@@ -1,0 +1,26 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>TEMP.Infras.Lite</Name>
+    <Description>&lt;No description available&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>TEMP.Infras.Lite</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="TEMP.Infras.Lite.csproj" File="TEMP.Infras.Lite.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="DataCreator.cs">DataCreator.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="SqliteMemory.cs">SqliteMemory.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="SqliteSetup.cs">SqliteSetup.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="TestDataKeyProvider.cs">TestDataKeyProvider.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="TestPrincipalProvider.cs">TestPrincipalProvider.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

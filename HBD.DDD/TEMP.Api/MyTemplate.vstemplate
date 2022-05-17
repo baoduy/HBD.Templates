@@ -1,0 +1,52 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>TEMP.Api</Name>
+    <Description>&lt;No description available&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>TEMP.Api</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="TEMP.Api.csproj" File="TEMP.Api.csproj" ReplaceParameters="true">
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="launchSettings.json">launchSettings.json</ProjectItem>
+      </Folder>
+      <Folder Name="Abstractions" TargetFolderName="Abstractions">
+        <ProjectItem ReplaceParameters="true" TargetFileName="BaseController.cs">BaseController.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Configs" TargetFolderName="Configs">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ApiConfig.cs">ApiConfig.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="HealthCheckConfig.cs">HealthCheckConfig.cs</ProjectItem>
+		    <ProjectItem ReplaceParameters="true" TargetFileName="CrosConfig.cs">CrosConfig.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ServiceConfig.cs">ServiceConfig.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Controllers" TargetFolderName="Controllers">
+        <Folder Name="V1" TargetFolderName="V1">
+          <ProjectItem ReplaceParameters="true" TargetFileName="ProfileController.cs">ProfileController.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="Handlers" TargetFolderName="Handlers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="HealthCheck.cs">HealthCheck.cs</ProjectItem>
+      </Folder>
+       <Folder Name="Options" TargetFolderName="Options">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AppRoleOptions.cs">AppRoleOptions.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Providers" TargetFolderName="Providers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="PrincipalProvider.cs">PrincipalProvider.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="appsettings.json">appsettings.json</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="appsettings.Development.json">appsettings.Development.json</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="appsettings.Mac.json">appsettings.Mac.json</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Program.cs">Program.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Startup.cs">Startup.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

@@ -1,0 +1,42 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>TEMP.Infras</Name>
+    <Description>&lt;No description available&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>TEMP.Infras</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="TEMP.Infras.csproj" File="TEMP.Infras.csproj" ReplaceParameters="true">
+      <Folder Name="EventHandlers" TargetFolderName="EventHandlers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="EventPublisher.cs">EventPublisher.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProfileCreatedHandler.cs">ProfileCreatedHandler.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Mappers" TargetFolderName="Mappers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="DefaultMapper.cs">DefaultMapper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProfileMapper.cs">ProfileMapper.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Repos" TargetFolderName="Repos">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProfileRepo.cs">ProfileRepo.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Services" TargetFolderName="Services">
+        <ProjectItem ReplaceParameters="true" TargetFileName="MembershipService.cs">MembershipService.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SequenceService.cs">SequenceService.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="BoundedContextBuilder.cs">BoundedContextBuilder.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="InfraExtensions.cs">InfraExtensions.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="InfraMigration.cs">InfraMigration.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="InfraSetup.cs">InfraSetup.cs</ProjectItem>
+	    <ProjectItem ReplaceParameters="true" TargetFileName="InternalSetup.cs">InternalSetup.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$ext_projectname$Context.cs">TEMPContext.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

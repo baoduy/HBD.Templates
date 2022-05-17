@@ -1,0 +1,56 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="ProjectGroup">
+  <TemplateData>
+    <Name>API with HBD.DDD extensions $(Package.Version)</Name>
+    <Description>.NET Core API with Versioning and DDD design. (The version 5 only compatible with .Net 5 onward)</Description>
+    <DefaultName>HBD</DefaultName>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>C#</ProjectSubType>
+    <SortOrder>10</SortOrder>
+    <TemplateGroupID>A8DF25EC-67CF-47EB-A102-79FD55F1A5EA</TemplateGroupID>
+    <Icon>__TemplateIcon.ico</Icon>
+    <LanguageTag>CSharp</LanguageTag>
+    <ProjectTypeTag>DDD</ProjectTypeTag>
+    <ProjectTypeTag>API</ProjectTypeTag>
+    <ProjectTypeTag>HBD</ProjectTypeTag>
+    <PlatformTag>Windows</PlatformTag>
+    <PlatformTag>Linux</PlatformTag>
+    <PlatformTag>macOS</PlatformTag>
+    <ProjectTypeTag>Cloud</ProjectTypeTag>
+    <ProjectTypeTag>Library</ProjectTypeTag>
+    <FrameworkVersion>netstandard2.1</FrameworkVersion>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectCollection>
+      <SolutionFolder Name="Projects">
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Api" CopyParameters="true">
+          TEMP.Api\MyTemplate.vstemplate
+        </ProjectTemplateLink>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.AppServices" CopyParameters="true">
+          TEMP.AppServices\MyTemplate.vstemplate
+        </ProjectTemplateLink>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Core" CopyParameters="true">
+          TEMP.Core\MyTemplate.vstemplate
+        </ProjectTemplateLink>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Domains" CopyParameters="true">
+          TEMP.Domains\MyTemplate.vstemplate
+        </ProjectTemplateLink>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Infras" CopyParameters="true">
+          TEMP.Infras\MyTemplate.vstemplate
+        </ProjectTemplateLink>
+      </SolutionFolder>
+      <SolutionFolder Name="Tests">
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Infras.Lite" CopyParameters="true">
+          TEMP.Infras.Lite\MyTemplate.vstemplate
+        </ProjectTemplateLink>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.AppServices.Tests" CopyParameters="true">
+          TEMP.AppServices.Tests\MyTemplate.vstemplate
+        </ProjectTemplateLink>
+        <ProjectTemplateLink ProjectName="$safeprojectname$.Infras.Tests" CopyParameters="true">
+          TEMP.Infras.Tests\MyTemplate.vstemplate
+        </ProjectTemplateLink>
+      </SolutionFolder>
+	  <SolutionFolder Name="Solution">
+      </SolutionFolder>
+    </ProjectCollection>
+  </TemplateContent>
+</VSTemplate>

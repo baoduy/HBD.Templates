@@ -1,0 +1,56 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>TEMP.AppServices</Name>
+    <Description>&lt;No description available&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>TEMP.AppServices</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="TEMP.AppServices.csproj" File="TEMP.AppServices.csproj" ReplaceParameters="true">
+      <Folder Name="Abstracts" TargetFolderName="Abstracts">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ModelBase.cs">ModelBase.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ViewModelBase.cs">ViewModelBase.cs</ProjectItem>
+      </Folder>
+      <Folder Name="BizActions" TargetFolderName="BizActions">
+        <Folder Name="Profiles" TargetFolderName="Profiles">
+          <ProjectItem ReplaceParameters="true" TargetFileName="CreateProfileAction.cs">CreateProfileAction.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="ICreateProfileAction.cs">ICreateProfileAction.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="IUpdateProfileAction.cs">IUpdateProfileAction.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="UpdateProfileAction.cs">UpdateProfileAction.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="IDeleteProfileAction.cs">IDeleteProfileAction.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DeleteProfileAction.cs">DeleteProfileAction.cs</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="BizActionAsync.cs">BizActionAsync.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Models" TargetFolderName="Models">
+        <Folder Name="Profiles" TargetFolderName="Profiles">
+          <ProjectItem ReplaceParameters="true" TargetFileName="ProfileModel.cs">ProfileModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="ProfileBasicView.cs">ProfileBasicView.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="ProfileDeleteModel.cs">ProfileDeleteModel.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="ProcessManagers" TargetFolderName="ProcessManagers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="IProfileSyncManager.cs">IProfileSyncManager.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProfileSyncManager.cs">ProfileSyncManager.cs</ProjectItem>
+      </Folder>
+      <Folder Name="QueryServices" TargetFolderName="QueryServices">
+        <ProjectItem ReplaceParameters="true" TargetFileName="IProfileQueryService.cs">IProfileQueryService.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IQueryService.cs">IQueryService.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProfileQueryService.cs">ProfileQueryService.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="AppSetup.cs">AppSetup.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="IPrincipalProvider.cs">IPrincipalProvider.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="ModelExtensions.cs">ModelExtensions.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="SaveChangesExceptionHandler.cs">SaveChangesExceptionHandler.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

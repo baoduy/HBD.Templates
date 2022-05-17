@@ -1,0 +1,25 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>TEMP.AppServices.Tests</Name>
+    <Description>&lt;No description available&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>TEMP.AppServices.Tests</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="TEMP.AppServices.Tests.csproj" File="TEMP.AppServices.Tests.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="AutoMapperTests.cs">AutoMapperTests.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="BizBasicTests.cs">BizBasicTests.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Initialize.cs">Initialize.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="ProfileTests.cs">ProfileTests.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

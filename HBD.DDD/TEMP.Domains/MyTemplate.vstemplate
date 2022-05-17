@@ -1,0 +1,51 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>TEMP.Domains</Name>
+    <Description>&lt;No description available&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>TEMP.Domains</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="TEMP.Domains.csproj" File="TEMP.Domains.csproj" ReplaceParameters="true">
+      <Folder Name="Abstracts" TargetFolderName="Abstracts">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AggregateRoot.cs">AggregateRoot.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DomainEntity.cs">DomainEntity.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DomainEvent.cs">DomainEvent.cs</ProjectItem>
+		<ProjectItem ReplaceParameters="true" TargetFileName="EntityBase.cs">EntityBase.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Aggregators" TargetFolderName="Aggregators">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Profile.cs">Profile.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Entities" TargetFolderName="Entities">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Employee.cs">Employee.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Events" TargetFolderName="Events">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProfileCreatedEvent.cs">ProfileCreatedEvent.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Repositories" TargetFolderName="Repositories">
+        <ProjectItem ReplaceParameters="true" TargetFileName="IProfileRepo.cs">IProfileRepo.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Services" TargetFolderName="Services">
+        <ProjectItem ReplaceParameters="true" TargetFileName="IDomainService.cs">IDomainService.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IMembershipService.cs">IMembershipService.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ISequenceServices.cs">ISequenceServices.cs</ProjectItem>
+      </Folder>
+      <Folder Name="ValueObjects" TargetFolderName="ValueObjects">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Address.cs">Address.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Company.cs">Company.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="PersonName.cs">PersonName.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="DomainSchemas.cs">DomainSchemas.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Enums.cs">Enums.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

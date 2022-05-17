@@ -1,0 +1,139 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - master
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+  # Delete Old files
+  - task: DeleteFiles@1
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/HBD.DDD'
+      Contents: |
+        *.cs
+        *.json
+        *.csproj
+
+  # Copy new fiels
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/Solutions/HBD.DDD/TEMP'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/HBD.DDD'
+      OverWrite: true
+
+  # Test Template Projects
+  - task: DotNetCoreCLI@2
+    displayName: Restore HBD.DDD
+    inputs:
+      command: 'restore'
+      projects: 'Solutions/HBD.DDD/**/*.csproj'
+      feedsToUse: 'config'
+      nugetConfigPath: 'Solutions/HBD.DDD/nuget.config'
+
+  - task: DotNetCoreCLI@2
+    displayName: Run HBD.DDD Tests
+    inputs:
+      command: 'test'
+      projects: 'Solutions/HBD.DDD/**/*.Tests.csproj'
+      arguments: '--collect "Code coverage"'
+
+  # Prepare package
+  - task: ReplaceInFilesTextByText@1
+    inputs:
+      parameterSearchText: 'TEMP.'
+      parameterReplaceText: '$ext_projectname$.'
+      parameterTypeOfSearch: 'filesSearchPattern'
+      parameterFilesPattern: '**.csproj'
+
+  - task: ReplaceInFilesTextByText@1
+    inputs:
+      parameterSearchText: 'TEMP.'
+      parameterReplaceText: '$ext_projectname$.'
+      parameterTypeOfSearch: 'filesSearchPattern'
+      parameterFilesPattern: '**.json'
+
+  - task: ReplaceInFilesTextByText@1
+    inputs:
+      parameterSearchText: 'TEMP.'
+      parameterReplaceText: '$ext_projectname$.'
+      parameterTypeOfSearch: 'filesSearchPattern'
+      parameterFilesPattern: '**.cs'
+
+  - task: ReplaceInFilesTextByText@1
+    inputs:
+      parameterSearchText: 'TEMP'
+      parameterReplaceText: '$ext_projectname$'
+      parameterTypeOfSearch: 'filesSearchPattern'
+      parameterFilesPattern: '**.cs'
+
+  - task: ReplaceInFilesTextByText@1
+    inputs:
+      parameterSearchText: 'TEMP'
+      parameterReplaceText: '$ext_projectname$'
+      parameterTypeOfSearch: 'filesSearchPattern'
+      parameterFilesPattern: '**.json'
+
+  - task: ReplaceInFilesTextByText@1
+    inputs:
+      parameterSearchText: 'TEMP'
+      parameterReplaceText: '$ext_projectname$'
+      parameterTypeOfSearch: 'filesSearchPattern'
+      parameterFilesPattern: '**.csproj'
+
+  # Test Template Package
+  - task: DotNetCoreCLI@2
+    displayName: Restore TemplateTests
+    inputs:
+      command: 'restore'
+      projects: '**/TemplateTests.csproj'
+      feedsToUse: 'select'
+
+  - task: DotNetCoreCLI@2
+    displayName: Run TemplateTests
+    inputs:
+      command: 'test'
+      projects: '**/TemplateTests.csproj'
+
+  # Package
+  - task: GitVersion@5
+    inputs:
+      runtime: 'core'
+
+  - task: SetVariable@0
+    inputs:
+      variableName: 'Package.Version'
+      value: '$(GitVersion.NuGetVersionV2)$(GitVersion.BuildMetaData)'
+
+  - task: replacetokens@3
+    inputs:
+      targetFiles: '**/MultiProjectTemplate.vstemplate'
+      encoding: 'auto'
+      writeBOM: true
+      actionOnMissing: 'fail'
+      keepToken: false
+      tokenPrefix: '$('
+      tokenSuffix: ')'
+      useLegacyPattern: false
+      defaultValue: '5.0.0'
+      enableTransforms: false
+      enableTelemetry: true
+
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(Build.SourcesDirectory)/HBD.DDD'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(Build.SourcesDirectory)/HBD.DDD-$(Package.Version).zip'
+      replaceExistingArchive: true
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.SourcesDirectory)/HBD.DDD-$(Package.Version).zip'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
