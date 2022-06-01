@@ -2,7 +2,9 @@ using TEMP.Api.Configs;
 using TEMP.Core;
 using TEMP.Infras;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args)
+    .AddAzAppConfig();
+
 //Log
 //builder.Services.AddLogging();
 
@@ -11,6 +13,7 @@ var isMigration = true;
 #else
 var isMigration = args.Any(x => string.Equals(x, "migration", StringComparison.OrdinalIgnoreCase));
 #endif
+
 //Run the migration job under K8s execution
 if (isMigration)
 {
