@@ -1,16 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
-using HBD.EfCore.BizAction;
+﻿using HBD.EfCore.BizAction;
 using Microsoft.AspNetCore.Mvc;
 using TEMP.Api.Controllers.Abstractions;
 using TEMP.AppServices.BizActions.Profiles;
 using TEMP.AppServices.Models.Profiles;
 using TEMP.AppServices.QueryServices;
 
-namespace TEMP.Api.Controllers.V1;
+namespace TEMP.Api.Controllers.V2;
 
-[ApiVersion("1")]
-public class ProfileController : BaseController
+[ApiVersion("2")]
+public class ProfileControllerV2 : BaseController
 {
 
 
@@ -38,5 +36,6 @@ public class ProfileController : BaseController
         var result = await action.RunBizActionAsync<ProfileBasicView>(model).ConfigureAwait(false);
         return action.Status.Send(result);
     }
-    
+
+
 }

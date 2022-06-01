@@ -17,7 +17,7 @@ namespace TEMP.Api.Configs;
 
 internal static class ServiceConfigs
 {
-    public const string AppName = "Singa-Portal";
+    public const string AppName = "TEMP.Api";
 
     //public const string CorsName = $"{AppName}-CORS";
     public const string CookieHeaderKey = "SET-COOKIE";
@@ -53,7 +53,8 @@ internal static class ServiceConfigs
         //Cors
         services.AddCors(c => c.AddDefaultPolicy(o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
-        services.AddControllers(
+        services.AddApiVersioning()
+            .AddControllers(
                 config =>
                 {
                     if (features.RequireAuthorization)
@@ -86,12 +87,12 @@ internal static class ServiceConfigs
         services.AddEndpointsApiExplorer()
             .AddSwaggerGen(setup =>
             {
-                setup.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Singa.Portal.xml"), true);
+                setup.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{AppName}.xml"), true);
 
-                setup.SwaggerDoc("v1", new OpenApiInfo()
+                setup.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Description = "The API definition of Singtel Portal",
-                    Title = "Singa Api",
+                    Description = $"The API definition of {AppName} Api",
+                    Title = AppName,
                     Version = "v1",
                     Contact = new OpenApiContact()
                     {

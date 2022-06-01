@@ -13,14 +13,14 @@
       "launchBrowser": true,
       "launchUrl": "docs",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Mac"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "TEMP.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Mac"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }

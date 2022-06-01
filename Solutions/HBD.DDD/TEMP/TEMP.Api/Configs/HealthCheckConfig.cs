@@ -5,7 +5,7 @@ namespace TEMP.Api.Configs;
 
 internal static class HealthCheckConfig
 {
-    public static IServiceCollection AddHealthCheckConfigs(this IServiceCollection services)
+    public static IServiceCollection AddHealthzChecks(this IServiceCollection services)
     {
         services.AddHealthChecks()
             .AddDbContextCheck<DbContext>();
@@ -20,7 +20,9 @@ internal static class HealthCheckConfig
     /// <returns></returns>
     public static IEndpointRouteBuilder MapHealthzCheck(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapHealthChecks("/healthz", new HealthCheckOptions { AllowCachingResponses = false });
+        var options = new HealthCheckOptions { AllowCachingResponses = false };
+        endpoints.MapHealthChecks("/healthz",options);
+        endpoints.MapHealthChecks("/", options);
         return endpoints;
     }
 }

@@ -23,11 +23,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEMP.AppServices.Tests", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEMP.Infras.Tests", "TEMP\TEMP.Infras.Tests\TEMP.Infras.Tests.csproj", "{98259D34-2BD3-4790-91F2-16AF4E168247}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEMP.Api6", "TEMP.Api6\TEMP.Api6.csproj", "{DA69CD88-7AA5-48FB-95D5-892AACA69B71}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{50779780-8E3A-4F31-8F8A-D34B75745C24}"
 	ProjectSection(SolutionItems) = preProject
 		nuget.config = nuget.config
+		global.json = global.json
 	EndProjectSection
 EndProject
 Global
@@ -68,10 +67,6 @@ Global
 		{98259D34-2BD3-4790-91F2-16AF4E168247}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98259D34-2BD3-4790-91F2-16AF4E168247}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98259D34-2BD3-4790-91F2-16AF4E168247}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA69CD88-7AA5-48FB-95D5-892AACA69B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA69CD88-7AA5-48FB-95D5-892AACA69B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA69CD88-7AA5-48FB-95D5-892AACA69B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA69CD88-7AA5-48FB-95D5-892AACA69B71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,7 +80,6 @@ Global
 		{F328A30C-39E6-4A45-809B-36FB3A06E656} = {62333544-A767-4E25-9F52-977248ABEBDC}
 		{DD241B63-8111-44B9-ABC3-226C47EFC4AA} = {62333544-A767-4E25-9F52-977248ABEBDC}
 		{98259D34-2BD3-4790-91F2-16AF4E168247} = {62333544-A767-4E25-9F52-977248ABEBDC}
-		{DA69CD88-7AA5-48FB-95D5-892AACA69B71} = {0E467735-1C4F-4D8D-A69B-F6BC14F5FD46}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {59DB826D-25D1-4BDC-83AB-B3233B2E3A87}

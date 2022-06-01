@@ -37,7 +37,7 @@ builder.Services
     .AddOptions(builder.Configuration)
     .AddAllAppServices(builder.Configuration)
     //.AddHangfire(builder.Configuration)
-    .AddHealthCheckConfigs();
+    .AddHealthzChecks();
 
 var app = builder.Build()
     .EnableFeatures(builder.Configuration)
