@@ -20,8 +20,12 @@ internal static class HealthCheckConfig
     /// <returns></returns>
     public static IEndpointRouteBuilder MapHealthzCheck(this IEndpointRouteBuilder endpoints)
     {
-        var options = new HealthCheckOptions { AllowCachingResponses = false };
-        endpoints.MapHealthChecks("/healthz",options);
+        var options = new HealthCheckOptions
+        {
+            AllowCachingResponses = false, Predicate = _ => true,
+            //ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        };
+        endpoints.MapHealthChecks("/healthz", options);
         endpoints.MapHealthChecks("/", options);
         return endpoints;
     }

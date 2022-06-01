@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace TEMP.Api.Handlers;
 

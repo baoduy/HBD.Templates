@@ -1,32 +1,30 @@
-
-
 using TEMP.Api.Configs;
 using TEMP.Core;
 using TEMP.Infras;
 
-Console.WriteLine("start program");
+var builder = WebApplication.CreateBuilder(args);
+//Log
+//builder.Services.AddLogging();
+
+#if DEBUG
+var isMigration = true;
+#else
 var isMigration = args.Any(x => string.Equals(x, "migration", StringComparison.OrdinalIgnoreCase));
+#endif
 //Run the migration job under K8s execution
 if (isMigration)
 {
     Console.WriteLine("Start App with Db migration...");
 
-    var envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-    var config = new ConfigurationBuilder()
-        .AddJsonFile("appsettings.json", true)
-        .AddJsonFile($"appsettings.{envName}.json", true)
-        .AddEnvironmentVariables()
-        .Build();
-
     //Stop here after migrated.
-    await InfraMigration.MigrateDb(config.GetConnectionString(SettingKeys.DbConnectionString));
+    await InfraMigration.MigrateDb(builder.Configuration.GetConnectionString(SettingKeys.DbConnectionString));
+    //Stop the app after ran migration
+#if !DEBUG
     return;
-}else
-   Console.WriteLine("Start App...");
-
-var builder = WebApplication.CreateBuilder(args);
-//Log
-//builder.Services.AddLogging();
+#endif
+}
+else
+    Console.WriteLine("Start App...");
 
 // Add services to the container.
 builder.Services

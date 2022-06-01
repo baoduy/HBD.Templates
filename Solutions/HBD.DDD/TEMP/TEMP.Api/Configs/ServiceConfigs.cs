@@ -1,11 +1,11 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Azure.Core;
+using HBD.Web.GlobalException;
+using HBD.Web.Swagger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.FeatureManagement;
 using Microsoft.OpenApi.Models;
-using TEMP.Api.Extensions;
 using TEMP.Api.Providers;
 using TEMP.AppServices;
 using TEMP.Core;
@@ -84,23 +84,12 @@ internal static class ServiceConfigs
 
     public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
-        services.AddEndpointsApiExplorer()
-            .AddSwaggerGen(setup =>
-            {
-                setup.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{AppName}.xml"), true);
-
-                setup.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Description = $"The API definition of {AppName} Api",
-                    Title = AppName,
-                    Version = "v1",
-                    Contact = new OpenApiContact()
-                    {
-                        Name = "system@singtel.com",
-                        Url = new Uri("https://www.singtel.com")
-                    }
-                });
-            });
+        services.AddSwaggerConfig(new SwaggerInfo
+        {
+            Title = AppName,
+            Description = $"The {AppName} Api documentation."
+        }, xmlFile: $"{AppName}.xml");
+        
         return services;
     }
 

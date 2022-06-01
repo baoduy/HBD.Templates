@@ -26,7 +26,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{50779780-8E3A-4F31-8F8A-D34B75745C24}"
 	ProjectSection(SolutionItems) = preProject
 		nuget.config = nuget.config
-		global.json = global.json
 	EndProjectSection
 EndProject
 Global

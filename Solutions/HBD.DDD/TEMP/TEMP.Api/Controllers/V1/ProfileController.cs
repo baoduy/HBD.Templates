@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using HBD.EfCore.BizAction;
+﻿using HBD.EfCore.BizAction;
 using Microsoft.AspNetCore.Mvc;
 using TEMP.Api.Controllers.Abstractions;
 using TEMP.AppServices.BizActions.Profiles;

@@ -1,7 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+﻿using HBD.Web.Swagger;
 using TEMP.Api.Configs.Handlers;
 using TEMP.Core.Options;
 
@@ -17,11 +14,7 @@ internal static class ApiConfig
             app.UseHsts().UseHttpsRedirection();
 
         if (features.EnableSwagger)
-            app.UseSwagger().UseSwaggerUI(c =>
-            {
-                c.RoutePrefix = "docs";
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1");
-            });
+            app.UseSwaggerAndUI();
 
         app.UseCors();
 
