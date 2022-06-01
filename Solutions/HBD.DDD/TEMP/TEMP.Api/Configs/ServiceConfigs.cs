@@ -53,7 +53,13 @@ internal static class ServiceConfigs
         //Cors
         services.AddCors(c => c.AddDefaultPolicy(o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
-        services.AddApiVersioning()
+        services
+            .AddApiVersioning(setup =>
+            {
+                setup.DefaultApiVersion = new ApiVersion(1, 0);
+                setup.AssumeDefaultVersionWhenUnspecified = true;
+                setup.ReportApiVersions = true;
+            })
             .AddControllers(
                 config =>
                 {

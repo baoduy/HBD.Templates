@@ -8,7 +8,7 @@ using TEMP.AppServices.QueryServices;
 namespace TEMP.Api.Controllers.V1;
 
 [ApiVersion("1")]
-public class ProfileController : BaseController
+public class ProfileController : ApiControllerBase
 {
 
 

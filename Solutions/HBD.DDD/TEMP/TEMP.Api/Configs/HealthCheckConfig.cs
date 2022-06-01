@@ -22,7 +22,8 @@ internal static class HealthCheckConfig
     {
         var options = new HealthCheckOptions
         {
-            AllowCachingResponses = false, Predicate = _ => true,
+            AllowCachingResponses = false,
+            Predicate = _ => true,
             //ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         };
         endpoints.MapHealthChecks("/healthz", options);

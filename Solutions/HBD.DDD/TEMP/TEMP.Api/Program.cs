@@ -48,9 +48,8 @@ var app = builder.Build()
 //     return;
 // }
 
-app.UseRouting();
 app.UseAuthentications(builder.Configuration);
-
+app.UseRouting();
 app.MapControllerRoute(
     "default",
     "api/{controller}/{action=Index}/{id?}");

@@ -12,6 +12,6 @@ namespace TEMP.Api.Controllers.Abstractions;
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
 [ProducesResponseType(StatusCodes.Status200OK)]
 [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-public abstract class BaseController : ControllerBase
+public abstract class ApiControllerBase : ControllerBase
 {
 }

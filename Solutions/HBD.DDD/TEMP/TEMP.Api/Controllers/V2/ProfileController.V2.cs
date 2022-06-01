@@ -8,10 +8,8 @@ using TEMP.AppServices.QueryServices;
 namespace TEMP.Api.Controllers.V2;
 
 [ApiVersion("2")]
-public class ProfileControllerV2 : BaseController
+public class ProfileControllerV2 : ApiControllerBase
 {
-
-
     [HttpGet]
     public async Task<ActionResult<ProfileBasicView>> Get([FromServices] IProfileQueryService repo)
     {
@@ -36,6 +34,4 @@ public class ProfileControllerV2 : BaseController
         var result = await action.RunBizActionAsync<ProfileBasicView>(model).ConfigureAwait(false);
         return action.Status.Send(result);
     }
-
-
 }
