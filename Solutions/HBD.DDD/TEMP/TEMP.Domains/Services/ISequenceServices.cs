@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
 
-namespace TEMP.Domains.Services
+namespace TEMP.Domains.Services;
+
+public interface ISequenceServices : IDomainService
 {
-    public interface ISequenceServices : IDomainService
-    {
-        #region Methods
+    #region Methods
 
-        ValueTask<string> NextValueAsync();
+    ValueTask<string> NextValueAsync();
 
-        #endregion Methods
-    }
+    #endregion Methods
 }

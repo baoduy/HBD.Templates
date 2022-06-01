@@ -1,40 +1,26 @@
-﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using TEMP.Api.Handlers;
 
-namespace TEMP.Api.Configs
+namespace TEMP.Api.Configs;
+
+internal static class HealthCheckConfig
 {
-    internal static class HealthCheckConfig
+    public static IServiceCollection AddHealthCheckConfigs(this IServiceCollection services)
     {
-        #region Methods
+        services.AddHealthChecks()
+            .AddDbContextCheck<DbContext>();
 
-        public static IServiceCollection AddHealthCheckConfigs(this IServiceCollection services)
-        {
-            services.AddHealthChecks()
-                .AddDbContextCheck<DbContext>()
-                .AddCheck<HealthCheck>(nameof(HealthCheck));
+        return services;
+    }
 
-            return services;
-        }
-
-        public static IApplicationBuilder UseHealthChecks(this IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseEndpoints(endpoints =>
-            {
-                var check = endpoints.MapHealthChecks("/", new HealthCheckOptions {AllowCachingResponses = false});
-
-                ////if (env.IsProduction())
-                ////{
-                ////    check.RequireAuthorization();
-                ////}
-            });
-
-            return app;
-        }
-
-        #endregion Methods
+    /// <summary>
+    /// The health check endpoint will be "/healthz"
+    /// </summary>
+    /// <param name="endpoints"></param>
+    /// <returns></returns>
+    public static IEndpointRouteBuilder MapHealthzCheck(this IEndpointRouteBuilder endpoints)
+    {
+        endpoints.MapHealthChecks("/healthz", new HealthCheckOptions { AllowCachingResponses = false });
+        return endpoints;
     }
 }

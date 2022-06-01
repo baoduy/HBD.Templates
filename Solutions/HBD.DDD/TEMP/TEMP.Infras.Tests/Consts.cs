@@ -1,22 +1,21 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace TEMP.Infras.Tests
+namespace TEMP.Infras.Tests;
+
+internal class Consts
 {
-    internal class Consts
-    {
-        #region Fields
+    #region Fields
 
-        private const string DbName = "TEMPDb";
+    private const string DbName = "TEMPDb";
 
-        #endregion Fields
+    #endregion Fields
 
-        #region Properties
+    #region Properties
 
-        public static string ConnectionString =>
-            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? $"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog={DbName};Integrated Security=True;Connect Timeout=300;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=True"
-                : $"Data Source=localhost;Initial Catalog={DbName};User Id=sa;Password=Pass@word1;";
+    public static string ConnectionString =>
+        RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            ? $"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog={DbName};Integrated Security=True;Connect Timeout=300;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=True"
+            : $"Data Source=localhost;Initial Catalog={DbName};User Id=sa;Password=Pass@word1;";
 
-        #endregion Properties
-    }
+    #endregion Properties
 }

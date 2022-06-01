@@ -1,6 +1,5 @@
-﻿namespace TEMP.Domains.Services
+﻿namespace TEMP.Domains.Services;
+
+public interface IMembershipService : ISequenceServices
 {
-    public interface IMembershipService : ISequenceServices
-    {
-    }
 }

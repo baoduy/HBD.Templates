@@ -3,12 +3,11 @@ using HBD.EfCore.Repos.Basic;
 using TEMP.Domains.Repositories;
 using Profile = TEMP.Domains.Aggregators.Profile;
 
-namespace TEMP.Infras.Repos
+namespace TEMP.Infras.Repos;
+
+internal class ProfileRepo : Repository<Profile>, IProfileRepo
 {
-    internal class ProfileRepo : Repository<Profile>, IProfileRepo
+    public ProfileRepo(IBasicRepository repository) : base(repository)
     {
-        public ProfileRepo(IBasicRepository repository) : base(repository)
-        {
-        }
     }
 }

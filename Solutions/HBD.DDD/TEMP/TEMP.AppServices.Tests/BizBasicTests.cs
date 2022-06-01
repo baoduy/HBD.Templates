@@ -1,18 +1,17 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TEMP.AppServices.Tests
+namespace TEMP.AppServices.Tests;
+
+[TestClass]
+public class BizBasicTests
 {
-    [TestClass]
-    public class BizBasicTests
+    #region Methods
+
+    [TestMethod]
+    public void The_Actions_ShouldBe_InternalSealed_Classes()
     {
-        #region Methods
-
-        [TestMethod]
-        public void The_Actions_ShouldBe_InternalSealed_Classes()
-        {
             
-        }
-
-        #endregion Methods
     }
+
+    #endregion Methods
 }

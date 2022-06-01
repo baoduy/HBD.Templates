@@ -2,12 +2,11 @@
 using TEMP.AppServices.Models.Profiles;
 using TEMP.Domains.Aggregators;
 
-namespace TEMP.AppServices.BizActions.Profiles
+namespace TEMP.AppServices.BizActions.Profiles;
+
+/// <summary>
+/// This is auto action => no need to call _repo.SaveAsync()
+/// </summary>
+public interface ICreateProfileAction : IGenericActionWriteDbAsync<ProfileModel, Profile>
 {
-    /// <summary>
-    /// This is auto action => no need to call _repo.SaveAsync()
-    /// </summary>
-    public interface ICreateProfileAction : IGenericActionWriteDbAsync<ProfileModel, Profile>
-    {
-    }
 }

@@ -1,23 +1,22 @@
 ﻿using System;
 using HBD.StatusGeneric;
 
-namespace TEMP.AppServices
+namespace TEMP.AppServices;
+
+public static class SaveChangesExceptionHandler
 {
-    public static class SaveChangesExceptionHandler
+    #region Methods
+
+    public static IStatusGeneric Handler(Exception exception)
     {
-        #region Methods
+        var status = new StatusGenericHandler();
 
-        public static IStatusGeneric Handler(Exception exception)
-        {
-            var status = new StatusGenericHandler();
+        if (exception != null)
+            status.AddError(
+                $"{exception.Message} {(exception.InnerException != null ? "\n" + exception.InnerException.Message : "")}");
 
-            if (exception != null)
-                status.AddError(
-                    $"{exception.Message} {(exception.InnerException != null ? "\n" + exception.InnerException.Message : "")}");
-
-            return status;
-        }
-
-        #endregion Methods
+        return status;
     }
+
+    #endregion Methods
 }

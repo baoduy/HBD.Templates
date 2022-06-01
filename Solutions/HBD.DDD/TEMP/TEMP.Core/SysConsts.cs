@@ -1,7 +1,6 @@
-﻿namespace TEMP.Core
+﻿namespace TEMP.Core;
+
+public static class SysConsts
 {
-    public static class SysConsts
-    {
-        public static string SystemAccount => "System";
-    }
+    public static string SystemAccount => "System";
 }

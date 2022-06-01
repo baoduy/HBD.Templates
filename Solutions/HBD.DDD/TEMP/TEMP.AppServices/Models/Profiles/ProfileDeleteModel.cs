@@ -1,9 +1,8 @@
 using System;
 
-namespace TEMP.AppServices.Models.Profiles
+namespace TEMP.AppServices.Models.Profiles;
+
+public class ProfileDeleteModel
 {
-    public class ProfileDeleteModel
-    {
-        public Guid Id { get; set; }
-    }
+    public Guid Id { get; set; }
 }

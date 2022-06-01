@@ -1,6 +1,5 @@
-﻿namespace TEMP.AppServices.ProcessManagers
+﻿namespace TEMP.AppServices.ProcessManagers;
+
+public interface IProfileSyncManager
 {
-    public interface IProfileSyncManager
-    {
-    }
 }

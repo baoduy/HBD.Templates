@@ -1,19 +1,18 @@
 ﻿using HBD.Web.Models;
 
-namespace TEMP.AppServices.Abstracts
+namespace TEMP.AppServices.Abstracts;
+
+public abstract class ModelBase : Model
 {
-    public abstract class ModelBase : Model
-    {
-        #region Properties
+    #region Properties
         
-        // public override Guid? Id
-        // {
-        //     get => base.Id;
-        //     set => base.Id = value;
-        // }
+    // public override Guid? Id
+    // {
+    //     get => base.Id;
+    //     set => base.Id = value;
+    // }
 
-        public string UserId { get; internal set; }
+    public string UserId { get; internal set; }
 
-        #endregion Properties
-    }
+    #endregion Properties
 }

@@ -2,52 +2,83 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using TEMP.Api.Configs.Handlers;
+using TEMP.Core.Options;
 
-namespace TEMP.Api.Configs
+namespace TEMP.Api.Configs;
+
+internal static class ApiConfig
 {
-    internal static class ApiConfig
+    public static WebApplication EnableFeatures(this WebApplication app, IConfiguration configuration)
     {
-        #region Methods
+        var features = configuration.Bind<FeatureOptions>(FeatureOptions.Name);
+        
+        if (features.EnableHttps)
+            app.UseHsts().UseHttpsRedirection();
 
-        public static IServiceCollection AddApiConfig(this IServiceCollection services, IWebHostEnvironment env)
-        {
-            services.AddMvcCore(op =>
-                {
-                    //var policy = new AuthorizationPolicyBuilder()
-                    //      .RequireAuthenticatedUser()
-                    //      .Build();
-                    //op.Filters.Add(new AuthorizeFilter(policy));
+        if (features.EnableSwagger)
+            app.UseSwagger().UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = "docs";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1");
+            });
 
-                    //Requires Https in PRD. TODO: This is require if your API will be accessible directly from internet without proxy
-                    // if (env.IsProduction())
-                    //     op.Filters.Add<RequireHttpsAttribute>();
+        app.UseCors();
 
-                    //op.AddModelHandlers();
-                })
-                .AddJsonOptions(op => { op.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); })
-                .AddApiExplorer()
-                .AddAuthorization();
-
-            services.AddControllers();
-
-            return services;
-        }
-
-        public static IApplicationBuilder UseApi(this IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            //TODO: This is require if your API will be accessible directly from internet without proxy
-            // if (env.IsProduction())
-            //     app.UseHsts()
-            //         .UseHttpsRedirection();
-
-            app.UseRouting()
-                .UseAuth()
-                .UseAuthorization();
-
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-            return app;
-        }
-
-        #endregion Methods
+        return app;
     }
+
+    public static WebApplication EnableDevFeatures(this WebApplication app)
+    {
+        if (!app.Environment.IsDevelopment()) return app;
+
+        app.UseDeveloperExceptionPage();
+        return app;
+    }
+
+    public static WebApplication UseAuthentications(this WebApplication app, IConfiguration configuration)
+    {
+        var features = configuration.Bind<FeatureOptions>(FeatureOptions.Name);
+        
+        app.UseCookiePolicy();
+
+        if (features.RequireAuthorization)
+        {
+            app.UseAuthentication()
+                .UseAuthorization();
+        }
+
+        return app;
+    }
+
+    public static WebApplication UseMiddlewares(this WebApplication app, IConfiguration configuration)
+    {
+        app.UseGlobalExceptionHandler();
+        
+        var features = configuration.Bind<FeatureOptions>(FeatureOptions.Name);
+        if (features.EnableAntiforgery)
+            app.UseMiddleware<AntiforgeryCookieMiddleware>();
+
+        return app;
+    }
+
+    public static WebApplication UseEndpointsWithHealthCheck(this WebApplication app)
+    {
+        app.UseEndpoints(endpoint => endpoint.MapHealthzCheck());
+        return app;
+    }
+
+    // public static WebApplication UseHangfireUI(this WebApplication app)
+    // {
+    //     var features = app.Configuration.GetBindValue<FeatureOptions>(FeatureOptions.Name);
+    //     if (!features.EnableHangfire) return app;
+    //
+    //     var options = new DashboardOptions { IsReadOnlyFunc = _ => false };
+    //     if (features.RequireAuthorization)
+    //         options.Authorization = new[] { new DashboardAuthorizationFilter() };
+    //
+    //     app.UseHangfireDashboard(options: options);
+    //
+    //     return app;
+    // } 
 }

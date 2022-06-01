@@ -3,11 +3,10 @@ using TEMP.AppServices.Abstracts;
 using Profile = TEMP.Domains.Aggregators.Profile;
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace TEMP.AppServices.Models.Profiles
+namespace TEMP.AppServices.Models.Profiles;
+
+[AutoMap(typeof(Profile))]
+public class ProfileBasicView : ViewModelBase
 {
-    [AutoMap(typeof(Profile))]
-    public class ProfileBasicView : ViewModelBase
-    {
-        public string Name { get; set; }
-    }
+    public string Name { get; set; }
 }

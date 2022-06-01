@@ -6,15 +6,14 @@ using Microsoft.EntityFrameworkCore;
 using TEMP.AppServices.Models.Profiles;
 using Profile = TEMP.Domains.Aggregators.Profile;
 
-namespace TEMP.AppServices.QueryServices
+namespace TEMP.AppServices.QueryServices;
+
+internal sealed class ProfileQueryService : QueryService, IProfileQueryService
 {
-    internal sealed class ProfileQueryService : QueryService, IProfileQueryService
-    {
-        private readonly IDtoRepository<Profile> _repository;
+    private readonly IDtoRepository<Profile> _repository;
 
-        public async ValueTask<ProfileBasicView> GetBasicViewForUserAsync(Guid userId) 
-            => await _repository.Get<ProfileBasicView>(p => p.AdAccountId == userId).FirstOrDefaultAsync();
+    public async ValueTask<ProfileBasicView> GetBasicViewForUserAsync(Guid userId) 
+        => await _repository.Get<ProfileBasicView>(p => p.AdAccountId == userId).FirstOrDefaultAsync();
 
-        public ProfileQueryService(IMapper mapper, IDtoRepository<Profile> repository) : base(mapper) => _repository = repository;
-    }
+    public ProfileQueryService(IMapper mapper, IDtoRepository<Profile> repository) : base(mapper) => _repository = repository;
 }

@@ -2,23 +2,22 @@
 using Microsoft.Extensions.DependencyInjection;
 using TEMP.Infras.Lite;
 
-namespace TEMP.Infras.Tests
+namespace TEMP.Infras.Tests;
+
+internal class DbContextFactory : IDesignTimeDbContextFactory<TEMPContext>
 {
-    internal class DbContextFactory : IDesignTimeDbContextFactory<TEMPContext>
+    #region Methods
+
+    public TEMPContext CreateDbContext(string[] args)
     {
-        #region Methods
+        var service = new ServiceCollection()
+            .AddInfraServices(Consts.ConnectionString)
+            .AddDataKeyProvider<TestDataKeyProvider>()
+            .AddLogging()
+            .BuildServiceProvider();
 
-        public TEMPContext CreateDbContext(string[] args)
-        {
-            var service = new ServiceCollection()
-                .AddInfraServices(Consts.ConnectionString)
-                .AddDataKeyProvider<TestDataKeyProvider>()
-                .AddLogging()
-                .BuildServiceProvider();
-
-            return service.GetRequiredService<TEMPContext>();
-        }
-
-        #endregion Methods
+        return service.GetRequiredService<TEMPContext>();
     }
+
+    #endregion Methods
 }

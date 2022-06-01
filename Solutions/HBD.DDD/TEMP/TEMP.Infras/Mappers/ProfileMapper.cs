@@ -1,21 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TEMP.Domains.Aggregators;
 
-namespace TEMP.Infras.Mappers
+namespace TEMP.Infras.Mappers;
+
+internal sealed class ProfileMapper : DefaultMapper<Profile>
 {
-    internal sealed class ProfileMapper : DefaultMapper<Profile>
+    #region Methods
+
+    public override void Configure(EntityTypeBuilder<Profile> builder)
     {
-        #region Methods
+        base.Configure(builder);
 
-        public override void Configure(EntityTypeBuilder<Profile> builder)
-        {
-            base.Configure(builder);
-
-            builder.HasIndex(p => p.Email).IsUnique();
-            builder.HasIndex(p => p.AdAccountId).IsUnique();
-            builder.HasIndex(p => p.MembershipNo).IsUnique();
-        }
-
-        #endregion Methods
+        builder.HasIndex(p => p.Email).IsUnique();
+        builder.HasIndex(p => p.AdAccountId).IsUnique();
+        builder.HasIndex(p => p.MembershipNo).IsUnique();
     }
+
+    #endregion Methods
 }

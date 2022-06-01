@@ -2,16 +2,15 @@
 
 // ReSharper disable PublicConstructorInAbstractClass
 
-namespace TEMP.AppServices.QueryServices
+namespace TEMP.AppServices.QueryServices;
+
+public interface IQueryService
 {
-    public interface IQueryService
-    {
-    }
+}
 
-    internal abstract class QueryService
-    {
-        protected IMapper Mapper { get; }
+internal abstract class QueryService
+{
+    protected IMapper Mapper { get; }
 
-        public QueryService(IMapper mapper) => Mapper = mapper;
-    }
+    public QueryService(IMapper mapper) => Mapper = mapper;
 }
