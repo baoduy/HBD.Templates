@@ -1,25 +1,12 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace TEMP.Api.Handlers;
+namespace TEMP.Api.Configs.Handlers;
 
-public sealed class HealthCheck : IHealthCheck
+public sealed class HealthCheckHandler : IHealthCheck
 {
-    #region Fields
-
-    private readonly ILogger<HealthCheck> _logger;
-
-    #endregion Fields
-
-    #region Constructors
-
-    public HealthCheck(ILogger<HealthCheck> logger)
-    {
-        this._logger = logger;
-    }
-
-    #endregion Constructors
-
-    #region Methods
+    private readonly ILogger<HealthCheckHandler> _logger;
+    public HealthCheckHandler(ILogger<HealthCheckHandler> logger) => _logger = logger;
+    
 
     public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context,
         CancellationToken cancellationToken = default)
@@ -42,6 +29,4 @@ public sealed class HealthCheck : IHealthCheck
         return Task.FromResult(
             HealthCheckResult.Unhealthy(ms));
     }
-
-    #endregion Methods
 }

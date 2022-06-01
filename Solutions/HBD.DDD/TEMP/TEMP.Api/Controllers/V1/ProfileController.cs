@@ -10,12 +10,10 @@ namespace TEMP.Api.Controllers.V1;
 [ApiVersion("1")]
 public class ProfileController : ApiControllerBase
 {
-
-
     [HttpGet]
     public async Task<ActionResult<ProfileBasicView>> Get([FromServices] IProfileQueryService repo)
     {
-        var p = await repo.GetBasicViewForUserAsync(Guid.Empty).ConfigureAwait(false);
+        var p = await repo.GetBasicViewAsync().ConfigureAwait(false);
         return this.Send(p);
     }
 

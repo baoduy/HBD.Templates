@@ -2,6 +2,6 @@
 
 public static class SettingKeys
 {
-    public static string ApiName => "TEMP.Api";
+    public const string ApiName = "TEMP.Api";
     public static string DbConnectionString => "TEMPDb";
 }

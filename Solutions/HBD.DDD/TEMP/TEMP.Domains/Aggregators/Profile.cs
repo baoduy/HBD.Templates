@@ -3,45 +3,39 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using TEMP.Domains.Abstracts;
-using TEMP.Domains.ValueObjects;
 
 namespace TEMP.Domains.Aggregators;
 
 [Table("Profiles", Schema = DomainSchemas.Profile)]
 public class Profile : AggregateRoot
 {
-    //private HashSet<Account> _accounts = new HashSet<Account>();
-
-    #region Constructors
-
-    public Profile([NotNull] PersonName name, string memberShipNo, Guid adAccountId, string email, string phone,
+    public Profile([NotNull] string name, string memberShipNo, Guid adAccountId, string email, string phone,
         string userId)
-        : base(userId)
+        : this(default, name, memberShipNo, adAccountId, email, phone, userId)
+    {
+    }
+
+    public Profile(Guid id, [NotNull] string name, string memberShipNo, Guid adAccountId, string email,
+        string phone,
+        string userId)
+        : base(id, userId)
     {
         Email = email;
         Phone = phone;
         MembershipNo = memberShipNo;
         AdAccountId = adAccountId;
 
-        UpdateName(name ?? new PersonName(), userId);
+        UpdateName(name, userId);
     }
 
     private Profile()
     {
     }
 
-    #endregion Constructors
-
-    //public IReadOnlyCollection<Account> Accounts => _accounts;
-
-    #region Properties
-
     public Guid AdAccountId { get; }
-
-    // ReSharper disable once UnusedAutoPropertyAccessor.Global
+    
     [MaxLength(50)] public string Avatar { get; private set; }
-
-    // ReSharper disable once UnusedAutoPropertyAccessor.Global
+    
     [Column(TypeName = "Date")] public DateTime? BirthDay { get; private set; }
 
     [MaxLength(150)]
@@ -51,13 +45,10 @@ public class Profile : AggregateRoot
 
     [MaxLength(50)] [Required] public string MembershipNo { get; }
 
-    public PersonName Name { get; private set; }
+    [MaxLength(150)] [Required] 
+    public string Name { get; private set; }
 
     [Phone] [MaxLength(50)] public string Phone { get; }
-
-    #endregion Properties
-
-    #region Methods
 
     public void Update(string avatar, DateTime? birthday, string userId)
     {
@@ -66,11 +57,9 @@ public class Profile : AggregateRoot
         SetUpdatedBy(userId);
     }
 
-    public void UpdateName(PersonName name, string userId)
+    public void UpdateName(string name, string userId)
     {
         Name = name;
         SetUpdatedBy(userId);
     }
-
-    #endregion Methods
 }

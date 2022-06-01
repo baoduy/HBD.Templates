@@ -14,6 +14,10 @@ public static class InfraMigration
             .UseAutoConfigModel()
             .Options, null);
 
+#if DEBUG
+        await db.Database.EnsureCreatedAsync().ConfigureAwait(false);
+#else
         await db.Database.MigrateAsync().ConfigureAwait(false);
+#endif
     }
 }

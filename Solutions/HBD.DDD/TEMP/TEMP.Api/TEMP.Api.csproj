@@ -18,10 +18,10 @@
     <ApplicationURL>http://localhost:5000</ApplicationURL>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="HBD.Web.Auths" Version="6.1.9" />
-    <PackageReference Include="HBD.Web.GlobalException" Version="6.1.9" />
-    <PackageReference Include="HBD.Web.Models" Version="6.1.9" />
-    <PackageReference Include="HBD.Web.Swagger" Version="6.1.9" />
+    <PackageReference Include="HBD.Web.Auths" Version="6.1.14" />
+    <PackageReference Include="HBD.Web.GlobalException" Version="6.1.14" />
+    <PackageReference Include="HBD.Web.Models" Version="6.1.14" />
+    <PackageReference Include="HBD.Web.Swagger" Version="6.1.14" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
@@ -37,8 +37,5 @@
   <ItemGroup>
     <ProjectReference Include="..\TEMP.AppServices\TEMP.AppServices.csproj" />
     <ProjectReference Include="..\TEMP.Infras\TEMP.Infras.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions" />
   </ItemGroup>
 </Project>

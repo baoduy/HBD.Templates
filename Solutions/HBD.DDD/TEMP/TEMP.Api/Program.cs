@@ -1,6 +1,4 @@
 using TEMP.Api.Configs;
-using TEMP.Core;
-using TEMP.Infras;
 
 var builder = WebApplication.CreateBuilder(args)
     .AddAzAppConfig();
@@ -8,32 +6,12 @@ var builder = WebApplication.CreateBuilder(args)
 //Log
 //builder.Services.AddLogging();
 
-#if DEBUG
-var isMigration = true;
-#else
-var isMigration = args.Any(x => string.Equals(x, "migration", StringComparison.OrdinalIgnoreCase));
-#endif
-
-//Run the migration job under K8s execution
-if (isMigration)
-{
-    Console.WriteLine("Start App with Db migration...");
-
-    //Stop here after migrated.
-    await InfraMigration.MigrateDb(builder.Configuration.GetConnectionString(SettingKeys.DbConnectionString));
-    //Stop the app after ran migration
-#if !DEBUG
-    return;
-#endif
-}
-else
-    Console.WriteLine("Start App...");
+await builder.RunMigrationAsync(args);
 
 // Add services to the container.
 builder.Services
     .AddSwagger()
-    //.AddAuth(builder.Configuration)
-    //.AddSingaAuth(builder.Configuration)
+    .AddAuths(builder.Configuration)
     .AddAspNetConfig(builder.Configuration)
     .AddOptions(builder.Configuration)
     .AddAllAppServices(builder.Configuration)
@@ -55,7 +33,7 @@ app.UseAuthentications(builder.Configuration);
 app.UseRouting();
 app.MapControllerRoute(
     "default",
-    "api/{controller}/{action=Index}/{id?}");
+    "api/{controller}/{action=Get}/{id?}");
 
 app.UseMiddlewares(builder.Configuration)
     .UseEndpointsWithHealthCheck();
@@ -63,7 +41,7 @@ app.UseMiddlewares(builder.Configuration)
 await app.RunAsync();
 
 //This Startup endpoint for Unit Tests
-namespace Singa.Portal
+namespace TEMP.Api
 {
     public partial class Program
     {

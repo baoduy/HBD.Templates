@@ -1,12 +1,12 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using HBD.EfCore.DataAuthorization;
 using HBD.Web.GlobalException;
 using HBD.Web.Swagger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.FeatureManagement;
-using Microsoft.OpenApi.Models;
-using TEMP.Api.Providers;
+using TEMP.Api.Configs.Handlers;
 using TEMP.AppServices;
 using TEMP.Core;
 using TEMP.Core.Options;
@@ -17,11 +17,9 @@ namespace TEMP.Api.Configs;
 
 internal static class ServiceConfigs
 {
-    public const string AppName = "TEMP.Api";
-
     //public const string CorsName = $"{AppName}-CORS";
     public const string CookieHeaderKey = "SET-COOKIE";
-    public const string CsrfHeaderKey = $"{AppName}-CSRF-TOKEN";
+    public const string CsrfHeaderKey = $"{SettingKeys.ApiName}-CSRF-TOKEN";
     public const string CsrfCookieKey = $"X-{CsrfHeaderKey}";
     public const string CsrfFieldKey = $"__{CsrfHeaderKey}";
 
@@ -92,9 +90,9 @@ internal static class ServiceConfigs
     {
         services.AddSwaggerConfig(new SwaggerInfo
         {
-            Title = AppName,
-            Description = $"The {AppName} Api documentation."
-        }, xmlFile: $"{AppName}.xml");
+            Title = SettingKeys.ApiName,
+            Description = $"The {SettingKeys.ApiName} Api documentation."
+        }, xmlFile: $"{SettingKeys.ApiName}.xml");
         
         return services;
     }
@@ -110,7 +108,8 @@ internal static class ServiceConfigs
     {
         services
             .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
-            .AddScoped<IPrincipalProvider, PrincipalProvider>();
+            .AddScoped<IPrincipalProvider, PrincipalProvider>()
+            .AddScoped<IDataKeyProvider>(p => p.GetRequiredService<IPrincipalProvider>());;
 
         var conn = configuration.GetConnectionString(SettingKeys.DbConnectionString);
 

@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using TEMP.AppServices;
 
-namespace TEMP.Api.Providers;
+namespace TEMP.Api.Configs.Handlers;
 
 internal sealed class PrincipalProvider : IPrincipalProvider
 {

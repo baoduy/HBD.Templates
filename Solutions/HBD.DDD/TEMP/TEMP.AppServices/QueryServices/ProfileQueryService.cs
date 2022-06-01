@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using HBD.EfCore.Repos;
@@ -14,6 +15,9 @@ internal sealed class ProfileQueryService : QueryService, IProfileQueryService
 
     public async ValueTask<ProfileBasicView> GetBasicViewForUserAsync(Guid userId) 
         => await _repository.Get<ProfileBasicView>(p => p.AdAccountId == userId).FirstOrDefaultAsync();
+
+    public async ValueTask<List<ProfileBasicView>> GetBasicViewAsync()
+        => await _repository.Get<ProfileBasicView>().ToListAsync();
 
     public ProfileQueryService(IMapper mapper, IDtoRepository<Profile> repository) : base(mapper) => _repository = repository;
 }
