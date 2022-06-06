@@ -31,7 +31,7 @@ public class Initialize
             builder.WithConventions(c =>
             {
                 c.PhoneNumber.Aliases(nameof(ProfileModel.Phone));
-                c.JobTitle.Aliases(nameof(ProfileModel.Title));
+                //c.JobTitle.Aliases(nameof(ProfileModel.));
             });
         });
 

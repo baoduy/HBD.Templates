@@ -46,7 +46,7 @@ internal static class ApiConfig
 
     public static WebApplication UseMiddlewares(this WebApplication app, IConfiguration configuration)
     {
-        app.UseGlobalExceptionHandler();
+        app.UseGlobalExceptionHandler<GlobalExceptionHandler>();
         
         var features = configuration.Bind<FeatureOptions>(FeatureOptions.Name);
         if (features.EnableAntiforgery)

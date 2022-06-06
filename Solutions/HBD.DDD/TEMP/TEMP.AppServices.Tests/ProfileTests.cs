@@ -25,7 +25,7 @@ public class ProfileTests
 
         var m = AutoFaker.Generate<ProfileModel>();
 
-        m.Title = m.Title[..10];
+        //m.Title = m.Title[..10];
         m.Id = null;
 
         var rs = await sv.RunBizActionAsync<ProfileBasicView>(m).ConfigureAwait(false);
@@ -47,7 +47,7 @@ public class ProfileTests
         var sv = Initialize.Provider.GetRequiredService<IActionServiceAsync<IUpdateProfileAction>>();
         var m = AutoFaker.Generate<ProfileModel>();
 
-        m.Title = m.Title[..10];
+        //m.Title = m.Title[..10];
         m.Id = _id;
 
         var rs = await sv.RunBizActionAsync<ProfileBasicView>(m).ConfigureAwait(false);
