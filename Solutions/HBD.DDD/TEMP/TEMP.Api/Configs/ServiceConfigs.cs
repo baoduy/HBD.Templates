@@ -26,7 +26,7 @@ internal static class ServiceConfigs
     public static IServiceCollection AddAspNetConfig(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddFeatureManagement();
-        
+
         //TODO move to external cache
         services.AddDistributedMemoryCache();
 
@@ -93,7 +93,7 @@ internal static class ServiceConfigs
             Title = SettingKeys.ApiName,
             Description = $"The {SettingKeys.ApiName} Api documentation."
         }, xmlFile: $"{SettingKeys.ApiName}.xml");
-        
+
         return services;
     }
 
@@ -102,14 +102,15 @@ internal static class ServiceConfigs
         services.Configure<FeatureOptions>(configuration.GetSection(FeatureOptions.Name));
         return services;
     }
-    
+
     public static IServiceCollection AddAllAppServices(this IServiceCollection services,
         IConfiguration configuration)
     {
         services
             .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
             .AddScoped<IPrincipalProvider, PrincipalProvider>()
-            .AddScoped<IDataKeyProvider>(p => p.GetRequiredService<IPrincipalProvider>());;
+            .AddScoped<IDataKeyProvider>(p => p.GetRequiredService<IPrincipalProvider>());
+        ;
 
         var conn = configuration.GetConnectionString(SettingKeys.DbConnectionString);
 
@@ -121,8 +122,11 @@ internal static class ServiceConfigs
             /*typeof(AuthSetup).Assembly*/
         );
 
+
         return services
             .AddAppServices()
-            .AddInfraServices(conn);
+            .AddInfraServices(conn)
+            //Service Bus
+            .AddInfraServiceBus(configuration);
     }
 }

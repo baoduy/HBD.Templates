@@ -1,11 +1,13 @@
 using TEMP.Api.Configs;
 
-var builder = WebApplication.CreateBuilder(args)
-    .AddAzAppConfig();
+var builder = WebApplication
+    .CreateBuilder(args)
+    //Azure App Configuration
+    .AddAzAppConfig()
+    //Azure App Insight Logs
+    .AddLogs();
 
-//Log
-//builder.Services.AddLogging();
-
+//Run migration and exit the app if needed.
 await builder.RunMigrationAsync(args);
 
 // Add services to the container.
@@ -22,13 +24,6 @@ var app = builder.Build()
     .EnableFeatures(builder.Configuration)
     .EnableDevFeatures(); //Dev Features like swagger error pages,...
 
-// Cronjob
-// if (args.Length > 0 && args[0].IsJobTask())
-// {
-//     await app.RunTaskAsync(args[0]);
-//     return;
-// }
-
 app.UseAuthentications(builder.Configuration);
 app.UseRouting();
 app.MapControllerRoute(
@@ -38,7 +33,8 @@ app.MapControllerRoute(
 app.UseMiddlewares(builder.Configuration)
     .UseEndpointsWithHealthCheck();
 
-await app.RunAsync();
+await app.RunWithServiceBusAsync();
+//await app.RunAsync();
 
 //This Startup endpoint for Unit Tests
 namespace TEMP.Api

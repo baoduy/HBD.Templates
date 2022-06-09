@@ -4,9 +4,9 @@ namespace TEMP.Api.Configs;
 
 internal static class LogConfig
 {
-    public static WebApplicationBuilder AddLogs(this WebApplicationBuilder builder, IConfiguration configuration)
+    public static WebApplicationBuilder AddLogs(this WebApplicationBuilder builder)
     {
-        var instrumentKey = configuration.GetValue<string>("ApplicationInsights:InstrumentationKey");
+        var instrumentKey = builder.Configuration.GetValue<string>("ApplicationInsights:InstrumentationKey");
         if (string.IsNullOrWhiteSpace(instrumentKey))
         {
             builder.Host.ConfigureLogging((_, b) => b.AddConsole());

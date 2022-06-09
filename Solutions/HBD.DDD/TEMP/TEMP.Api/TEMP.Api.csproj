@@ -18,6 +18,7 @@
     <ApplicationURL>http://localhost:5000</ApplicationURL>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="HBD.AzProxy.ServiceBus" Version="6.1.4" />
     <PackageReference Include="HBD.Web.Auths" Version="6.1.14" />
     <PackageReference Include="HBD.Web.GlobalException" Version="6.1.14" />
     <PackageReference Include="HBD.Web.Models" Version="6.1.14" />

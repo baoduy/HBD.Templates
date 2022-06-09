@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using HBD.EfCore.BizAction.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TEMP.AppServices;
 using TEMP.Domains;
@@ -33,9 +34,12 @@ public static class InfraSetup
                 enableAutoMapper: false,
                 enableAutoScanEventHandler: true,
                 assembliesToScans: new[] {typeof(InfraSetup).Assembly, typeof(DomainSchemas).Assembly});
-
+        
         return service.AddBizRunner();
     }
+
+    public static IServiceCollection AddInfraServiceBus(this IServiceCollection service, IConfiguration configuration)
+        => service.AddServiceBus(configuration, typeof(InfraSetup).Assembly);
 
     internal static IServiceCollection AddBizRunner(this IServiceCollection services)
     {
@@ -54,11 +58,14 @@ public static class InfraSetup
 
         //DONOT: scan the Even handler here as it already scan and added via AddCoreInfraServices
             
-        return services.Scan(s => s.FromAssemblies(typeof(InfraSetup).Assembly)
+         services.Scan(s => s.FromAssemblies(typeof(InfraSetup).Assembly)
             .AddClasses(c => c.InNamespaces($"{Name}.Repos", $"{Name}.Services"))
             .AsImplementedInterfaces()
             .WithScopedLifetime());
 
-           
+        return services.Scan(s => s.FromAssemblies(typeof(InfraSetup).Assembly)
+            .AddClasses(c => c.InNamespaces($"{Name}.ServiceBus.Senders"))
+            .AsImplementedInterfaces()
+            .WithSingletonLifetime());
     }
 }
