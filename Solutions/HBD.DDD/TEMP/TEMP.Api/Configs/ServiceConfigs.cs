@@ -110,7 +110,6 @@ internal static class ServiceConfigs
             .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
             .AddScoped<IPrincipalProvider, PrincipalProvider>()
             .AddScoped<IDataKeyProvider>(p => p.GetRequiredService<IPrincipalProvider>());
-        ;
 
         var conn = configuration.GetConnectionString(SettingKeys.DbConnectionString);
 
@@ -121,8 +120,7 @@ internal static class ServiceConfigs
             }, typeof(AppSetup).Assembly, typeof(DomainSchemas).Assembly
             /*typeof(AuthSetup).Assembly*/
         );
-
-
+        
         return services
             .AddAppServices()
             .AddInfraServices(conn)

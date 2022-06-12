@@ -18,6 +18,9 @@ public static class AppSetup
             cfg.ShouldMapProperty = p => p.GetMethod?.IsPublic == true || p.CanRead;
         }, typeof(AppSetup).Assembly,typeof(DomainSchemas).Assembly);
 
+        //Add StateManagement
+        services.AddDistributedStateStorage();
+        
         return services.Scan(s => s.FromAssemblies(typeof(AppSetup).Assembly)
             .AddClasses(c => c.InNamespaces($"{Name}.BizActions", $"{Name}.ProcessManagers", $"{Name}.QueryServices")).AsImplementedInterfaces()
             .WithScopedLifetime()

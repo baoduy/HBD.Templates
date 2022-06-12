@@ -18,11 +18,11 @@
     <ApplicationURL>http://localhost:5000</ApplicationURL>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="HBD.AzProxy.ServiceBus" Version="6.1.4" />
-    <PackageReference Include="HBD.Web.Auths" Version="6.1.14" />
-    <PackageReference Include="HBD.Web.GlobalException" Version="6.1.14" />
-    <PackageReference Include="HBD.Web.Models" Version="6.1.14" />
-    <PackageReference Include="HBD.Web.Swagger" Version="6.1.14" />
+    <PackageReference Include="HBD.AzProxy.ServiceBus" Version="6.1.5" />
+    <PackageReference Include="HBD.Web.Auths" Version="6.1.15" />
+    <PackageReference Include="HBD.Web.GlobalException" Version="6.1.15" />
+    <PackageReference Include="HBD.Web.Models" Version="6.1.15" />
+    <PackageReference Include="HBD.Web.Swagger" Version="6.1.15" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
