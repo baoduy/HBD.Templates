@@ -7,16 +7,16 @@ namespace TEMP.AppServices.ProcessManagers;
 
 internal sealed class ProfileSyncManager : IProfileSyncManager
 {
-    private readonly IStateManager<ProfileSyncManager> _stateManager;
+    private readonly IStateService<ProfileState> _state;
 
-    public ProfileSyncManager(IStateManager<ProfileSyncManager> stateManager) => _stateManager = stateManager;
+    public ProfileSyncManager(IStateManager<ProfileSyncManager> stateManager) 
+        => _state = stateManager.Get<ProfileState>();
 
     public async Task RunAsync()
     {
-        var state = _stateManager.Get<ProfileState>();
-        var value = await state.GetValueAsync();
+        var value = await _state.GetValueAsync();
         value.LastProcessed = DateTime.Now;
 
-        await state.CommitAsync();
+        await _state.CommitAsync();
     }
 }
