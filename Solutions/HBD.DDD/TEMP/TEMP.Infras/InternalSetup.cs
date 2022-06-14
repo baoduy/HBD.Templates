@@ -120,7 +120,8 @@ public static class InternalSetup
     /// <returns></returns>
     internal static DbContextOptionsBuilder UseSqlWithMigration(this DbContextOptionsBuilder builder, string connectionString) =>
         builder.UseSqlServer(connectionString,
-            o => o.MigrationsHistoryTable(nameof(TEMPContext), DomainSchemas.Migration)
+            o => o
+                .MigrationsHistoryTable(nameof(TEMPContext), DomainSchemas.Migration)
                 .EnableRetryOnFailure()
                 .UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
 }
