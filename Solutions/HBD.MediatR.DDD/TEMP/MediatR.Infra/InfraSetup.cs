@@ -1,19 +1,18 @@
 ﻿using System.Runtime.CompilerServices;
-using HBD.EfCore.BizAction.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TEMP.AppServices;
-using TEMP.Domains;
-using TEMP.Infras.EventHandlers;
+using MediatR.AppServices;
+using MediatR.Domains;
+using MediatR.Infra.EventHandlers;
 
-[assembly: InternalsVisibleTo("TEMP.AppServices.Tests")]
+[assembly: InternalsVisibleTo("MediatR.AppServices.Tests")]
 [assembly: InternalsVisibleTo("TEMP.Infra.Tests")]
 
-namespace TEMP.Infras;
+namespace MediatR.Infra;
 
 public static class InfraSetup
 {
-    private const string Name = "TEMP.Infras";
+    private const string Name = "MediatR.Infra";
 
     public static IServiceCollection AddInfraServices(this IServiceCollection service, string connectionString)
     {
@@ -36,22 +35,22 @@ public static class InfraSetup
                 enableAutoScanEventHandler: true,
                 assembliesToScans: new[] {typeof(InfraSetup).Assembly, typeof(DomainSchemas).Assembly});
         
-        return service.AddBizRunner();
+        return service;
     }
 
     public static IServiceCollection AddInfraServiceBus(this IServiceCollection service, IConfiguration configuration)
         => service.AddServiceBus(configuration, typeof(InfraSetup).Assembly);
 
-    internal static IServiceCollection AddBizRunner(this IServiceCollection services)
-    {
-        services.RegisterBizRunner<TEMPContext>(new GenericBizRunnerConfig
-        {
-            DoNotValidateSaveChanges = true,
-            SaveChangesExceptionHandler = SaveChangesExceptionHandler.Handler
-        });
-
-        return services;
-    }
+    // internal static IServiceCollection AddBizRunner(this IServiceCollection services)
+    // {
+    //     services.RegisterBizRunner<TEMPContext>(new GenericBizRunnerConfig
+    //     {
+    //         DoNotValidateSaveChanges = true,
+    //         SaveChangesExceptionHandler = SaveChangesExceptionHandler.Handler
+    //     });
+    //
+    //     return services;
+    // }
 
     internal static IServiceCollection AddImplementations(this IServiceCollection services)
     {
