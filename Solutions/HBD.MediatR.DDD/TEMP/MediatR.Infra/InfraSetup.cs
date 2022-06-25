@@ -1,7 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MediatR.AppServices;
 using MediatR.Domains;
 using MediatR.Infra.EventHandlers;
 

@@ -29,6 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MediatR.AppServices\MediatR.AppServices.csproj" />
-    <ProjectReference Include="..\MediatR.Infra.Lite\MediatR.Infra.Lite.csproj" />
+    <ProjectReference Include="..\MediatR.Infra\MediatR.Infra.csproj" />
   </ItemGroup>
 </Project>

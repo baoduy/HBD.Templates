@@ -8,14 +8,13 @@ public class Company
 {
     #region Constructors
 
-    public Company(string name, string uen, string abn, string arbn, string can, LegalType legalType)
+    public Company(string name, string uen, string abn, string arbn, string can)
     {
         Name = name;
         UEN = uen;
         ABN = abn;
         ARBN = arbn;
         CAN = can;
-        LegalType = LegalType;
     }
 
     internal Company()
@@ -31,8 +30,6 @@ public class Company
     [MaxLength(50)] public string ARBN { get; }
 
     [MaxLength(50)] public string CAN { get; }
-
-    public LegalType LegalType { get; }
 
     [MaxLength(100)] public string Name { get; }
 

@@ -13,7 +13,7 @@ internal static class DbMigration
 var isMigration = args.Any(x => string.Equals(x, "migration", StringComparison.OrdinalIgnoreCase));
 #endif
 
-//Run the migration job under K8s execution
+//Run the migration job
         if (isMigration)
         {
             Console.WriteLine("Running Db migration...");

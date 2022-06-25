@@ -1,14 +1,12 @@
 using AutoMapper;
-using HBD.EfCore.Repos;
 using MediatR.AppServices.Exceptions;
 using MediatR.AppServices.Models.Profiles;
 using MediatR.Domains.Repositories;
-using Profile = MediatR.Domains.Aggregators.Profile;
 
 
 namespace MediatR.AppServices.BizActions.Profiles;
 
-public class DeleteProfileCommand:IRequest
+public class DeleteProfileCommand : BaseCommand, IRequest
 {
     public Guid Id { get; set; }
 }
@@ -19,7 +17,7 @@ internal class DeleteProfileCommandHandler : IRequestHandler<DeleteProfileComman
     private readonly IProfileRepo _repository;
     private readonly IMapper _mapper;
 
-    public DeleteProfileCommandHandler( IMediator mediator, 
+    public DeleteProfileCommandHandler(IMediator mediator,
         IProfileRepo repository,
         IMapper mapper)
     {
@@ -27,7 +25,7 @@ internal class DeleteProfileCommandHandler : IRequestHandler<DeleteProfileComman
         _repository = repository;
         _mapper = mapper;
     }
-    
+
 
     public async Task<Unit> Handle(DeleteProfileCommand request, CancellationToken cancellationToken)
     {

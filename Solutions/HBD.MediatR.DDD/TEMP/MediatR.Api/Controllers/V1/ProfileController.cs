@@ -9,6 +9,9 @@ namespace MediatR.Api.Controllers.V1;
 [ApiVersion("1")]
 public class ProfileController : ApiControllerBase
 {
+    private readonly IMediator _mediator;
+    public ProfileController(IMediator mediator) => _mediator = mediator;
+
     [HttpGet]
     public async Task<ActionResult<ProfileBasicView>> Get([FromServices] IProfileQueryService repo)
     {
@@ -18,20 +21,20 @@ public class ProfileController : ApiControllerBase
 
     // POST api/<controller>
     [HttpPost]
-    public async Task<ActionResult<ProfileBasicView>> Post([FromBody] ProfileModel model,
-        [FromServices] IActionServiceAsync<ICreateProfileAction> action)
+    public async Task<ActionResult<ProfileBasicView>> Post([FromBody] CreateProfileCommand model)
     {
-        var result = await action.RunBizActionAsync<ProfileBasicView>(model).ConfigureAwait(false);
-        return action.Status.Send(result);
+        var rs =await _mediator.Send(model);
+        return Ok(rs);
     }
 
     // PUT api/<controller>/5
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult<ProfileBasicView>> Put(Guid id, [FromBody] ProfileModel model,
-        [FromServices] IActionServiceAsync<IUpdateProfileAction> action)
+    public async Task<ActionResult<ProfileBasicView>> Put(Guid id, [FromBody] UpdateProfileCommand model)
     {
-        var result = await action.RunBizActionAsync<ProfileBasicView>(model).ConfigureAwait(false);
-        return action.Status.Send(result);
+        if (model.Id != id) return BadRequest();
+        
+        var rs =await _mediator.Send(model);
+        return Ok(rs);
     }
     
 }

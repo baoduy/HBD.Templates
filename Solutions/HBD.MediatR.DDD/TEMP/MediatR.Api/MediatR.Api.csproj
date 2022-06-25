@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RuntimeIdentifiers>linux-x64;win-x64</RuntimeIdentifiers>
     <LangVersion>8.0</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -18,10 +18,9 @@
     <ApplicationURL>http://localhost:5000</ApplicationURL>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="HBD.AzProxy.ServiceBus" Version="6.1.7" />
+    <PackageReference Include="HBD.AzProxy.ServiceBus" Version="6.1.9" />
     <PackageReference Include="HBD.Web.Auths" Version="6.1.15" />
     <PackageReference Include="HBD.Web.GlobalException" Version="6.1.15" />
-    <PackageReference Include="HBD.Web.Models" Version="6.1.15" />
     <PackageReference Include="HBD.Web.Swagger" Version="6.1.15" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />

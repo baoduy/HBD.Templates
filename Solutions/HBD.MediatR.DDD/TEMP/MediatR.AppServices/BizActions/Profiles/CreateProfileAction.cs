@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
-using MediatR.AppServices.Abstracts;
 using MediatR.AppServices.Models.Profiles;
 using MediatR.Domains.Events;
 using MediatR.Domains.Repositories;
@@ -10,7 +9,7 @@ using Profile = MediatR.Domains.Aggregators.Profile;
 namespace MediatR.AppServices.BizActions.Profiles;
 
 [AutoMap(typeof(Profile), ReverseMap = true)]
-public class CreateProfileCommand : ModelBase,IRequest<ProfileBasicView>
+public class CreateProfileCommand :BaseCommand, IRequest<ProfileBasicView>
 {
     [Required] public string Email { get; set; }
     

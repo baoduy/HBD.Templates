@@ -1,4 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8e2a522f_002Dbdfc_002D4b24_002D8258_002D520a6c8e4fd8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;Project Location="/Volumes/VMs_2T/_DRUNK/HBD.Templates/Solutions/HBD.DDD" Presentation="&amp;lt;Tests&amp;gt;" /&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::556A24D8-A655-4A51-B74A-C12829108A72::net6.0::MediatR.Api.Tests.ProfileTests.Create_Profile&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

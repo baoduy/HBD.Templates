@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
-using MediatR.Infra.Lite;
 
 namespace MediatR.Infra.Tests;
 
@@ -12,7 +11,7 @@ internal class DbContextFactory : IDesignTimeDbContextFactory<TEMPContext>
     {
         var service = new ServiceCollection()
             .AddInfraServices(Consts.ConnectionString)
-            .AddDataKeyProvider<TestDataKeyProvider>()
+            //.AddDataKeyProvider<TestDataKeyProvider>()
             .AddLogging()
             .BuildServiceProvider();
 

@@ -18,6 +18,9 @@ public static class AppSetup
             cfg.ShouldMapProperty = p => p.GetMethod?.IsPublic == true || p.CanRead;
         }, typeof(AppSetup).Assembly,typeof(DomainSchemas).Assembly);
 
+        //Add MediatR
+        services.AddMediatR(typeof(AppSetup).Assembly);
+        
         //Add StateManagement
         services.AddDistributedStateStorage();
         

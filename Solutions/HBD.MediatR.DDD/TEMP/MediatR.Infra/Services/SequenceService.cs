@@ -12,7 +12,10 @@ internal abstract class SequenceService : ISequenceServices
         _sequence = sequence;
     }
 
-    public virtual ValueTask<string> NextValueAsync() => _dbContext.NextSeqValueWithFormat(_sequence);
+    public virtual async ValueTask<string> NextValueAsync() =>
+        _dbContext.Database.ProviderName == "Microsoft.EntityFrameworkCore.SqlServer"
+            ? await _dbContext.NextSeqValueWithFormat(_sequence)
+            : Guid.NewGuid().ToString();
 
 
     private readonly DbContext _dbContext;
