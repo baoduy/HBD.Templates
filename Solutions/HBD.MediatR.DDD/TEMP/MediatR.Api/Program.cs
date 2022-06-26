@@ -1,4 +1,5 @@
 using MediatR.Api.Configs;
+using MediatR.Core.Options;
 
 var builder = WebApplication
     .CreateBuilder(args)
@@ -6,6 +7,8 @@ var builder = WebApplication
     .AddAzAppConfig()
     //Azure App Insight Logs
     .AddLogs();
+
+var feature = builder.Configuration.Bind<FeatureOptions>(FeatureOptions.Name);
 
 //Run migration and exit the app if needed.
 await builder.RunMigrationAsync(args);
@@ -33,8 +36,9 @@ app.MapControllerRoute(
 app.UseMiddlewares(builder.Configuration)
     .UseEndpointsWithHealthCheck();
 
-await app.RunWithServiceBusAsync();
-//await app.RunAsync();
+if (feature.EnableServiceBusProcess)
+    await app.RunWithServiceBusAsync();
+else await app.RunAsync();
 
 //This Startup endpoint for Unit Tests
 namespace MediatR.Api

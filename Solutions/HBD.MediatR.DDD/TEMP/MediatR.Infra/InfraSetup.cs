@@ -2,7 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR.Domains;
-using MediatR.Infra.EventHandlers;
+using MediatR.Domains.Share;
+using MediatR.Infra.Share;
 
 [assembly: InternalsVisibleTo("MediatR.AppServices.Tests")]
 [assembly: InternalsVisibleTo("TEMP.Infra.Tests")]
@@ -22,7 +23,6 @@ public static class InfraSetup
             .AddCoreInfraServices<TEMPContext>(op =>
                 {
                     op.UseSqlWithMigration(connectionString);
-
 #if DEBUG
                     op.EnableDetailedErrors().EnableSensitiveDataLogging();
 #else
@@ -56,7 +56,7 @@ public static class InfraSetup
         //DONOT: scan the Even handler here as it already scan and added via AddCoreInfraServices
             
          services.Scan(s => s.FromAssemblies(typeof(InfraSetup).Assembly)
-            .AddClasses(c => c.InNamespaces($"{Name}.Repos", $"{Name}.Services"))
+            .AddClasses(c => c.Where(t=>t.Namespace!.Contains("Repos")||t.Namespace!.Contains("Services")))
             .AsImplementedInterfaces()
             .WithScopedLifetime());
 

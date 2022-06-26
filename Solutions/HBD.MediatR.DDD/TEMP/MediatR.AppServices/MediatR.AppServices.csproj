@@ -5,16 +5,7 @@
     <LangVersion>default</LangVersion>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Quotations\**" />
-    <Compile Remove="Recipients\**" />
-    <EmbeddedResource Remove="Quotations\**" />
-    <EmbeddedResource Remove="Recipients\**" />
-    <None Remove="Quotations\**" />
-    <None Remove="Recipients\**" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="HBD.Services.StateManagement" Version="6.1.7" />
@@ -25,5 +16,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MediatR.Domains\MediatR.Domains.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="MediatR.Api.Tests" />
   </ItemGroup>
 </Project>

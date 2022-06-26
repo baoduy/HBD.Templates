@@ -1,4 +1,5 @@
 using MediatR.Domains;
+using MediatR.Domains.Share;
 using MediatR.Infra;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -12,18 +13,16 @@ namespace MediatR.Api.Tests.TestClasses;
 public class TestApi: WebApplicationFactory<Program>
 {
     protected virtual bool TestWithSqlServer => false;
-    public IServiceScope ScopeServices { get; private set; }
+    public IServiceScope ScopeServices { get; private set; } = default!;
 
     protected override IHostBuilder? CreateHostBuilder()
     {
-        Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development");
+        Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
         return base.CreateHostBuilder();
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        base.ConfigureWebHost(builder);
-
         builder.ConfigureServices(services =>
         {
             if (!TestWithSqlServer)
@@ -31,10 +30,6 @@ public class TestApi: WebApplicationFactory<Program>
                 services.Remove<TEMPContext>().Remove<DbContextOptions<TEMPContext>>();
 
                 //Use InMemory
-                // services
-                //     .AddDbContext<AuthContext>(b => b
-                //         .ConfigureWarnings(w => w.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
-                //         .UseInMemoryDatabase(nameof(AuthContext)));
                 services
                     .AddDbContext<TEMPContext>(b =>
                         b.ConfigureWarnings(w => w.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
@@ -43,6 +38,8 @@ public class TestApi: WebApplicationFactory<Program>
                             .UseInMemoryDatabase(nameof(TEMPContext)));
             }
         });
+        
+        base.ConfigureWebHost(builder);
     }
 
     protected override IHost CreateHost(IHostBuilder builder)
@@ -58,12 +55,13 @@ public class TestApi: WebApplicationFactory<Program>
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
-        ScopeServices?.Dispose();
+        ScopeServices.Dispose();
     }
 
     protected virtual void InitializeDatabase()
     {
-        if (!TestWithSqlServer) return;
+        //if (!TestWithSqlServer) return;
+        
         var dbContext = ScopeServices.ServiceProvider.GetRequiredService<DbContext>();
         dbContext.Database.EnsureDeleted();
         EnsureDatabaseCreated<TEMPContext>(ScopeServices);
@@ -72,6 +70,7 @@ public class TestApi: WebApplicationFactory<Program>
     private static void EnsureDatabaseCreated<TContext>(IServiceScope scope) where TContext : DbContext
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
+        
         if (dbContext.Database.IsRelational())
             dbContext.Database.Migrate();
         else

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using HBD.EfCore.DataAuthorization;
+using MediatR.Domains.Features.Profiles.Entities;
 using Microsoft.EntityFrameworkCore;
-using MediatR.Domains.Aggregators;
 
 namespace MediatR.Infra;
 

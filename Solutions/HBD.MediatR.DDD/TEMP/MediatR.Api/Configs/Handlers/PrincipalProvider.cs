@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using MediatR.AppServices;
+using MediatR.AppServices.Share;
 
 namespace MediatR.Api.Configs.Handlers;
 

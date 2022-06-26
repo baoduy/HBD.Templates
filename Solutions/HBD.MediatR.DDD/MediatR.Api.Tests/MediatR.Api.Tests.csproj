@@ -26,13 +26,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\TEMP\MediatR.Api\appsettings.Development.json">
-        <Link>appsettings.Development.json</Link>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\TEMP\MediatR.Api\MediatR.Api.csproj" />
     </ItemGroup>
 

@@ -1,8 +1,8 @@
 ﻿using MediatR.Api.Controllers.Abstractions;
 using Microsoft.AspNetCore.Mvc;
-using MediatR.AppServices.BizActions.Profiles;
-using MediatR.AppServices.Models.Profiles;
-using MediatR.AppServices.QueryServices;
+using MediatR.AppServices.Features.Profiles.Actions;
+using MediatR.AppServices.Features.Profiles.Models;
+using MediatR.AppServices.Features.Profiles.Queries;
 
 namespace MediatR.Api.Controllers.V2;
 

@@ -4,6 +4,7 @@ using AutoMapper;
 using HBD.EfCore.Hooks;
 using Microsoft.EntityFrameworkCore;
 using MediatR.Domains;
+using MediatR.Domains.Share;
 using MediatR.Infra;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -93,9 +94,7 @@ public static class InternalSetup
         assembliesToScans ??= new[] {typeof(TContext).Assembly};
 
         if (enableAutoScanEventHandler)
-        {
             service.ScanEventHandlers(assembliesToScans);
-        }
 
         if (enableAutoMapper)
         {

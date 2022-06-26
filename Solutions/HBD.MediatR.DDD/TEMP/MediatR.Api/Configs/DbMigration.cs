@@ -1,14 +1,16 @@
 using MediatR.Core;
+using MediatR.Core.Options;
 using MediatR.Infra;
 
 namespace MediatR.Api.Configs;
 
 internal static class DbMigration
 {
-    public static async Task RunMigrationAsync(this WebApplicationBuilder builder,params string[] args)
+    public static async Task RunMigrationAsync(this WebApplicationBuilder builder, params string[] args)
     {
+        var feature = builder.Configuration.Bind<FeatureOptions>(FeatureOptions.Name);
 #if DEBUG
-        var isMigration = true;
+        var isMigration = feature.RunDbMigrationWhenAppStart;
 #else
 var isMigration = args.Any(x => string.Equals(x, "migration", StringComparison.OrdinalIgnoreCase));
 #endif
@@ -18,7 +20,6 @@ var isMigration = args.Any(x => string.Equals(x, "migration", StringComparison.O
         {
             Console.WriteLine("Running Db migration...");
             await InfraMigration.MigrateDb(builder.Configuration.GetConnectionString(SettingKeys.DbConnectionString));
-           
             Console.WriteLine("Db migration is completed");
             
 #if !DEBUG

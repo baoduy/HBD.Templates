@@ -12,12 +12,9 @@ public static class InfraMigration
             .UseSqlWithMigration(connectionString)
             .UseAutoConfigModel()
             .Options, null);
-
-#if DEBUG
-        await db.Database.EnsureCreatedAsync().ConfigureAwait(false);
-#else
+        
         await db.Database.MigrateAsync().ConfigureAwait(false);
-#endif
+
         //TODO: Add other data seeding here. The problems with IDataSeedingConfiguration is not support owned type property.
     }
 }

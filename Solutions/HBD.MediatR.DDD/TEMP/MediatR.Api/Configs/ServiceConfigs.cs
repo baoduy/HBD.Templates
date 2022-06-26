@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.FeatureManagement;
 using MediatR.AppServices;
+using MediatR.AppServices.Share;
 using MediatR.Core;
 using MediatR.Core.Options;
 using MediatR.Domains;
+using MediatR.Domains.Share;
 using MediatR.Infra;
 
 namespace MediatR.Api.Configs;
@@ -61,12 +63,11 @@ internal static class ServiceConfigs
             .AddControllers(
                 config =>
                 {
+                    config.Filters.Add<SetUserIdPropertyFilter>(2);
+                    
                     if (features.RequireAuthorization)
-                    {
                         config.Filters.Add(new AuthorizeFilter());
-                        //config.Filters.Add<SetActionUserForModelFilter>(2);
-                    }
-
+                    
                     if (features.EnableAntiforgery)
                         config.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
                 })

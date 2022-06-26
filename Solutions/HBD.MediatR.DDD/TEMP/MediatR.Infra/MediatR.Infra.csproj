@@ -7,21 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Abstracts\**" />
-    <Compile Remove="Migrations\**" />
-    <Compile Remove="Quotations\**" />
-    <Compile Remove="Recipients\**" />
-    <EmbeddedResource Remove="Abstracts\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <EmbeddedResource Remove="Quotations\**" />
-    <EmbeddedResource Remove="Recipients\**" />
-    <None Remove="Abstracts\**" />
-    <None Remove="Migrations\**" />
-    <None Remove="Quotations\**" />
-    <None Remove="Recipients\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="HBD.AzProxy.ServiceBus" Version="6.1.9" />
     <PackageReference Include="HBD.EfCore.Events" Version="6.1.3" />
@@ -39,5 +24,10 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="MediatR.Api.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Profiles" />
+    <Folder Include="Migrations" />
   </ItemGroup>
 </Project>
