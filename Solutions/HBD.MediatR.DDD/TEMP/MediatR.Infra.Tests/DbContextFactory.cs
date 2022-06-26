@@ -5,8 +5,6 @@ namespace MediatR.Infra.Tests;
 
 internal class DbContextFactory : IDesignTimeDbContextFactory<TEMPContext>
 {
-    #region Methods
-
     public TEMPContext CreateDbContext(string[] args)
     {
         var service = new ServiceCollection()
@@ -18,6 +16,4 @@ internal class DbContextFactory : IDesignTimeDbContextFactory<TEMPContext>
 
         return service.GetRequiredService<TEMPContext>();
     }
-
-    #endregion Methods
 }

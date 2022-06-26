@@ -16,9 +16,13 @@ public static class Extensions
         ProblemDetails? error = default;
 
         var str = await message.Content.ReadAsStringAsync();
-        if (success)
-            result = JsonSerializer.Deserialize<TValue>(str, _options);
-        else error = JsonSerializer.Deserialize<ProblemDetails>(str, _options);
+
+        if (!string.IsNullOrEmpty(str))
+        {
+            if (success)
+                result = JsonSerializer.Deserialize<TValue>(str, _options);
+            else error = JsonSerializer.Deserialize<ProblemDetails>(str, _options);
+        }
 
         return (success, result, error, str);
     }
