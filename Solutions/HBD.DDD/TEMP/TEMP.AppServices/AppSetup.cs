@@ -22,7 +22,8 @@ public static class AppSetup
         services.AddDistributedStateStorage();
         
         return services.Scan(s => s.FromAssemblies(typeof(AppSetup).Assembly)
-            .AddClasses(c => c.InNamespaces($"{Name}.BizActions", $"{Name}.ProcessManagers", $"{Name}.QueryServices")).AsImplementedInterfaces()
+            .AddClasses(c => c.Where(t=>t.Namespace!.Contains("Actions")||t.Namespace!.Contains("Queries")))
+            .AsImplementedInterfaces()
             .WithScopedLifetime()
         );
     }

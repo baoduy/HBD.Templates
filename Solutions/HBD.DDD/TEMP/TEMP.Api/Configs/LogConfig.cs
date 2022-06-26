@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Logging.ApplicationInsights;
-
 namespace TEMP.Api.Configs;
 
 internal static class LogConfig

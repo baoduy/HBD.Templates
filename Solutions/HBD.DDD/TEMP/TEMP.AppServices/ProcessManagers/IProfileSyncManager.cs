@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace TEMP.AppServices.ProcessManagers;
+﻿namespace TEMP.AppServices.ProcessManagers;
 
 public interface IProfileSyncManager
 {
