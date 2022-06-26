@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using MediatR.Domains.Share;
 
 namespace MediatR.Domains.Features.Profiles.Entities;
@@ -13,8 +14,6 @@ public enum EmployeeType
 [Table("Employees", Schema = DomainSchemas.Profile)]
 public class Employee : DomainEntity
 {
-    #region Constructors
-
     public Employee(Guid profileId, EmployeeType type, string userId) : base(Guid.NewGuid(), userId)
     {
         ProfileId = profileId;
@@ -25,28 +24,17 @@ public class Employee : DomainEntity
     {
     }
 
-    #endregion Constructors
 
-    #region Properties
+    [Required] public virtual Profile Profile { get; private set; } = default!;
 
-    // ReSharper disable once UnusedAutoPropertyAccessor.Local
-    public virtual Profile Profile { get; private set; }
+    [Required] public Guid ProfileId { get; private set; } = default!;
 
-    // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
-    public Guid ProfileId { get; private set; }
-
-    // ReSharper disable once UnusedAutoPropertyAccessor.Global
-    public EmployeeType Type { get; private set; }
-
-    #endregion Properties
-
-    #region Methods
+    [Required] public EmployeeType Type { get; private set; } = default!;
+    
 
     public void PromoteTo(EmployeeType type, string userId)
     {
         Type = type;
         SetUpdatedBy(userId);
     }
-
-    #endregion Methods
 }

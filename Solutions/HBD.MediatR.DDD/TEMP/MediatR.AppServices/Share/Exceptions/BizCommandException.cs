@@ -8,8 +8,7 @@ public sealed class BizCommandException : Exception
     {
     }
 
-    public BizCommandException(string message, string[] fields, Exception? innerException) : base(message,
-        innerException)
+    public BizCommandException(string message, string[] fields, Exception? innerException) : base(message, innerException)
     {
         Fields = fields;
     }

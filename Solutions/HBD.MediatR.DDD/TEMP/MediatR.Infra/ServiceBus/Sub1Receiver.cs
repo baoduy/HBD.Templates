@@ -1,7 +1,7 @@
 using Azure.Messaging.ServiceBus;
 using HBD.AzProxy.ServiceBus;
 
-namespace MediatR.Infra.ServiceBus.Receivers;
+namespace MediatR.Infra.ServiceBus;
 
 /// <summary>
 /// This Receiver will be pickup by ServiceBus activator automatically. NO NEED to be added into ServiceCollection

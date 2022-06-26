@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediatR.Infra.Migrations
 {
     [DbContext(typeof(TEMPContext))]
-    [Migration("20220625132952_intitalize")]
-    partial class intitalize
+    [Migration("20220626053418_01CreateDb")]
+    partial class _01CreateDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,97 +28,7 @@ namespace MediatR.Infra.Migrations
                 .HasMax(99999L)
                 .IsCyclic();
 
-            modelBuilder.Entity("MediatR.Domains.Aggregators.Profile", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnOrder(0);
-
-                    b.Property<string>("Avatar")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime?>("BirthDay")
-                        .HasColumnType("Date");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnOrder(996);
-
-                    b.Property<DateTimeOffset>("CreatedOn")
-                        .HasColumnType("datetimeoffset")
-                        .HasColumnOrder(997);
-
-                    b.Property<Guid?>("DataKey")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("MembershipNo")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion")
-                        .HasColumnOrder(1000);
-
-                    b.Property<string>("UpdatedBy")
-                        .IsConcurrencyToken()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnOrder(998);
-
-                    b.Property<DateTimeOffset?>("UpdatedOn")
-                        .HasColumnType("datetimeoffset")
-                        .HasColumnOrder(999);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedBy");
-
-                    b.HasIndex("CreatedOn");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("MembershipNo")
-                        .IsUnique();
-
-                    b.HasIndex("UpdatedBy");
-
-                    b.HasIndex("UpdatedOn");
-
-                    b.ToTable("Profiles", "pro");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("a6b50327-160e-423c-9c0b-c125588e6025"),
-                            CreatedBy = "System",
-                            CreatedOn = new DateTimeOffset(new DateTime(2022, 6, 25, 21, 29, 52, 677, DateTimeKind.Unspecified).AddTicks(3409), new TimeSpan(0, 8, 0, 0, 0)),
-                            Email = "abc@gmail.com",
-                            MembershipNo = "MS12345",
-                            Name = "Steven Hoang",
-                            UpdatedBy = "System",
-                            UpdatedOn = new DateTimeOffset(new DateTime(2022, 6, 25, 21, 29, 52, 677, DateTimeKind.Unspecified).AddTicks(3443), new TimeSpan(0, 8, 0, 0, 0))
-                        });
-                });
-
-            modelBuilder.Entity("MediatR.Domains.Entities.Employee", b =>
+            modelBuilder.Entity("MediatR.Domains.Features.Profiles.Entities.Employee", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -175,9 +85,104 @@ namespace MediatR.Infra.Migrations
                     b.ToTable("Employees", "pro");
                 });
 
-            modelBuilder.Entity("MediatR.Domains.Entities.Employee", b =>
+            modelBuilder.Entity("MediatR.Domains.Features.Profiles.Entities.Profile", b =>
                 {
-                    b.HasOne("MediatR.Domains.Aggregators.Profile", "Profile")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
+
+                    b.Property<string>("Avatar")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("BirthDay")
+                        .HasColumnType("Date");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnOrder(996);
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .HasColumnType("datetimeoffset")
+                        .HasColumnOrder(997);
+
+                    b.Property<Guid?>("DataKey")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("MembershipNo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion")
+                        .HasColumnOrder(1000);
+
+                    b.Property<string>("UpdatedBy")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnOrder(998);
+
+                    b.Property<DateTimeOffset?>("UpdatedOn")
+                        .HasColumnType("datetimeoffset")
+                        .HasColumnOrder(999);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("CreatedOn");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("MembershipNo")
+                        .IsUnique();
+
+                    b.HasIndex("UpdatedBy");
+
+                    b.HasIndex("UpdatedOn");
+
+                    b.ToTable("Profiles", "pro");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a6b50327-160e-423c-9c0b-c125588e6025"),
+                            CreatedBy = "System",
+                            CreatedOn = new DateTimeOffset(new DateTime(2022, 6, 26, 13, 34, 18, 674, DateTimeKind.Unspecified).AddTicks(4756), new TimeSpan(0, 8, 0, 0, 0)),
+                            Email = "abc@gmail.com",
+                            MembershipNo = "MS12345",
+                            Name = "Steven Hoang",
+                            Phone = "123456789",
+                            UpdatedBy = "System",
+                            UpdatedOn = new DateTimeOffset(new DateTime(2022, 6, 26, 13, 34, 18, 674, DateTimeKind.Unspecified).AddTicks(4794), new TimeSpan(0, 8, 0, 0, 0))
+                        });
+                });
+
+            modelBuilder.Entity("MediatR.Domains.Features.Profiles.Entities.Employee", b =>
+                {
+                    b.HasOne("MediatR.Domains.Features.Profiles.Entities.Profile", "Profile")
                         .WithMany()
                         .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)

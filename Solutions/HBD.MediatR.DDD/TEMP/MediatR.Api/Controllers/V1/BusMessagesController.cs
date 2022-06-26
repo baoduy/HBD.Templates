@@ -1,8 +1,8 @@
 using MediatR.Api.Controllers.Abstractions;
 using MediatR.AppServices.Features.Bus.Models;
 using MediatR.AppServices.Features.Profiles.Models;
+using MediatR.Infra.ServiceBus;
 using Microsoft.AspNetCore.Mvc;
-using MediatR.Infra.ServiceBus.Senders;
 
 namespace MediatR.Api.Controllers.V1;
 

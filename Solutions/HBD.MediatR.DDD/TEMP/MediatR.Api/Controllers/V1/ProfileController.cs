@@ -18,18 +18,16 @@ public class ProfileController : ApiControllerBase
         var p = await repo.GetBasicViewAsync().ConfigureAwait(false);
         return this.Send(p);
     }
-
-    // POST api/<controller>
+    
     [HttpPost]
-    public async Task<ActionResult<ProfileBasicView>> Post([FromBody] CreateProfileCommand model)
+    public async Task<ActionResult<ProfileBasicView>> Create([FromBody] CreateProfileCommand model)
     {
         var rs =await _mediator.Send(model);
         return Ok(rs);
     }
-
-    // PUT api/<controller>/5
+    
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult<ProfileBasicView>> Put(Guid id, [FromBody] UpdateProfileCommand model)
+    public async Task<ActionResult<ProfileBasicView>> Update(Guid id, [FromBody] UpdateProfileCommand model)
     {
         if (model.Id != id) return BadRequest();
         
@@ -37,4 +35,10 @@ public class ProfileController : ApiControllerBase
         return Ok(rs);
     }
     
+    [HttpDelete("{id:guid}")]
+    public async Task<ActionResult<ProfileBasicView>> Delete([FromRoute]DeleteProfileCommand model)
+    {
+        var rs = await _mediator.Send(model);
+        return Ok(rs);
+    }
 }

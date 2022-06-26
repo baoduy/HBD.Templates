@@ -1,4 +1,5 @@
 using System.Net;
+using System.Text.Json;
 using HBD.StatusGeneric;
 using HBD.Web.GlobalException;
 using MediatR.AppServices.Share.Exceptions;
@@ -30,4 +31,8 @@ internal class GlobalExceptionHandler : DefaultGlobalExceptionHandler
 
         return problems;
     }
+
+    public override string Serialize(ProblemDetails? problemDetails) =>
+        JsonSerializer.Serialize(problemDetails,
+            new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 }

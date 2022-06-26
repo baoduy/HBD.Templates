@@ -6,8 +6,6 @@ namespace MediatR.Domains.Features.Profiles.Entities;
 [Owned]
 public class Company
 {
-    #region Constructors
-
     public Company(string name, string uen, string abn, string arbn, string can)
     {
         Name = name;
@@ -21,19 +19,14 @@ public class Company
     {
     }
 
-    #endregion Constructors
+    [MaxLength(50)] public string? ABN { get; private set; } = default!;
 
-    #region Properties
+    [MaxLength(50)] public string? ARBN { get; private set; } = default!;
 
-    [MaxLength(50)] public string ABN { get; }
+    [MaxLength(50)] public string? CAN { get; private set; } = default!;
 
-    [MaxLength(50)] public string ARBN { get; }
+    [MaxLength(100),Required] public string Name { get; private set; } = default!;
 
-    [MaxLength(50)] public string CAN { get; }
-
-    [MaxLength(100)] public string Name { get; }
-
-    [MaxLength(100)] public string UEN { get; }
-
-    #endregion Properties
+    [MaxLength(100),Required] public string UEN { get; private set; } = default!;
+    
 }

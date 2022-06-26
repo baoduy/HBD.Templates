@@ -1,6 +1,6 @@
 using HBD.AzProxy.ServiceBus;
 
-namespace MediatR.Infra.ServiceBus.Senders;
+namespace MediatR.Infra.ServiceBus;
 
 public interface ITopic1Sender
 {

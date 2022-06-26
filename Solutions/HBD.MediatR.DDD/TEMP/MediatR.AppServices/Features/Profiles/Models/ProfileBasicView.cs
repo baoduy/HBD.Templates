@@ -5,7 +5,9 @@ using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
 namespace MediatR.AppServices.Features.Profiles.Models;
 
 [AutoMap(typeof(Profile))]
-public class ProfileBasicView
+public record ProfileBasicView
 {
+    public Guid Id { get; set; }
+    
     public string Name { get; set; }
 }

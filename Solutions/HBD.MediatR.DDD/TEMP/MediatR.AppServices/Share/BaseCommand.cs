@@ -4,5 +4,5 @@ namespace MediatR.AppServices.Share;
 
 public class BaseCommand
 {
-    [JsonIgnore] public string UserId { get; set; }    
+    [JsonIgnore] public string? UserId { get; set; }    
 }

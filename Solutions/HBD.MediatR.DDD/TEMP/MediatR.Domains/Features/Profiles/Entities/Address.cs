@@ -6,8 +6,6 @@ namespace MediatR.Domains.Features.Profiles.Entities;
 [Owned]
 public class Address
 {
-    #region Constructors
-
     public Address(string line, string state, string city, string country, string postal)
     {
         Line = line;
@@ -21,19 +19,13 @@ public class Address
     {
     }
 
-    #endregion Constructors
+    [MaxLength(50), Required] public string City { get; private set; } = default!;
 
-    #region Properties
+    [MaxLength(50),Required] public string Country { get;private set; } = default!;
 
-    [MaxLength(50)] public string City { get; }
+    [MaxLength(50),Required] public string Line { get; private set; } = default!;
 
-    [MaxLength(50)] public string Country { get; }
+    [MaxLength(50),Required] public string Postal { get; private set; } = default!;
 
-    [MaxLength(50)] public string Line { get; }
-
-    [MaxLength(50)] public string Postal { get; }
-
-    [MaxLength(50)] public string State { get; }
-
-    #endregion Properties
+    [MaxLength(50),Required] public string State { get; private set; } = default!;
 }

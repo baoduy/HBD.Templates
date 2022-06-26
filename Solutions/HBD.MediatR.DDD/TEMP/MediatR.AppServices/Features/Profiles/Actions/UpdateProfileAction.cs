@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using MediatR.AppServices.Features.Profiles.Models;
+using MediatR.AppServices.Share;
 using MediatR.AppServices.Share.Exceptions;
 using MediatR.Domains.Features.Profiles.Repos;
 using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
@@ -8,10 +9,13 @@ using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
 namespace MediatR.AppServices.Features.Profiles.Actions;
 
 [AutoMap(typeof(Profile), ReverseMap = true)]
-public class UpdateProfileCommand : CreateProfileCommand
+public class UpdateProfileCommand : BaseCommand,IRequest<ProfileBasicView>
 {
-    [Required]
-    public Guid Id { get; set; }
+    [Required] public Guid Id { get; set; }
+
+    [Phone] public string Phone { get; set; }
+
+    public string Name { get; set; }
 }
 
 internal sealed class UpdateProfileCommandHandler : IRequestHandler<UpdateProfileCommand, ProfileBasicView>
@@ -38,13 +42,13 @@ internal sealed class UpdateProfileCommandHandler : IRequestHandler<UpdateProfil
             throw new BizCommandException($"The Profile {request.Id} is not found.", nameof(request.Id));
 
         //Update Here
-        profile.UpdateName(request.Name, request.UserId);
-        
+        profile.Update(null,request.Name, request.Phone,null, request.UserId);
+
         //Add Event
-        
+
         //Save to Db
         await _repo.SaveAsync(cancellationToken);
-        
+
         //Return result
         return _mapper.Map<ProfileBasicView>(profile);
     }

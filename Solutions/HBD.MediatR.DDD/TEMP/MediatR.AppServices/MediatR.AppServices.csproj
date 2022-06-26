@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>default</LangVersion>
     <ImplicitUsings>true</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   
   <ItemGroup>
@@ -20,5 +21,11 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="MediatR.Api.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="HBD.AzProxy.ServiceBus">
+      <HintPath>..\..\..\..\..\..\..\.nuget\packages\hbd.azproxy.servicebus\6.1.9\lib\net6.0\HBD.AzProxy.ServiceBus.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

@@ -3,6 +3,8 @@
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::556A24D8-A655-4A51-B74A-C12829108A72::net6.0::MediatR.Api.Tests.ProfileTests.Create_Profile&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::556A24D8-A655-4A51-B74A-C12829108A72::net6.0::MediatR.Api.Tests.ProfileTests.Create_Duplicate_Profile&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::556A24D8-A655-4A51-B74A-C12829108A72::net6.0::MediatR.Api.Tests.ProfileTests.Update_Profile&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::556A24D8-A655-4A51-B74A-C12829108A72::net6.0::MediatR.Api.Tests.ProfileTests.Delete_Profile&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>

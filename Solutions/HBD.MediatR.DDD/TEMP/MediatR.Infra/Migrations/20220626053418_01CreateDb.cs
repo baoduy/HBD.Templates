@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MediatR.Infra.Migrations
 {
-    public partial class intitalize : Migration
+    public partial class _01CreateDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +37,7 @@ namespace MediatR.Infra.Migrations
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     MembershipNo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     DataKey = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
@@ -74,8 +75,8 @@ namespace MediatR.Infra.Migrations
             migrationBuilder.InsertData(
                 schema: "pro",
                 table: "Profiles",
-                columns: new[] { "Id", "Avatar", "BirthDay", "CreatedBy", "CreatedOn", "DataKey", "Email", "MembershipNo", "Name", "UpdatedBy", "UpdatedOn" },
-                values: new object[] { new Guid("a6b50327-160e-423c-9c0b-c125588e6025"), null, null, "System", new DateTimeOffset(new DateTime(2022, 6, 25, 21, 29, 52, 677, DateTimeKind.Unspecified).AddTicks(3409), new TimeSpan(0, 8, 0, 0, 0)), null, "abc@gmail.com", "MS12345", "Steven Hoang", "System", new DateTimeOffset(new DateTime(2022, 6, 25, 21, 29, 52, 677, DateTimeKind.Unspecified).AddTicks(3443), new TimeSpan(0, 8, 0, 0, 0)) });
+                columns: new[] { "Id", "Avatar", "BirthDay", "CreatedBy", "CreatedOn", "DataKey", "Email", "MembershipNo", "Name", "Phone", "UpdatedBy", "UpdatedOn" },
+                values: new object[] { new Guid("a6b50327-160e-423c-9c0b-c125588e6025"), null, null, "System", new DateTimeOffset(new DateTime(2022, 6, 26, 13, 34, 18, 674, DateTimeKind.Unspecified).AddTicks(4756), new TimeSpan(0, 8, 0, 0, 0)), null, "abc@gmail.com", "MS12345", "Steven Hoang", "123456789", "System", new DateTimeOffset(new DateTime(2022, 6, 26, 13, 34, 18, 674, DateTimeKind.Unspecified).AddTicks(4794), new TimeSpan(0, 8, 0, 0, 0)) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_CreatedBy",

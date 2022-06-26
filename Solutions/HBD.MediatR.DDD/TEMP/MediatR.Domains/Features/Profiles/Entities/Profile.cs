@@ -20,41 +20,41 @@ public class Profile : AggregateRoot
         : base(id, userId)
     {
         Email = email;
-        Phone = phone;
         MembershipNo = memberShipNo;
-        UpdateName(name, userId);
+        
+        Update(null, name, phone,null,userId);
     }
 
     private Profile()
     {
     }
 
-    [MaxLength(50)] public string Avatar { get; private set; }
+    [MaxLength(50)] public string? Avatar { get; private set; }
     
     [Column(TypeName = "Date")] public DateTime? BirthDay { get; private set; }
 
     [MaxLength(150)]
     [EmailAddress]
     [Required]
-    public string Email { get; }
+    public string Email { get;private set; }
 
-    [MaxLength(50)] [Required] public string MembershipNo { get; }
+    [MaxLength(50)] [Required] public string MembershipNo { get; private set; } = default!;
 
     [MaxLength(150)] [Required] 
-    public string Name { get; private set; }
+    public string Name { get; private set; } = default!;
 
-    [Phone] [MaxLength(50)] public string Phone { get; }
+    [Phone] [MaxLength(50)] public string? Phone { get; private set; }
 
-    public void Update(string avatar, DateTime? birthday, string userId)
+    public void Update(string? avatar,string? name, string? phoneNumber, DateTime? birthday, string userId)
     {
         Avatar = avatar;
         BirthDay = birthday;
-        SetUpdatedBy(userId);
-    }
 
-    public void UpdateName(string name, string userId)
-    {
-        Name = name;
+        if (!string.IsNullOrEmpty(name))
+            Name = name;
+        if (!string.IsNullOrEmpty(phoneNumber))
+            Phone = phoneNumber;
+        
         SetUpdatedBy(userId);
     }
 }
