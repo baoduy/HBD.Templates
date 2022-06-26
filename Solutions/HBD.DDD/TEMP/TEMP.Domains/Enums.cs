@@ -1,5 +1,4 @@
-﻿using System;
-using HBD.EfCore.Abstractions.Attributes;
+﻿using HBD.EfCore.Abstractions.Attributes;
 
 namespace TEMP.Domains;
 

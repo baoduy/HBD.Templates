@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using TEMP.Api.Controllers.Abstractions;
-using TEMP.AppServices.Models.Profiles;
-using TEMP.Infras.ServiceBus.Senders;
+using TEMP.AppServices.Features.Bus.Models;
+using TEMP.AppServices.Features.Profiles.Models;
+using TEMP.Infra.ServiceBus.Senders;
 
 namespace TEMP.Api.Controllers.V1;
 

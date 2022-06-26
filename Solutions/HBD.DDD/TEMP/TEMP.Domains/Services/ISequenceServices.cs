@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace TEMP.Domains.Services;
+﻿namespace TEMP.Domains.Services;
 
 public interface ISequenceServices : IDomainService
 {

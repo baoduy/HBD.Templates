@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.FeatureManagement;
 using TEMP.Api.Configs.Handlers;
 using TEMP.AppServices;
+using TEMP.AppServices.Share;
 using TEMP.Core;
 using TEMP.Core.Options;
 using TEMP.Domains;
-using TEMP.Infras;
+using TEMP.Infra;
 
 namespace TEMP.Api.Configs;
 
@@ -61,10 +62,11 @@ internal static class ServiceConfigs
             .AddControllers(
                 config =>
                 {
+                    config.Filters.Add<SetUserIdPropertyFilter>(2);
+                    
                     if (features.RequireAuthorization)
                     {
                         config.Filters.Add(new AuthorizeFilter());
-                        //config.Filters.Add<SetActionUserForModelFilter>(2);
                     }
 
                     if (features.EnableAntiforgery)

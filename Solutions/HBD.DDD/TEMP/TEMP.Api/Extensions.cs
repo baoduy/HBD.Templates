@@ -1,5 +1,4 @@
 using HBD.AzProxy.ServiceBus;
-
 // ReSharper disable once CheckNamespace
 namespace Microsoft.AspNetCore.Builder;
 
