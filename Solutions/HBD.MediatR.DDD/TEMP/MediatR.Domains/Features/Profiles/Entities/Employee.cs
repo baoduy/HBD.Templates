@@ -27,9 +27,9 @@ public class Employee : DomainEntity
 
     [Required] public virtual Profile Profile { get; private set; } = default!;
 
-    [Required] public Guid ProfileId { get; private set; } = default!;
+    [Required] public Guid ProfileId { get; private set; }
 
-    [Required] public EmployeeType Type { get; private set; } = default!;
+    [Required] public EmployeeType Type { get; private set; }
     
 
     public void PromoteTo(EmployeeType type, string userId)

@@ -13,27 +13,9 @@ public class ProfileControllerV2 : ApiControllerBase
     public ProfileControllerV2(IMediator mediator) => _mediator = mediator;
     
     [HttpGet]
-    public async Task<ActionResult<ProfileBasicView>> Get([FromServices] IProfileQueryService repo)
-    {
-        var p = await repo.GetBasicViewForUserAsync(Guid.Empty).ConfigureAwait(false);
-        return this.Send(p);
-    }
+    public async Task<ProfileBasicView> Get(SingleProfileQuery query) => await _mediator.Send(query).ConfigureAwait(false);
 
     // POST api/<controller>
     [HttpPost]
-    public async Task<ActionResult<ProfileBasicView>> Post([FromBody] CreateProfileCommand model)
-    {
-        var rs =await _mediator.Send(model);
-        return Ok(rs);
-    }
-
-    // PUT api/<controller>/5
-    [HttpPut("{id:guid}")]
-    public async Task<ActionResult<ProfileBasicView>> Put(Guid id, [FromBody] UpdateProfileCommand model)
-    {
-        if (model.Id != id) return BadRequest();
-        
-        var rs =await _mediator.Send(model);
-        return Ok(rs);
-    }
+    public async Task<ProfileBasicView> Post([FromBody] CreateProfileCommand model) => await _mediator.Send(model);
 }

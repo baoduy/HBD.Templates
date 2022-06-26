@@ -32,8 +32,8 @@ public static class InternalSetup
     /// <returns></returns>
     internal static BoundedContextBuilder AddBoundedContext<TContext>(this IServiceCollection service,
         Action<DbContextOptionsBuilder> contextBuilder,
-        Assembly[] assembliesToScans = null,
-        Expression<Func<Type, bool>> entityFilter = null,
+        Assembly[]? assembliesToScans = null,
+        Expression<Func<Type, bool>>? entityFilter = null,
         ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
         ServiceLifetime optionsLifetime = ServiceLifetime.Scoped) where TContext : DbContext
     {
@@ -83,13 +83,13 @@ public static class InternalSetup
     /// <returns></returns>
     internal static BoundedContextBuilder AddCoreInfraServices<TContext>(this IServiceCollection service,
         Action<DbContextOptionsBuilder> contextBuilder,
-        Assembly[] assembliesToScans = null,
-        Expression<Func<Type, bool>> entityFilter = null,
+        Assembly[]? assembliesToScans = null,
+        Expression<Func<Type, bool>>? entityFilter = null,
         ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
         ServiceLifetime optionsLifetime = ServiceLifetime.Scoped,
         bool enableAutoScanEventHandler = true,
         bool enableAutoMapper = false,
-        Action<IMapperConfigurationExpression> autoMapperConfig = null) where TContext : DbContext
+        Action<IMapperConfigurationExpression>? autoMapperConfig = null) where TContext : DbContext
     {
         assembliesToScans ??= new[] {typeof(TContext).Assembly};
 

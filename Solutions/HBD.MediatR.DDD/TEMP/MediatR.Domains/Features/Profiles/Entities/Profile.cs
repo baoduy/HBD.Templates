@@ -36,7 +36,7 @@ public class Profile : AggregateRoot
     [MaxLength(150)]
     [EmailAddress]
     [Required]
-    public string Email { get;private set; }
+    public string Email { get;private set; } = default!;
 
     [MaxLength(50)] [Required] public string MembershipNo { get; private set; } = default!;
 

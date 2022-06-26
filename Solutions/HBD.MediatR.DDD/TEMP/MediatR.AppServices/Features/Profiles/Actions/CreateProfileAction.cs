@@ -13,13 +13,13 @@ namespace MediatR.AppServices.Features.Profiles.Actions;
 [AutoMap(typeof(Profile), ReverseMap = true)]
 public class CreateProfileCommand : BaseCommand, IRequest<ProfileBasicView>
 {
-    [Required] public string Email { get; set; }
+    [Required] public string Email { get; set; } = default!;
 
-    [Phone] public string Phone { get; set; }
+    [Phone] public string Phone { get; set; } = default!;
 
-    internal string MembershipNo { get; set; }
+    internal string MembershipNo { get; set; } = default!;
 
-    [StringLength(150)] [Required] public string Name { get; set; }
+    [StringLength(150)] [Required] public string Name { get; set; } = default!;
 }
 
 internal sealed class CreateProfileCommandHandler : IRequestHandler<CreateProfileCommand, ProfileBasicView>
@@ -47,11 +47,7 @@ internal sealed class CreateProfileCommandHandler : IRequestHandler<CreateProfil
         if (await _repository.IsEmailExistAsync(request.Email))
             throw new BizCommandException($"Email {request.Email} is already existed.", nameof(request.Email));
 
-        var profile = new Profile(request.Name,
-            request.MembershipNo,
-            request.Email,
-            request.Phone,
-            request.UserId);
+        var profile = _mapper.Map<Profile>(request);
 
         //Event
         profile.AddEvent(new ProfileCreatedEvent(profile.Id, profile.Name));

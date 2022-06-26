@@ -19,11 +19,11 @@ public class Company
     {
     }
 
-    [MaxLength(50)] public string? ABN { get; private set; } = default!;
+    [MaxLength(50)] public string? ABN { get; private set; }
 
-    [MaxLength(50)] public string? ARBN { get; private set; } = default!;
+    [MaxLength(50)] public string? ARBN { get; private set; }
 
-    [MaxLength(50)] public string? CAN { get; private set; } = default!;
+    [MaxLength(50)] public string? CAN { get; private set; }
 
     [MaxLength(100),Required] public string Name { get; private set; } = default!;
 

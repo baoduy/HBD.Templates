@@ -11,11 +11,11 @@ namespace MediatR.AppServices.Features.Profiles.Actions;
 [AutoMap(typeof(Profile), ReverseMap = true)]
 public class UpdateProfileCommand : BaseCommand,IRequest<ProfileBasicView>
 {
-    [Required] public Guid Id { get; set; }
+    [Required] public Guid Id { get; set; } = default!;
 
-    [Phone] public string Phone { get; set; }
+    [Phone] public string? Phone { get; set; }
 
-    public string Name { get; set; }
+    public string? Name { get; set; } = default!;
 }
 
 internal sealed class UpdateProfileCommandHandler : IRequestHandler<UpdateProfileCommand, ProfileBasicView>
@@ -42,7 +42,7 @@ internal sealed class UpdateProfileCommandHandler : IRequestHandler<UpdateProfil
             throw new BizCommandException($"The Profile {request.Id} is not found.", nameof(request.Id));
 
         //Update Here
-        profile.Update(null,request.Name, request.Phone,null, request.UserId);
+        profile.Update(null,request.Name, request.Phone,null, request.UserId!);
 
         //Add Event
 

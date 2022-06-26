@@ -30,7 +30,7 @@ public class ProfileTests : IClassFixture<ApiFixture>
 
         success.Should().BeTrue(error?.ErrorMessage);
         result.Should().NotBeNull();
-        result.Id.Should().NotBeEmpty();
+        result!.Id.Should().NotBeEmpty();
         
         ProfileCreatedEventAuditTrailHandler.Called.Should().BeTrue();
         ProfileCreatedEventServiceBusHandler.Called.Should().BeTrue();
@@ -59,7 +59,7 @@ public class ProfileTests : IClassFixture<ApiFixture>
 
         success.Should().BeFalse();
         error.Should().NotBeNull();
-        error.ErrorDetails[nameof(CreateProfileCommand.Email)].Should().NotBeNullOrEmpty();
+        error!.ErrorDetails[nameof(CreateProfileCommand.Email)].Should().NotBeNullOrEmpty();
     }
 
     [Fact]
@@ -90,7 +90,7 @@ public class ProfileTests : IClassFixture<ApiFixture>
 
         success.Should().BeTrue(error?.ErrorMessage);
         result.Should().NotBeNull();
-        result.Id.Should().NotBeEmpty();
+        result!.Id.Should().NotBeEmpty();
     }
  
     [Fact]

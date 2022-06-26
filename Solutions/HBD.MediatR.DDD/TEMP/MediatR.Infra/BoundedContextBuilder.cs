@@ -27,7 +27,7 @@ public sealed class BoundedContextBuilder
     #region Methods
 
     public BoundedContextBuilder AddMoreContext<TContext>(Action<DbContextOptionsBuilder> contextBuilder,
-        Expression<Func<Type, bool>> entityFilter = null,
+        Expression<Func<Type, bool>>? entityFilter = null,
         ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
         ServiceLifetime optionsLifetime = ServiceLifetime.Scoped) where TContext : DbContext
     {

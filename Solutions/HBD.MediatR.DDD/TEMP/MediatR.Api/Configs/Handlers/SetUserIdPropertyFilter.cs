@@ -20,7 +20,7 @@ public class SetUserIdPropertyFilter : IActionFilter
         {
             if (context.HttpContext.User.Identity?.IsAuthenticated != true)
                 return;
-            userName = context.HttpContext.User.Identity.Name;
+            userName = context.HttpContext.User.Identity.Name!;
         }
         else userName = SysConsts.SystemAccount;
 

@@ -6,27 +6,14 @@ namespace MediatR.Api.Configs.Handlers;
 
 internal sealed class PrincipalProvider : IPrincipalProvider
 {
-    #region Constructors
+    public PrincipalProvider(IHttpContextAccessor accessor) => this._accessor = accessor;
+    
+    private readonly IHttpContextAccessor _accessor;
 
-    public PrincipalProvider(IHttpContextAccessor accessor)
-    {
-        this.accessor = accessor;
-    }
-
-    #endregion Constructors
-
-    #region Fields
-
-    private readonly IHttpContextAccessor accessor;
-
-    private string _email;
+    private string _email=default!;
     private Guid _profileId;
-    private string _userName;
-
-    #endregion Fields
-
-    #region Properties
-
+    private string _userName=default!;
+    
     public string Email
     {
         get
@@ -54,28 +41,23 @@ internal sealed class PrincipalProvider : IPrincipalProvider
         }
     }
 
-    #endregion Properties
-
-    #region Methods
+    
 
     public IEnumerable<Guid> GetImpersonateKeys()
     {
         yield return ProfileId;
     }
 
-    public Guid GetOwnershipKey()
-    {
-        return ProfileId;
-    }
+    public Guid GetOwnershipKey() => ProfileId;
 
     private void Initialize()
     {
-        var context = accessor.HttpContext;
+        var context = _accessor.HttpContext;
         if (context == null) return;
 
         if (!context.User.Identity?.IsAuthenticated==true || _profileId != default) return;
 
-        _userName = context.User.Identity?.Name;
+        _userName = context.User.Identity?.Name!;
 
         //Get from ProfileId Claims
         var id = context.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
@@ -94,5 +76,5 @@ internal sealed class PrincipalProvider : IPrincipalProvider
         }
     }
 
-    #endregion Methods
+
 }
