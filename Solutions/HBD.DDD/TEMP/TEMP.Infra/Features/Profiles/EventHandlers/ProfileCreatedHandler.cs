@@ -5,16 +5,10 @@ using TEMP.Domains.Features.Profiles.Events;
 
 namespace TEMP.Infra.Features.Profiles.EventHandlers;
 
-/// <summary>
-/// Using this to capture the ProfileCreatedEvent events.
-/// This is for internal communication between Domains boundary.
-/// </summary>
-public class ProfileCreatedHandler : IBeforeSaveEventHandlerAsync<ProfileCreatedEvent>
+internal class ProfileCreatedEventAuditTrailHandler : IBeforeSaveEventHandlerAsync<ProfileCreatedEvent>
 {
     //This is just for demo testing purposes. Please remove it from real application
-    public static int Called { get; set; }
-
-    public ProfileCreatedHandler() => Called = 0;
+    public static bool Called { get; set; }
 
     public ValueTask<IStatusGeneric> HandleAsync(IEventEntity callingEntity, ProfileCreatedEvent domainEvent,
         CancellationToken cancellationToken = new CancellationToken())
@@ -22,16 +16,7 @@ public class ProfileCreatedHandler : IBeforeSaveEventHandlerAsync<ProfileCreated
         var status = new StatusGenericHandler();
 
         //TODO: implement your logic here
-        Called += 1;
+        Called = true;
         return new ValueTask<IStatusGeneric>(status);
-    }
-
-    public IStatusGeneric Handle(IEventEntity callingEntity, ProfileCreatedEvent domainEvent)
-    {
-        var status = new StatusGenericHandler();
-
-        //TODO: implement your logic here
-        Called += 1;
-        return status;
     }
 }

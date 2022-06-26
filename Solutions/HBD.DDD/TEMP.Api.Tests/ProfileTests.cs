@@ -1,6 +1,8 @@
 using System.Net.Http.Json;
 using FluentAssertions;
 using TEMP.AppServices.Features.Profiles.Models;
+using TEMP.Infra.Features.Profiles.EventHandlers;
+using TEMP.Infra.Share;
 
 namespace TEMP.Api.Tests;
 
@@ -13,8 +15,8 @@ public class ProfileTests : IClassFixture<ApiFixture>
     [Fact]
     public async Task Create_Profile()
     {
-        // ProfileCreatedEventAuditTrailHandler.Called = false;
-        // ProfileCreatedEventServiceBusHandler.Called = false;
+        ProfileCreatedEventAuditTrailHandler.Called = false;
+        EventPublisher.Called = false;
         
         var client = _fixture.CreateClient();
         var rp = await client.PostAsJsonAsync("/v1/Profile", new CreateProfileModel
@@ -30,8 +32,8 @@ public class ProfileTests : IClassFixture<ApiFixture>
         result.Should().NotBeNull();
         result!.Id.Should().NotBeEmpty();
         
-        // ProfileCreatedEventAuditTrailHandler.Called.Should().BeTrue();
-        // ProfileCreatedEventServiceBusHandler.Called.Should().BeTrue();
+        ProfileCreatedEventAuditTrailHandler.Called.Should().BeTrue();
+        EventPublisher.Called.Should().BeTrue();
     }
 
     [Fact]

@@ -1,5 +1,7 @@
-﻿using HBD.EfCore.Abstractions.Events;
+﻿using HBD.AzProxy.ServiceBus;
+using HBD.EfCore.Abstractions.Events;
 using HBD.EfCore.Events.Handlers;
+using TEMP.Domains.Features.Profiles.Events;
 
 namespace TEMP.Infra.Share;
 
@@ -9,13 +11,19 @@ namespace TEMP.Infra.Share;
 /// </summary>
 public sealed class EventPublisher : IEventPublisher
 {
-    #region Methods
+    private readonly IBusMessageSenderFactory _factory;
+    public static bool Called { get; set; }
+    public EventPublisher(IBusMessageSenderFactory factory) => _factory = factory;
 
-    public Task PublishAsync(IEventItem domainEvent)
+    public async Task PublishAsync(IEventItem domainEvent)
     {
-        //TODO: implement your logic here
-        return Task.CompletedTask;
+        switch (domainEvent)
+        {
+            case ProfileCreatedEvent:
+                var sender = _factory.CreateSender("tp1");
+                await sender.SendAsync(domainEvent);
+                Called = true;
+                break;
+        }
     }
-
-    #endregion Methods
 }
