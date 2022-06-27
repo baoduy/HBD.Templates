@@ -46,8 +46,8 @@ internal sealed class UpdateProfileCommandHandler : IRequestHandler<UpdateProfil
 
         //Add Event
 
-        //Save to Db
-        await _repo.SaveAsync(cancellationToken);
+        //Save to Db - EfAutoSave will do this
+        //await _repo.SaveAsync(cancellationToken);
 
         //Return result
         return _mapper.Map<ProfileBasicView>(profile);

@@ -27,7 +27,8 @@ internal sealed class DeleteProfileCommandHandler : IRequestHandler<DeleteProfil
             throw new BizCommandException($"The Profile {request.Id} is not found.", nameof(request.Id));
 
         _repository.Delete(profile);
-        await _repository.SaveAsync(cancellationToken);
+        //EfAutoSave will do this
+        //await _repository.SaveAsync(cancellationToken);
 
         //Event
         return Unit.Value;

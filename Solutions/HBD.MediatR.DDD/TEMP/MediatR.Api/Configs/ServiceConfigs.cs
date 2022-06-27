@@ -11,7 +11,6 @@ using MediatR.AppServices;
 using MediatR.AppServices.Share;
 using MediatR.Core;
 using MediatR.Core.Options;
-using MediatR.Domains;
 using MediatR.Domains.Share;
 using MediatR.Infra;
 

@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
+using HBD.MediatR.EfAutoSave;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MediatR.Domains;
 using MediatR.Domains.Share;
 using MediatR.Infra.Share;
 
@@ -16,6 +16,9 @@ public static class InfraSetup
 
     public static IServiceCollection AddInfraServices(this IServiceCollection service, string connectionString)
     {
+        //Add MediatR
+        service.AddEfAutoSaveBehavior<TEMPContext>();
+        
         service
             .AddEventPublisher<EventPublisher>()//Domain Event handler
             .AddGenericRepositories<TEMPContext>()

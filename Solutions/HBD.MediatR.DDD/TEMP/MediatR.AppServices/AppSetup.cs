@@ -1,7 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
-using MediatR.Domains;
-using MediatR.Domains.Services;
 using MediatR.Domains.Share;
 
 [assembly: InternalsVisibleTo("MediatR.AppServices.Tests")]
@@ -22,7 +20,7 @@ public static class AppSetup
         
         //Add MediatR
         services.AddMediatR(typeof(AppSetup).Assembly);
-        
+
         //Add StateManagement
         services.AddDistributedStateStorage();
         

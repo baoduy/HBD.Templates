@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\HBD.MediatR.EfAutoSave\HBD.MediatR.EfAutoSave.csproj" />
     <ProjectReference Include="..\MediatR.AppServices\MediatR.AppServices.csproj" />
     <ProjectReference Include="..\MediatR.Core\MediatR.Core.csproj" />
     <ProjectReference Include="..\MediatR.Domains\MediatR.Domains.csproj" />

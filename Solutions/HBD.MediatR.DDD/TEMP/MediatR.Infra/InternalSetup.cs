@@ -3,7 +3,6 @@ using System.Reflection;
 using AutoMapper;
 using HBD.EfCore.Hooks;
 using Microsoft.EntityFrameworkCore;
-using MediatR.Domains;
 using MediatR.Domains.Share;
 using MediatR.Infra;
 

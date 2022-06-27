@@ -1,4 +1,3 @@
-using MediatR.Domains;
 using MediatR.Domains.Share;
 using MediatR.Infra;
 using Microsoft.AspNetCore.Hosting;
@@ -25,18 +24,19 @@ public class TestApi: WebApplicationFactory<Program>
     {
         builder.ConfigureServices(services =>
         {
-            if (!TestWithSqlServer)
-            {
-                services.Remove<TEMPContext>().Remove<DbContextOptions<TEMPContext>>();
-
-                //Use InMemory
-                services
-                    .AddDbContext<TEMPContext>(b =>
-                        b.ConfigureWarnings(w => w.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
-                            .UseAutoConfigModel(o =>
-                                o.ScanFrom(typeof(InfraSetup).Assembly, typeof(DomainSchemas).Assembly))
-                            .UseInMemoryDatabase(nameof(TEMPContext)));
-            }
+            // if (!TestWithSqlServer)
+            // {
+            //     var d = services.FirstOrDefault(s=>s.ServiceType==typeof(DbContextOptions<TEMPContext>));
+            //     if (d != null) services.Remove(d);
+            //
+            //     //Use InMemory
+            //     services
+            //         .AddDbContext<TEMPContext>(b =>
+            //             b.ConfigureWarnings(w => w.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
+            //                 .UseAutoConfigModel(o =>
+            //                     o.ScanFrom(typeof(InfraSetup).Assembly, typeof(DomainSchemas).Assembly))
+            //                 .UseInMemoryDatabase(nameof(TEMPContext)));
+            // }
         });
         
         base.ConfigureWebHost(builder);

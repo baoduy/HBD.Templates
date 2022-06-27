@@ -12,17 +12,20 @@ public class ProfileTests : IClassFixture<ApiFixture>
 
     public ProfileTests(ApiFixture fixture) => _fixture = fixture;
 
-    [Fact]
-    public async Task Create_Profile()
+    [Theory]
+    [InlineData("v1")]
+    [InlineData("v2")]
+    [InlineData("v3")]
+    public async Task Create_Profile_MultiVersion(string v)
     {
         ProfileCreatedEventAuditTrailHandler.Called = false;
         ProfileCreatedEventServiceBusHandler.Called = false;
         
         var client = _fixture.CreateClient();
-        var rp = await client.PostAsJsonAsync("/v1/Profile", new CreateProfileCommand
+        var rp = await client.PostAsJsonAsync($"/{v}/Profiles", new CreateProfileCommand
         {
-            Email = "abc@hbd.com",
-            Name = "HBD",
+            Email = $"abc_{v}@hbd.com",
+            Name = $"HBD {v}",
             Phone = "+6512345678"
         });
 
@@ -41,14 +44,14 @@ public class ProfileTests : IClassFixture<ApiFixture>
     {
         var client = _fixture.CreateClient();
         //Create Profile
-        await client.PostAsJsonAsync("/v1/Profile", new CreateProfileCommand
+        await client.PostAsJsonAsync("/v1/Profiles", new CreateProfileCommand
         {
             Email = "abc1@hbd.com",
             Name = "HBD",
             Phone = "+6512345678"
         });
         //And create other with the same email
-        var rp = await client.PostAsJsonAsync("/v1/Profile", new CreateProfileCommand
+        var rp = await client.PostAsJsonAsync("/v1/Profiles", new CreateProfileCommand
         {
             Email = "abc1@hbd.com",
             Name = "HBD",
@@ -68,7 +71,7 @@ public class ProfileTests : IClassFixture<ApiFixture>
         var client = _fixture.CreateClient();
         
         //Create Profile
-        var created = await client.PostAsJsonAsync("/v1/Profile", new CreateProfileCommand
+        var created = await client.PostAsJsonAsync("/v1/Profiles", new CreateProfileCommand
         {
             Email = "update_test@hbd.com",
             Name = "HBD",
@@ -79,7 +82,7 @@ public class ProfileTests : IClassFixture<ApiFixture>
         createdResult.Should().NotBeNull(createdError?.ErrorMessage);
         
         //Update
-        var rp = await client.PutAsJsonAsync($"/v1/Profile/{createdResult!.Id}", new UpdateProfileCommand
+        var rp = await client.PutAsJsonAsync($"/v1/Profiles/{createdResult!.Id}", new UpdateProfileCommand
         {
             Id = createdResult.Id,
             Name = "HBD New",
@@ -99,7 +102,7 @@ public class ProfileTests : IClassFixture<ApiFixture>
         var client = _fixture.CreateClient();
         
         //Create Profile
-        var created = await client.PostAsJsonAsync("/v1/Profile", new CreateProfileCommand
+        var created = await client.PostAsJsonAsync("/v1/Profiles", new CreateProfileCommand
         {
             Email = "delete_test@hbd.com",
             Name = "HBD",
@@ -110,7 +113,7 @@ public class ProfileTests : IClassFixture<ApiFixture>
         createdResult.Should().NotBeNull(createdError?.ErrorMessage);
         
         //Delete
-        var rp = await client.DeleteAsync($"/v1/Profile/{createdResult!.Id}");
+        var rp = await client.DeleteAsync($"/v1/Profiles/{createdResult!.Id}");
 
         var (success, _, error,_) = await rp.As<ProfileBasicView>();
         success.Should().BeTrue(error?.ErrorMessage);

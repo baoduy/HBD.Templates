@@ -11,7 +11,7 @@ using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
 namespace MediatR.AppServices.Features.Profiles.Actions;
 
 [AutoMap(typeof(Profile), ReverseMap = true)]
-public class CreateProfileCommand : BaseCommand, IRequest<ProfileBasicView>
+public class CreateProfileCommandV3 : BaseCommand, IRequest<Profile>
 {
     [Required] public string Email { get; set; } = default!;
 
@@ -22,23 +22,23 @@ public class CreateProfileCommand : BaseCommand, IRequest<ProfileBasicView>
     [StringLength(150)] [Required] public string Name { get; set; } = default!;
 }
 
-internal sealed class CreateProfileCommandHandler : IRequestHandler<CreateProfileCommand, ProfileBasicView>
+internal sealed class CreateProfileCommandHandlerV3 : IRequestHandler<CreateProfileCommandV3, Profile>
 {
     private readonly IMembershipService _membershipProvider;
     private readonly IMapper _mapper;
     private readonly IProfileRepo _repository;
 
-    public CreateProfileCommandHandler(
+    public CreateProfileCommandHandlerV3(
         IProfileRepo repository,
         IMembershipService membershipProvider,
         IMapper mapper)
     {
         _membershipProvider = membershipProvider;
-        _mapper = mapper;
         _repository = repository;
+        _mapper = mapper;
     }
 
-    public async Task<ProfileBasicView> Handle(CreateProfileCommand request, CancellationToken cancellationToken)
+    public async Task<Profile> Handle(CreateProfileCommandV3 request, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(request.MembershipNo))
             request.MembershipNo = await _membershipProvider.NextValueAsync().ConfigureAwait(false);
@@ -58,6 +58,8 @@ internal sealed class CreateProfileCommandHandler : IRequestHandler<CreateProfil
         //await _repository.SaveAsync(cancellationToken);
 
         //Return result
-        return _mapper.Map<ProfileBasicView>(profile);
+        //return _mapper.Map<ProfileBasicView>(profile);
+        //return LazyFor<ProfileBasicView>(profile);
+        return profile;
     }
 }
