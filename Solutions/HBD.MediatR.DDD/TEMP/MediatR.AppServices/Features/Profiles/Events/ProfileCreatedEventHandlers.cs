@@ -9,7 +9,7 @@ internal sealed class ProfileCreatedEventAuditTrailHandler : INotificationHandle
 
     public Task Handle(ProfileCreatedEvent notification, CancellationToken cancellationToken)
     {
-        Called = true;
+        Called = notification.Id != default;
         //TODO; Add audit trail logic here
         return Task.CompletedTask;
     }

@@ -48,17 +48,11 @@ internal sealed class CreateProfileCommandHandlerV2 :BaseRequestHandler, IReques
             throw new BizCommandException($"Email {request.Email} is already existed.", nameof(request.Email));
 
         var profile = _mapper.Map<Profile>(request);
-
+        //Add
+        await _repository.AddAsync(profile, cancellationToken);
         //Event
         profile.AddEvent(new ProfileCreatedEvent(profile.Id, profile.Name));
-
-        //Save
-        await _repository.AddAsync(profile, cancellationToken);
-        //EfAutoSave will do this
-        //await _repository.SaveAsync(cancellationToken);
-
         //Return result
-        //return _mapper.Map<ProfileBasicView>(profile);
         return LazyFor<ProfileBasicView>(profile);
     }
 }
