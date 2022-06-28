@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using HBD.AutoMapper.Lazy;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR.Domains.Share;
 
@@ -12,7 +13,8 @@ public static class AppSetup
         
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
-        services.AddAutoMapper(cfg =>
+        services.AddLazyMapper()
+            .AddAutoMapper(cfg =>
         {
             cfg.ShouldUseConstructor = c => c.IsPublic;
             cfg.ShouldMapProperty = p => p.GetMethod?.IsPublic == true || p.CanRead;

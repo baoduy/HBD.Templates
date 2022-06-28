@@ -14,7 +14,7 @@ public class ProfilesController : ApiControllerBase
     public ProfilesController(IAutoMapMediator mediator) => _mediator = mediator;
     
     [HttpGet]
-    public async Task<ProfileBasicView> Get(SingleProfileQuery query) => await _mediator.Send(query).ConfigureAwait(false);
+    public async Task<ProfileBasicView?> Get(SingleProfileQuery query) => await _mediator.Send(query).ConfigureAwait(false);
     
     [HttpPost]
     public async Task<ProfileBasicView?> Post([FromBody] CreateProfileCommandV3 model) => await _mediator.Send<ProfileBasicView>(model);

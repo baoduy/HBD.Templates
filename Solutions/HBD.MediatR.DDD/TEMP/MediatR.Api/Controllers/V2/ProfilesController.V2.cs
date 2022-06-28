@@ -13,12 +13,12 @@ public class ProfilesController : ApiControllerBase
     public ProfilesController(IMediator mediator) => _mediator = mediator;
     
     [HttpGet]
-    public async Task<ProfileBasicView> Get(SingleProfileQuery query) => await _mediator.Send(query).ConfigureAwait(false);
+    public async Task<ProfileBasicView?> Get(SingleProfileQuery query) => await _mediator.Send(query).ConfigureAwait(false);
     
     [HttpPost]
     public async Task<ProfileBasicView> Post([FromBody] CreateProfileCommandV2 model)
     {
         var rs = await _mediator.Send(model);
-        return rs.Value;
+        return rs.Value!;
     }
 }

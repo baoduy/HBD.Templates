@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
+using HBD.AutoMapper.Lazy;
 using MediatR.AppServices.Features.Profiles.Events;
 using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.AppServices.Share;
@@ -11,7 +12,7 @@ using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
 namespace MediatR.AppServices.Features.Profiles.Actions;
 
 [AutoMap(typeof(Profile), ReverseMap = true)]
-public class CreateProfileCommandV2 : BaseCommand, IRequest<ILazy<ProfileBasicView>>
+public class CreateProfileCommandV2 : BaseCommand, IRequest<ILazyMap<ProfileBasicView>>
 {
     [Required] public string Email { get; set; } = default!;
 
@@ -22,23 +23,23 @@ public class CreateProfileCommandV2 : BaseCommand, IRequest<ILazy<ProfileBasicVi
     [StringLength(150)] [Required] public string Name { get; set; } = default!;
 }
 
-internal sealed class CreateProfileCommandHandlerV2 :BaseRequestHandler, IRequestHandler<CreateProfileCommandV2, ILazy<ProfileBasicView>>
+internal sealed class CreateProfileCommandHandlerV2 :BaseRequestHandler, IRequestHandler<CreateProfileCommandV2, ILazyMap<ProfileBasicView>>
 {
     private readonly IMembershipService _membershipProvider;
-    private readonly IMapper _mapper;
+    private readonly ILazyMapper _mapper;
     private readonly IProfileRepo _repository;
 
     public CreateProfileCommandHandlerV2(
         IProfileRepo repository,
         IMembershipService membershipProvider,
-        IMapper mapper):base(mapper)
+        ILazyMapper mapper):base(mapper)
     {
         _membershipProvider = membershipProvider;
         _mapper = mapper;
         _repository = repository;
     }
 
-    public async Task<ILazy<ProfileBasicView>> Handle(CreateProfileCommandV2 request, CancellationToken cancellationToken)
+    public async Task<ILazyMap<ProfileBasicView>> Handle(CreateProfileCommandV2 request, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(request.MembershipNo))
             request.MembershipNo = await _membershipProvider.NextValueAsync().ConfigureAwait(false);
@@ -47,7 +48,7 @@ internal sealed class CreateProfileCommandHandlerV2 :BaseRequestHandler, IReques
         if (await _repository.IsEmailExistAsync(request.Email))
             throw new BizCommandException($"Email {request.Email} is already existed.", nameof(request.Email));
 
-        var profile = _mapper.Map<Profile>(request);
+        var profile = _mapper.Map<Profile>(request).Value!;
         //Add
         await _repository.AddAsync(profile, cancellationToken);
         //Event

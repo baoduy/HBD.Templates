@@ -9,6 +9,7 @@
   
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="HBD.AutoMapper.Lazy" Version="1.0.1" />
     <PackageReference Include="HBD.Services.StateManagement" Version="6.1.7" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />

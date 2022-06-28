@@ -1,12 +1,13 @@
 using AutoMapper;
+using HBD.AutoMapper.Lazy;
 
 namespace MediatR.AppServices.Share;
 
 public abstract class BaseRequestHandler
 {
-    private readonly IMapper _mapper;
+    private readonly ILazyMapper _mapper;
 
-    protected BaseRequestHandler(IMapper mapper) => _mapper = mapper;
+    protected BaseRequestHandler(ILazyMapper mapper) => _mapper = mapper;
 
-    public ILazy<TResult> LazyFor<TResult>(object originalValue) => new LazyResult<TResult>(_mapper, originalValue);
+    public ILazyMap<TResult> LazyFor<TResult>(object originalValue) => _mapper.Map<TResult>(originalValue);
 }
