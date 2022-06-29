@@ -14,7 +14,7 @@
     <PackageReference Include="HBD.EfCore.Extensions" Version="6.1.5" />
     <PackageReference Include="HBD.EfCore.Hooks" Version="6.1.5" />
     <PackageReference Include="HBD.EfCore.Repos" Version="6.1.5" />
-    <PackageReference Include="HBD.MediatR.EfAutoSave" Version="1.0.3" />
+    <PackageReference Include="HBD.MediatR.EfCore" Version="1.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
   </ItemGroup>
 

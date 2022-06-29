@@ -12,7 +12,7 @@ public static class InfraSetup
     public static IServiceCollection AddInfraServices(this IServiceCollection service, string connectionString)
     {
         //Add MediatR - EfCore Auto Save
-        service.AddEfAutoSaveBehavior<TEMPContext>();
+        service.AddMediatEfCoreExtensions<TEMPContext>();
         
         service
             .AddEventPublisher<EventPublisher>()//Domain Event handler
