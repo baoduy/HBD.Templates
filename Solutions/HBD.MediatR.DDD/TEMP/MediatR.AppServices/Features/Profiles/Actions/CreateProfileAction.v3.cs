@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using MediatR.AppServices.Features.Profiles.Events;
-using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.AppServices.Share;
 using MediatR.AppServices.Share.Exceptions;
 using MediatR.Domains.Features.Profiles.Repos;

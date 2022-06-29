@@ -1,12 +1,7 @@
-﻿using System.Runtime.CompilerServices;
-using HBD.MediatR.EfAutoSave;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR.Domains.Share;
 using MediatR.Infra.Share;
-
-[assembly: InternalsVisibleTo("MediatR.AppServices.Tests")]
-[assembly: InternalsVisibleTo("TEMP.Infra.Tests")]
 
 namespace MediatR.Infra;
 
@@ -16,7 +11,7 @@ public static class InfraSetup
 
     public static IServiceCollection AddInfraServices(this IServiceCollection service, string connectionString)
     {
-        //Add MediatR
+        //Add MediatR - EfCore Auto Save
         service.AddEfAutoSaveBehavior<TEMPContext>();
         
         service

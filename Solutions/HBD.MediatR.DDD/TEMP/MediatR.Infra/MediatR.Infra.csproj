@@ -14,11 +14,11 @@
     <PackageReference Include="HBD.EfCore.Extensions" Version="6.1.5" />
     <PackageReference Include="HBD.EfCore.Hooks" Version="6.1.5" />
     <PackageReference Include="HBD.EfCore.Repos" Version="6.1.5" />
+    <PackageReference Include="HBD.MediatR.EfAutoSave" Version="1.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\HBD.MediatR.EfAutoSave\HBD.MediatR.EfAutoSave.csproj" />
     <ProjectReference Include="..\MediatR.AppServices\MediatR.AppServices.csproj" />
     <ProjectReference Include="..\MediatR.Core\MediatR.Core.csproj" />
     <ProjectReference Include="..\MediatR.Domains\MediatR.Domains.csproj" />

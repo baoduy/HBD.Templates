@@ -1,4 +1,3 @@
-using AutoMapper;
 using HBD.AutoMapper.Lazy;
 
 namespace MediatR.AppServices.Share;
