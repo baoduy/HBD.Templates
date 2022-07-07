@@ -45,7 +45,7 @@ internal sealed class CreateProfileCommandHandlerV3 : IRequestFluentHandler<Crea
 
         //Check duplicate
         if (await _repository.IsEmailExistAsync(request.Email))
-         return Result.Fail<Profile>(new BizCommandError($"Email {request.Email} is already existed.", nameof(request.Email)));
+         return Result.Fail<Profile>(new BizError($"Email {request.Email} is already existed.", nameof(request.Email)));
 
         var profile = _mapper.Map<Profile>(request);
         //Add

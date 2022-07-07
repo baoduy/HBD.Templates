@@ -2,7 +2,7 @@ using FluentResults;
 
 namespace MediatR.AppServices.Share;
 
-public class BizCommandError : Error
+public class BizError : Error
 {
-    public BizCommandError(string message,string fileName) : base(message) => Metadata.Add(fileName, message);
+    public BizError(string message,string fileName) : base(message) => Metadata.Add(fileName, message);
 }

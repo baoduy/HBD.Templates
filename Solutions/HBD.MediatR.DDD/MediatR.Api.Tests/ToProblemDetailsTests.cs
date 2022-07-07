@@ -10,11 +10,7 @@ namespace MediatR.Api.Tests;
 public class ToProblemDetailsTests
 {
     private readonly ITestOutputHelper _testOutputHelper;
-
-    public ToProblemDetailsTests(ITestOutputHelper testOutputHelper)
-    {
-        _testOutputHelper = testOutputHelper;
-    }
+    public ToProblemDetailsTests(ITestOutputHelper testOutputHelper) => _testOutputHelper = testOutputHelper;
 
     [Fact]
     public void ToProblems_Null()
@@ -37,7 +33,7 @@ public class ToProblemDetailsTests
     public void ToProblems_WithDetails()
     {
         var rs = Result.Fail("The are many errors.")
-            .WithError(new BizCommandError("bad code", "Error1"))
+            .WithError(new BizError("bad code", "Error1"))
             .WithError("Stupid code")
             .ToProblemDetails();
 
