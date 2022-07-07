@@ -10,8 +10,9 @@ internal static class AuthConfig
         var features = configuration.Bind<FeatureOptions>(FeatureOptions.Name);
         if (!features.RequireAuthorization) return services;
 
-        services.AddJwtAuth(configuration)
-            .AddClaimsProvider<ClaimsProvider>();
+        services.AddClaimsProvider<ClaimsProvider>()
+            .AddAuth()
+            .AddJwtAuths(configuration);
         
         return services;
     }

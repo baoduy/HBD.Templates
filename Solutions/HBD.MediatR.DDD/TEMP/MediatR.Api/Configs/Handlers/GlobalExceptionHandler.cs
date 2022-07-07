@@ -2,14 +2,13 @@ using System.Net;
 using System.Text.Json;
 using HBD.StatusGeneric;
 using HBD.Web.GlobalException;
-using MediatR.AppServices.Share.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace MediatR.Api.Configs.Handlers;
 
 internal class GlobalExceptionHandler : DefaultGlobalExceptionHandler
 {
-    public GlobalExceptionHandler(ILogger<DefaultGlobalExceptionHandler> logger) : base(logger)
+    public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : base(logger)
     {
     }
 
@@ -19,10 +18,10 @@ internal class GlobalExceptionHandler : DefaultGlobalExceptionHandler
 
         switch (exception)
         {
-            case BizCommandException ex:
-                problems.Status = HttpStatusCode.BadRequest;
-                problems.ErrorDetails.Add(new GenericValidationResult(ex.Message, ex.Fields));
-                break;
+            // case BizCommandException ex:
+            //     problems.Status = HttpStatusCode.BadRequest;
+            //     problems.ErrorDetails.Add(new GenericValidationResult(ex.Message, ex.Fields));
+            //     break;
             case DbUpdateException ex:
                 problems.Status = HttpStatusCode.BadRequest;
                 problems.ErrorMessage = ex.InnerException?.Message ?? ex.Message;

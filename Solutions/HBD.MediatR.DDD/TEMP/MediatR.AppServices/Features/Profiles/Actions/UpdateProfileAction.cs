@@ -1,15 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
+using FluentResults;
+using HBD.MediatR.DDD;
 using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.AppServices.Share;
-using MediatR.AppServices.Share.Exceptions;
 using MediatR.Domains.Features.Profiles.Repos;
 using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
 
 namespace MediatR.AppServices.Features.Profiles.Actions;
 
 [AutoMap(typeof(Profile), ReverseMap = true)]
-public class UpdateProfileCommand : BaseCommand,IRequest<ProfileBasicView>
+public class UpdateProfileCommand : BaseCommand,IRequestFluent<ProfileBasicView>
 {
     [Required] public Guid Id { get; set; } = default!;
 
@@ -18,7 +19,7 @@ public class UpdateProfileCommand : BaseCommand,IRequest<ProfileBasicView>
     public string? Name { get; set; } = default!;
 }
 
-internal sealed class UpdateProfileCommandHandler : IRequestHandler<UpdateProfileCommand, ProfileBasicView>
+internal sealed class UpdateProfileCommandHandler : IRequestFluentHandler<UpdateProfileCommand, ProfileBasicView>
 {
     private readonly IMapper _mapper;
     private readonly IProfileRepo _repo;
@@ -31,15 +32,15 @@ internal sealed class UpdateProfileCommandHandler : IRequestHandler<UpdateProfil
         _repo = repo;
     }
 
-    public async Task<ProfileBasicView> Handle(UpdateProfileCommand request, CancellationToken cancellationToken)
+    public async Task<IResult<ProfileBasicView>> Handle(UpdateProfileCommand request, CancellationToken cancellationToken)
     {
         if (request.Id == default)
-            throw new BizCommandException("The Id is in valid.", nameof(request.Id));
+            return Result.Fail<ProfileBasicView>(new BizCommandError("The Id is in valid.", nameof(request.Id)));
 
-        var profile = await _repo.FindAsync(p => p.Id == request.Id, cancellationToken);
+        var profile = await _repo.FindAsync(request.Id);
 
         if (profile == null)
-            throw new BizCommandException($"The Profile {request.Id} is not found.", nameof(request.Id));
+            return Result.Fail<ProfileBasicView>(new BizCommandError($"The Profile {request.Id} is not found.", nameof(request.Id)));
 
         //Update Here
         profile.Update(null,request.Name, request.Phone,null, request.UserId!);
@@ -50,6 +51,6 @@ internal sealed class UpdateProfileCommandHandler : IRequestHandler<UpdateProfil
         //await _repo.SaveAsync(cancellationToken);
 
         //Return result
-        return _mapper.Map<ProfileBasicView>(profile);
+        return Result.Ok( _mapper.Map<ProfileBasicView>(profile));
     }
 }

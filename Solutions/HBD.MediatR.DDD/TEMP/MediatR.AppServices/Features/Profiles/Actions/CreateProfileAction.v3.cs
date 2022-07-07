@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
+using FluentResults;
+using HBD.MediatR.DDD;
 using MediatR.AppServices.Features.Profiles.Events;
 using MediatR.AppServices.Share;
-using MediatR.AppServices.Share.Exceptions;
 using MediatR.Domains.Features.Profiles.Repos;
 using MediatR.Domains.Services;
 using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
@@ -10,7 +11,7 @@ using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
 namespace MediatR.AppServices.Features.Profiles.Actions;
 
 [AutoMap(typeof(Profile), ReverseMap = true)]
-public class CreateProfileCommandV3 : BaseCommand, IRequest<Profile>
+public class CreateProfileCommandV3 : BaseCommand, IRequestFluent<Profile>
 {
     [Required] public string Email { get; set; } = default!;
 
@@ -21,7 +22,7 @@ public class CreateProfileCommandV3 : BaseCommand, IRequest<Profile>
     [StringLength(150)] [Required] public string Name { get; set; } = default!;
 }
 
-internal sealed class CreateProfileCommandHandlerV3 : IRequestHandler<CreateProfileCommandV3, Profile>
+internal sealed class CreateProfileCommandHandlerV3 : IRequestFluentHandler<CreateProfileCommandV3, Profile>
 {
     private readonly IMembershipService _membershipProvider;
     private readonly IMapper _mapper;
@@ -37,21 +38,22 @@ internal sealed class CreateProfileCommandHandlerV3 : IRequestHandler<CreateProf
         _mapper = mapper;
     }
 
-    public async Task<Profile> Handle(CreateProfileCommandV3 request, CancellationToken cancellationToken)
+    public async Task<IResult<Profile>> Handle(CreateProfileCommandV3 request, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(request.MembershipNo))
             request.MembershipNo = await _membershipProvider.NextValueAsync().ConfigureAwait(false);
 
         //Check duplicate
         if (await _repository.IsEmailExistAsync(request.Email))
-            throw new BizCommandException($"Email {request.Email} is already existed.", nameof(request.Email));
+         return Result.Fail<Profile>(new BizCommandError($"Email {request.Email} is already existed.", nameof(request.Email)));
 
         var profile = _mapper.Map<Profile>(request);
         //Add
         await _repository.AddAsync(profile, cancellationToken);
         //Event
         profile.AddEvent(new ProfileCreatedEvent(profile.Id, profile.Name));
+        
         //Return result
-        return profile;
+        return Result.Ok(profile);
     }
 }

@@ -14,11 +14,4 @@ public class ProfilesController : ApiControllerBase
     
     [HttpGet]
     public async Task<ProfileBasicView?> Get(SingleProfileQuery query) => await _mediator.Send(query).ConfigureAwait(false);
-    
-    [HttpPost]
-    public async Task<ProfileBasicView> Post([FromBody] CreateProfileCommandV2 model)
-    {
-        var rs = await _mediator.Send(model);
-        return rs.Value!;
-    }
 }

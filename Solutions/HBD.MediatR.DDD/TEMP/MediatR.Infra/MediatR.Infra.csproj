@@ -9,12 +9,11 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
-    <PackageReference Include="HBD.AzProxy.ServiceBus" Version="6.1.10" />
-    <PackageReference Include="HBD.EfCore.Events" Version="6.1.5" />
-    <PackageReference Include="HBD.EfCore.Extensions" Version="6.1.5" />
-    <PackageReference Include="HBD.EfCore.Hooks" Version="6.1.5" />
-    <PackageReference Include="HBD.EfCore.Repos" Version="6.1.5" />
-    <PackageReference Include="HBD.MediatR.EfCore" Version="1.0.4" />
+    <PackageReference Include="HBD.AzProxy.ServiceBus" Version="6.1.11" />
+    <PackageReference Include="HBD.EfCore.Events" Version="6.1.8" />
+    <PackageReference Include="HBD.EfCore.Extensions" Version="6.1.8" />
+    <PackageReference Include="HBD.EfCore.Hooks" Version="6.1.8" />
+    <PackageReference Include="HBD.EfCore.Repos" Version="6.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
   </ItemGroup>
 

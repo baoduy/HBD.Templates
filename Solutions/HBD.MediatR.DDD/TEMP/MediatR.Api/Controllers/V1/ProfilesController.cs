@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR.AppServices.Features.Profiles.Actions;
 using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.AppServices.Features.Profiles.Queries;
-using MediatR.AppServices.Share.Exceptions;
 
 namespace MediatR.Api.Controllers.V1;
 
@@ -23,16 +22,17 @@ public class ProfilesController : ApiControllerBase
         => await _mediator.Send(new SingleProfileQuery { Id = id }).ConfigureAwait(false);
 
     [HttpPost]
-    public async Task<ProfileBasicView?> Create([FromBody] CreateProfileCommand model)
-        => await _mediator.Send(model);
+    public async Task<ActionResult<ProfileBasicView?>> Create([FromBody] CreateProfileCommand model)
+    {
+        var rs = await _mediator.Send(model);
+        return rs.Send();
+    }
 
     [HttpPut("{id:guid}")]
-    public async Task<ProfileBasicView?> Update(Guid id, [FromBody] UpdateProfileCommand model)
+    public async Task<ActionResult<ProfileBasicView?>> Update(Guid id, [FromBody] UpdateProfileCommand model)
     {
-        if (model.Id != id) 
-            throw new BizCommandException($"The Id {id} is invalid.", nameof(UpdateProfileCommand.Id));
-
-        return await _mediator.Send(model);
+        var rs= await _mediator.Send(model);
+        return rs.Send();
     }
 
     [HttpDelete("{id:guid}")]
