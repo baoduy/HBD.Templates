@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
-using FluentResults;
 using HBD.MediatR.DDD;
+using HBD.Results;
 using MediatR.AppServices.Features.Profiles.Events;
 using MediatR.AppServices.Share;
 using MediatR.Domains.Features.Profiles.Repos;
@@ -45,14 +45,14 @@ internal sealed class CreateProfileCommandHandlerV3 : IRequestFluentHandler<Crea
 
         //Check duplicate
         if (await _repository.IsEmailExistAsync(request.Email))
-         return Result.Fail<Profile>(new BizError($"Email {request.Email} is already existed.", nameof(request.Email)));
+            return Result.Fails<Profile>($"Email {request.Email} is already existed.", new[] { nameof(request.Email) });
 
         var profile = _mapper.Map<Profile>(request);
         //Add
         await _repository.AddAsync(profile, cancellationToken);
         //Event
         profile.AddEvent(new ProfileCreatedEvent(profile.Id, profile.Name));
-        
+
         //Return result
         return Result.Ok(profile);
     }

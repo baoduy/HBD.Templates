@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
-using FluentResults;
 using HBD.MediatR.DDD;
+using HBD.Results;
 using MediatR.AppServices.Features.Profiles.Events;
 using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.AppServices.Share;
 using MediatR.Domains.Features.Profiles.Repos;
 using MediatR.Domains.Services;
+using Microsoft.Azure.Amqp.Framing;
 using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
 
 namespace MediatR.AppServices.Features.Profiles.Actions;
@@ -46,10 +47,7 @@ internal sealed class CreateProfileCommandHandler : IRequestFluentHandler<Create
 
         //Check duplicate
         if (await _repository.IsEmailExistAsync(request.Email))
-            return Result.Fail<ProfileBasicView>(new Error("Error")
-            {
-                Metadata = { [request.Email] = $"Email {request.Email} is already existed." }
-            });
+            return Result.Fails<ProfileBasicView>($"Email {request.Email} is already existed.", new[] { nameof(request.Email) });
 
         var profile = _mapper.Map<Profile>(request);
         //Add

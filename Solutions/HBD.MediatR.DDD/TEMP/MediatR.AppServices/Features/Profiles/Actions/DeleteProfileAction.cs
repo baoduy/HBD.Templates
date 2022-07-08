@@ -1,5 +1,5 @@
-using FluentResults;
 using HBD.MediatR.DDD;
+using HBD.Results;
 using MediatR.AppServices.Share;
 using MediatR.Domains.Features.Profiles.Repos;
 
@@ -17,15 +17,15 @@ internal sealed class DeleteProfileCommandHandler : IRequestFluentHandler<Delete
     public DeleteProfileCommandHandler(IProfileRepo repository) => _repository = repository;
 
 
-    public async Task<Result> Handle(DeleteProfileCommand request, CancellationToken cancellationToken)
+    public async Task<IResult> Handle(DeleteProfileCommand request, CancellationToken cancellationToken)
     {
         if (request.Id == default)
-            return Result.Fail(new BizError("The Id is in valid.", nameof(request.Id)));
+            return Result.Fails("The Id is in valid.", new[] { nameof(request.Id) });
 
         var profile = await _repository.FindAsync(request.Id);
 
         if (profile == null)
-            return Result.Fail(new BizError($"The Profile {request.Id} is not found.", nameof(request.Id)));
+            return Result.Fails($"The Profile {request.Id} is not found.", new[] { nameof(request.Id) });
 
         _repository.Delete(profile);
         //EfAutoSave will do this

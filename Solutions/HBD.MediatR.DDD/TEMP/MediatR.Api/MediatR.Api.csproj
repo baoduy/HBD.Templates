@@ -20,9 +20,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="HBD.AzProxy.ServiceBus" Version="6.1.11" />
-    <PackageReference Include="HBD.Web.Auths" Version="6.1.26" />
-    <PackageReference Include="HBD.Web.GlobalException" Version="6.1.26" />
-    <PackageReference Include="HBD.Web.Swagger" Version="6.1.26" />
+    <PackageReference Include="HBD.Web.Auths" Version="6.1.27" />
+    <PackageReference Include="HBD.Web.GlobalException" Version="6.1.27" />
+    <PackageReference Include="HBD.Web.Swagger" Version="6.1.27" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
-using FluentResults;
 using HBD.MediatR.DDD;
+using HBD.Results;
 using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.AppServices.Share;
 using MediatR.Domains.Features.Profiles.Repos;
@@ -35,12 +35,12 @@ internal sealed class UpdateProfileCommandHandler : IRequestFluentHandler<Update
     public async Task<IResult<ProfileBasicView>> Handle(UpdateProfileCommand request, CancellationToken cancellationToken)
     {
         if (request.Id == default)
-            return Result.Fail<ProfileBasicView>(new BizError("The Id is in valid.", nameof(request.Id)));
+            return Result.Fails<ProfileBasicView>("The Id is in valid.", new[]{nameof(request.Id)});
 
         var profile = await _repo.FindAsync(request.Id);
 
         if (profile == null)
-            return Result.Fail<ProfileBasicView>(new BizError($"The Profile {request.Id} is not found.", nameof(request.Id)));
+            return Result.Fails<ProfileBasicView>($"The Profile {request.Id} is not found.", new[]{nameof(request.Id)});
 
         //Update Here
         profile.Update(null,request.Name, request.Phone,null, request.UserId!);

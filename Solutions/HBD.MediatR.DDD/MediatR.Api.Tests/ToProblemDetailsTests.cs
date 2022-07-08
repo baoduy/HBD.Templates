@@ -1,7 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using FluentAssertions;
-using FluentResults;
+using HBD.Results;
 using MediatR.AppServices.Share;
 using Xunit.Abstractions;
 
@@ -22,7 +22,7 @@ public class ToProblemDetailsTests
     [Fact]
     public void ToProblems()
     {
-        var rs = Result.Fail("The id is invalid.").ToProblemDetails();
+        var rs = Result.Fails("The id is invalid.").ToProblemDetails();
         rs!.Status.Should().Be(HttpStatusCode.BadRequest);
         rs.ErrorMessage.Should().Be("The id is invalid.");
 
@@ -32,8 +32,8 @@ public class ToProblemDetailsTests
     [Fact]
     public void ToProblems_WithDetails()
     {
-        var rs = Result.Fail("The are many errors.")
-            .WithError(new BizError("bad code", "Error1"))
+        var rs = Result.Fails("The are many errors.")
+            .WithError("bad code", new[]{"Error1"})
             .WithError("Stupid code")
             .ToProblemDetails();
 

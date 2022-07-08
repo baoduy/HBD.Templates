@@ -1,24 +1,25 @@
 using System.Diagnostics;
 using System.Net;
-using FluentResults;
-using HBD.StatusGeneric;
+using HBD.Results;
 using HBD.Web.GlobalException;
 using Microsoft.AspNetCore.Mvc;
+using IResult = Microsoft.AspNetCore.Http.IResult;
 using ProblemDetails = HBD.Web.GlobalException.ProblemDetails;
 
 namespace MediatR.Api;
 
 public static class ResultExtensions
 {
-    public static void Add(this ProblemResultCollection collection, IError error)
+    public static ProblemResultCollection Add(this ProblemResultCollection collection, IError error)
     {
-        if (error.Metadata.Any())
-            foreach (var m in error.Metadata)
-                collection.Add(m.Key, m.Value.ToString());
-        else collection.Add(string.Empty, error.Message);
+        collection.Add(new ProblemResult(error.Code ?? string.Empty, error.Message)
+        {
+            References = error.MetaData
+        });
+        return collection;
     }
 
-    public static ProblemDetails? ToProblemDetails(this IResultBase result)
+    public static ProblemDetails? ToProblemDetails(this HBD.Results.IResult result)
     {
         if (result.IsSuccess) return null;
 
@@ -29,9 +30,9 @@ public static class ResultExtensions
             TraceId = Activity.Current?.RootId ?? Activity.Current?.Id,
         };
 
-        if (result.Errors.Count == 1 && !result.Errors.First().Metadata.Any())
+        if (result.Errors.Count == 1)
         {
-            problem.ErrorMessage = result.Errors.First().Message;
+            problem.ErrorMessage = result.Errors[0].Message;
             return problem;
         }
 
@@ -40,9 +41,9 @@ public static class ResultExtensions
         return problem;
     }
 
-    public static IActionResult Send(this Result result)
-        => result.IsFailed ? new BadRequestObjectResult(result.ToProblemDetails()) : new OkResult();
+    public static IActionResult Send(this HBD.Results.IResult result)
+        => result.IsSuccess ? new OkResult(): new BadRequestObjectResult(result.ToProblemDetails());
 
     public static ActionResult<TResponse?> Send<TResponse>(this IResult<TResponse> result)
-        => result.IsFailed ? new BadRequestObjectResult(result.ToProblemDetails()) : new OkObjectResult(result.Value);
+        => result.IsSuccess ?new OkObjectResult(result.Value): new BadRequestObjectResult(result.ToProblemDetails());
 }

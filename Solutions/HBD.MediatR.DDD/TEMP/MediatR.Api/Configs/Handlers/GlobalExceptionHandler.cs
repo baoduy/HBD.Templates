@@ -1,6 +1,5 @@
 using System.Net;
 using System.Text.Json;
-using HBD.StatusGeneric;
 using HBD.Web.GlobalException;
 using Microsoft.EntityFrameworkCore;
 
