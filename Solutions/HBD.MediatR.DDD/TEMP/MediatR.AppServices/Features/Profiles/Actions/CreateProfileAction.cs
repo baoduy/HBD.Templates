@@ -59,6 +59,8 @@ internal sealed class CreateProfileCommandHandler : IRequestFluentHandler<Create
         //Save
         await _repository.SaveAsync(cancellationToken);
         //Return result
-        return Result.Ok(_mapper.Map<ProfileBasicView>(profile));
+        
+        //NOTE this will return a lazy mapping result and only map profile to ProfileBasicView after SaveChanges is called.
+        return _mapper.ResultOf<ProfileBasicView>(profile);
     }
 }

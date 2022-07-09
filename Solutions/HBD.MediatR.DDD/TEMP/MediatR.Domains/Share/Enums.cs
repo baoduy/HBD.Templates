@@ -2,7 +2,7 @@
 
 namespace MediatR.Domains.Share;
 
-[SequenceEnum]
+[SqlSequence]
 public enum Sequences
 {
     [Sequence(typeof(int), FormatString = "T{DateTime:yyMMdd}{1:00000}", Max = 99999)]
