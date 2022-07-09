@@ -27,7 +27,7 @@ internal sealed class ProfileCreatedEventServiceBusHandler : INotificationHandle
 
     public async Task Handle(ProfileCreatedEvent notification, CancellationToken cancellationToken)
     {
-        await _busSender.SendAsync(notification, cancellationToken);
+        //await _busSender.SendAsync(notification, cancellationToken);
         Called = true;
     }
 }

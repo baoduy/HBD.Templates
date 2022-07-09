@@ -9,7 +9,7 @@ internal static class ApiConfig
     public static WebApplication EnableFeatures(this WebApplication app, IConfiguration configuration)
     {
         var features = configuration.Bind<FeatureOptions>(FeatureOptions.Name);
-        
+
         if (features.EnableHttps)
             app.UseHsts().UseHttpsRedirection();
 
@@ -32,22 +32,20 @@ internal static class ApiConfig
     public static WebApplication UseAuthentications(this WebApplication app, IConfiguration configuration)
     {
         var features = configuration.Bind<FeatureOptions>(FeatureOptions.Name);
-        
+
         app.UseCookiePolicy();
 
         if (features.RequireAuthorization)
-        {
-            app.UseAuthentication()
-                .UseAuthorization();
-        }
+            app.UseAuthentication();
 
+        app.UseAuthorization();
         return app;
     }
 
     public static WebApplication UseMiddlewares(this WebApplication app, IConfiguration configuration)
     {
         app.UseGlobalExceptionHandler<GlobalExceptionHandler>();
-        
+
         var features = configuration.Bind<FeatureOptions>(FeatureOptions.Name);
         if (features.EnableAntiforgery)
             app.UseMiddleware<AntiforgeryCookieMiddleware>();

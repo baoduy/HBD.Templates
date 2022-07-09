@@ -6,6 +6,7 @@ public class FeatureOptions
 
     public bool EnableHttps { get; set; } = true;
     public bool EnableSwagger { get; set; }
+    public bool EnableAzureAppConfig { get; set; }
     public bool EnableAntiforgery { get; set; } = true;
     public bool EnableServiceBusProcess { get; set; }
     public bool RequireAuthorization { get; set; }
