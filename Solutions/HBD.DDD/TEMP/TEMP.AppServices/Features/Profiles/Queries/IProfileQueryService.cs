@@ -1,4 +1,4 @@
-﻿using HBD.EfCore.Abstractions.Pageable;
+﻿using HBDStack.EfCore.Abstractions.Pageable;
 using TEMP.AppServices.Features.Profiles.Models;
 using TEMP.AppServices.Share;
 

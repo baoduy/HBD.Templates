@@ -1,5 +1,5 @@
-﻿using HBD.EfCore.Repos;
-using HBD.EfCore.Repos.Basic;
+﻿using HBDStack.EfCore.Repos;
+using HBDStack.EfCore.Repos.Abstractions.Basic;
 using Microsoft.EntityFrameworkCore;
 using TEMP.Domains.Features.Profiles.Entities;
 using TEMP.Domains.Features.Profiles.Repos;

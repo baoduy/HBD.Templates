@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using HBD.EfCore.BizActions.Abstraction;
+using HBDStack.EfCore.BizActions.Abstraction;
 using TEMP.AppServices.Features.Profiles.Models;
 using TEMP.AppServices.Share;
 using TEMP.Domains.Features.Profiles.Events;

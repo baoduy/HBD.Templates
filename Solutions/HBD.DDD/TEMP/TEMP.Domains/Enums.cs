@@ -1,4 +1,4 @@
-﻿using HBD.EfCore.Abstractions.Attributes;
+﻿using HBDStack.EfCore.Abstractions.Attributes;
 
 namespace TEMP.Domains;
 
@@ -8,7 +8,7 @@ public enum LegalType
     Partnership = 1
 }
 
-[SequenceEnum]
+[SqlSequence]
 [Flags]
 public enum Sequences
 {

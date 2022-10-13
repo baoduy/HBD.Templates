@@ -1,29 +1,18 @@
-using Azure.Messaging.ServiceBus;
-using HBD.AzProxy.ServiceBus;
-
 namespace TEMP.Infra.ServiceBus.Receivers;
+
+public class Sub1Message
+{
+    public string MessageId { get; set; }
+}
 
 /// <summary>
 /// This Receiver will be pickup by ServiceBus activator automatically. NO NEED to be added into ServiceCollection
 /// </summary>
-internal class Sub1Receiver : IBusMessageReceiver//, ISubscriptionSqlFilter <= uncomment this to apply the filter
+internal class Sub1Receiver : BusMessageHandler<Sub1Message>
 {
-    public ValueTask DisposeAsync() => ValueTask.CompletedTask;
-
-    public Task HandleMessageAsync(ServiceBusReceivedMessage message)
+    public override Task OnHandle(Sub1Message message, string path)
     {
-        //TODO; handling code here
-        Console.WriteLine($"{nameof(Sub1Receiver)} Received message {message.MessageId} {message.Body}");
+        Console.WriteLine(message.MessageId);
         return Task.CompletedTask;
-    }
-
-    public Task HandleErrorAsync(Exception exception) =>Task.CompletedTask;
-
-    public (string topicOrQueueName, string subcriptionName) Names => ("tp1", "sub1");
-    
-    public (string name, string filter) GetSqlFilter()
-    {
-        //TODO: implement the filter here.
-        return ("filter1", "propertyName=1");
     }
 }

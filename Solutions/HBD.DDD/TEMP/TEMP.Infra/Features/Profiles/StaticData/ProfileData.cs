@@ -1,4 +1,4 @@
-using HBD.EfCore.Extensions.Configurations;
+using HBDStack.EfCore.Extensions.Configurations;
 using TEMP.Core;
 using TEMP.Domains.Features.Profiles.Entities;
 

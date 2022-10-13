@@ -1,4 +1,4 @@
-﻿using HBD.StatusGeneric;
+﻿using HBDStack.StatusGeneric;
 
 namespace TEMP.AppServices.Share;
 

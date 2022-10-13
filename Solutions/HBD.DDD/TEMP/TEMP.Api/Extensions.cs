@@ -1,14 +1,13 @@
-using HBD.AzProxy.ServiceBus;
-// ReSharper disable once CheckNamespace
-namespace Microsoft.AspNetCore.Builder;
+using SlimMessageBus.Host;
 
-internal static class Extensions
+namespace TEMP.Api;
+
+public static class Extensions
 {
-    public static async Task RunWithServiceBusAsync(this WebApplication application)
+    public static async Task RunWithBusAsync(this WebApplication app)
     {
-        var activator = application.Services.GetRequiredService<IBusMessageProcessorActivator>();
-        await activator.StartProcessingAsync();
-        await application.RunAsync();
+        //The Service Bus will be started automatically when creating IMasterMessageBus instance
+        app.Services.GetService<IMasterMessageBus>();
+        await app.RunAsync();
     }
-    
 }

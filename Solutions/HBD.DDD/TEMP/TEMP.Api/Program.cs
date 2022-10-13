@@ -1,3 +1,4 @@
+using TEMP.Api;
 using TEMP.Api.Configs;
 using TEMP.Core.Options;
 
@@ -37,7 +38,7 @@ app.UseMiddlewares(builder.Configuration)
     .UseEndpointsWithHealthCheck();
 
 if (feature.EnableServiceBusProcess)
-    await app.RunWithServiceBusAsync();
+    await app.RunWithBusAsync();
 else await app.RunAsync();
 
 //This Startup endpoint for Unit Tests

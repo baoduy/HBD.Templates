@@ -1,3 +1,4 @@
+using HBDStack.Web.Auths;
 using TEMP.Api.Configs.Handlers;
 using TEMP.Core.Options;
 
@@ -10,8 +11,10 @@ internal static class AuthConfig
         var features = configuration.Bind<FeatureOptions>(FeatureOptions.Name);
         if (!features.RequireAuthorization) return services;
 
-        services.AddJwtAuth(configuration)
-            .AddClaimsProvider<ClaimsProvider>();
+        services
+            .AddClaimsProvider<ClaimsProvider>()
+            .AddAuth(new AuthsOptions()).AddJwtAuths(configuration)
+            ;
         
         return services;
     }

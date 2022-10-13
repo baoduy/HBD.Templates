@@ -1,4 +1,4 @@
-﻿using HBD.Web.Swagger;
+﻿using HBDStack.Web.Swagger;
 using TEMP.Api.Configs.Handlers;
 using TEMP.Core.Options;
 

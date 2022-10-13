@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 using AutoMapper;
-using HBD.EfCore.Hooks;
+using HBDStack.EfCore.Hooks;
 using Microsoft.EntityFrameworkCore;
 using TEMP.Domains;
 using TEMP.Infra;

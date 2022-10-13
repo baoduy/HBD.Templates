@@ -1,4 +1,4 @@
-﻿using HBD.EfCore.DataAuthorization;
+﻿using HBDStack.EfCore.DataAuthorization;
 using Microsoft.EntityFrameworkCore;
 using TEMP.Domains.Features.Profiles.Entities;
 

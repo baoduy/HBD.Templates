@@ -1,8 +1,8 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using HBD.EfCore.DataAuthorization;
-using HBD.Web.GlobalException;
-using HBD.Web.Swagger;
+using HBDStack.EfCore.DataAuthorization;
+using HBDStack.Web.GlobalException;
+using HBDStack.Web.Swagger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.FeatureManagement;
@@ -105,9 +105,10 @@ internal static class ServiceConfigs
         return services;
     }
 
-    public static IServiceCollection AddAllAppServices(this IServiceCollection services,
-        IConfiguration configuration)
+    public static IServiceCollection AddAllAppServices(this IServiceCollection services, IConfiguration configuration)
     {
+        var feature = configuration.Bind<FeatureOptions>(FeatureOptions.Name);
+        
         services
             .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
             .AddScoped<IPrincipalProvider, PrincipalProvider>()
@@ -122,11 +123,12 @@ internal static class ServiceConfigs
             }, typeof(AppSetup).Assembly, typeof(DomainSchemas).Assembly
             /*typeof(AuthSetup).Assembly*/
         );
-        
+
+        if (feature.EnableServiceBusProcess)
+            services.AddInfraServiceBus(configuration);
+
         return services
             .AddAppServices()
-            .AddInfraServices(conn)
-            //Service Bus
-            .AddInfraServiceBus(configuration);
+            .AddInfraServices(conn);
     }
 }

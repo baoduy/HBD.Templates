@@ -1,6 +1,6 @@
-﻿using HBD.AzProxy.ServiceBus;
-using HBD.EfCore.Abstractions.Events;
-using HBD.EfCore.Events.Handlers;
+﻿using HBDStack.EfCore.Abstractions.Events;
+using HBDStack.EfCore.Events.Handlers;
+using SlimMessageBus;
 using TEMP.Domains.Features.Profiles.Events;
 
 namespace TEMP.Infra.Share;
@@ -11,17 +11,17 @@ namespace TEMP.Infra.Share;
 /// </summary>
 public sealed class EventPublisher : IEventPublisher
 {
-    private readonly IBusMessageSenderFactory _factory;
+    private readonly IMessageBus _bus;
     public static bool Called { get; set; }
-    public EventPublisher(IBusMessageSenderFactory factory) => _factory = factory;
+
+    public EventPublisher(IMessageBus bus) => _bus = bus;
 
     public async Task PublishAsync(IEventItem domainEvent)
     {
         switch (domainEvent)
         {
             case ProfileCreatedEvent:
-                var sender = _factory.CreateSender("tp1");
-                await sender.SendAsync(domainEvent);
+                await _bus.Publish(domainEvent);
                 Called = true;
                 break;
         }

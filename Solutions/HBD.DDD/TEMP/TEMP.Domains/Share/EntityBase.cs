@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
-using HBD.EfCore.Abstractions.Entities;
-using HBD.EfCore.Abstractions.Events;
-using HBD.EfCore.DataAuthorization;
+using HBDStack.EfCore.Abstractions.Entities;
+using HBDStack.EfCore.Abstractions.Events;
+using HBDStack.EfCore.DataAuthorization;
 
 namespace TEMP.Domains.Share;
 

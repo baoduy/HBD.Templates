@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HBD.EfCore.BizAction;
-using HBD.EfCore.Repos;
+using HBDStack.EfCore.Repos.Abstractions;
 using TEMP.Domains.Share;
 
 // ReSharper disable MemberCanBePrivate.Global

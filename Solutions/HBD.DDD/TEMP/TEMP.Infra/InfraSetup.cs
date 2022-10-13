@@ -1,9 +1,14 @@
 ﻿using System.Runtime.CompilerServices;
 using HBD.EfCore.BizAction.Configuration;
+using HBDStack.SlimMessageBus.AzureBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SlimMessageBus.Host.AzureServiceBus;
+using SlimMessageBus.Host.MsDependencyInjection;
+using SlimMessageBus.Host.Serialization.SystemTextJson;
 using TEMP.AppServices.Share;
 using TEMP.Domains;
+using TEMP.Infra.ServiceBus.Receivers;
 using TEMP.Infra.Share;
 
 [assembly: InternalsVisibleTo("TEMP.AppServices.Tests")]
@@ -18,7 +23,6 @@ public static class InfraSetup
     public static IServiceCollection AddInfraServices(this IServiceCollection service, string connectionString)
     {
         service
-            .AddEventPublisher<EventPublisher>()//Domain Event handler
             .AddGenericRepositories<TEMPContext>()
             .AddImplementations()
             .AddCoreInfraServices<TEMPContext>(op =>
@@ -40,7 +44,43 @@ public static class InfraSetup
     }
 
     public static IServiceCollection AddInfraServiceBus(this IServiceCollection service, IConfiguration configuration)
-        => service.AddServiceBus(configuration, typeof(InfraSetup).Assembly);
+        => service
+            .AddEventPublisher<EventPublisher>()//Domain Event handler
+            .AddSlimMessageBus((mbb, svp) =>
+        {
+            mbb.Produce<Sub1Message>(x => x.DefaultTopic("topic-1").WithBusMessageModifier())
+                .Consume<Sub1Message>(c => c.Topic("topic-1")
+                    .SubscriptionName("sub-1")
+                    .PrefetchCount(10)
+                    .Instances(1)
+                    .WithConsumer<Sub1Receiver>()
+                )
+                .Consume<Sub1Message>(c => c.Topic("topic-1")
+                    .SubscriptionName("sub-2")
+                    //.SubscriptionSqlFilter($"{nameof(Sub1Message.FilterProperty)}='Steven'")
+                    .PrefetchCount(10)
+                    .Instances(1)
+                    .WithConsumer<Sub1Receiver>()
+                )
+                .WithProviderServiceBus(
+                    new ServiceBusMessageBusSettings(configuration.GetConnectionString("AzureBus"))
+                    {
+                        TopologyProvisioning = new ServiceBusTopologySettings
+                        {
+                            Enabled = true,
+                            // CanConsumerCreateQueue = false,
+                            // CanConsumerCreateTopic = false,
+                            // CanProducerCreateTopic = false,
+                            // CanProducerCreateQueue = false,
+                            CanConsumerCreateSubscription = true,
+                        }
+                    })
+                // Add other bus transports, if needed
+                //.AddChildBus("Bus2", (builder) => {})
+                .WithSerializer(new JsonMessageSerializer())
+                ;
+        }, addConsumersFromAssembly: new[] { typeof(InfraSetup).Assembly });
+    
 
     internal static IServiceCollection AddBizRunner(this IServiceCollection services)
     {

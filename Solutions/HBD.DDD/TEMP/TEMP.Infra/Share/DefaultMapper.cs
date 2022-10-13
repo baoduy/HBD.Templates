@@ -1,5 +1,5 @@
 ﻿
-using HBD.EfCore.Extensions.Configurations;
+using HBDStack.EfCore.Extensions.Configurations;
 
 namespace TEMP.Infra.Share;
 

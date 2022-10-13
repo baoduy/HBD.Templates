@@ -1,6 +1,6 @@
 using AutoMapper;
-using HBD.EfCore.BizActions.Abstraction;
-using HBD.EfCore.Repos;
+using HBDStack.EfCore.BizActions.Abstraction;
+using HBDStack.EfCore.Repos.Abstractions;
 using TEMP.AppServices.Features.Profiles.Models;
 using TEMP.AppServices.Share;
 using Profile = TEMP.Domains.Features.Profiles.Entities.Profile;
