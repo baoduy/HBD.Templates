@@ -1,8 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using FluentAssertions;
-using HBD.Results;
-using MediatR.AppServices.Share;
+using HBDStack.Results;
 using Xunit.Abstractions;
 
 namespace MediatR.Api.Tests;

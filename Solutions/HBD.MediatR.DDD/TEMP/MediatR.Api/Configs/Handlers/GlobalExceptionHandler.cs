@@ -1,6 +1,6 @@
 using System.Net;
 using System.Text.Json;
-using HBD.Web.GlobalException;
+using HBDStack.Web.GlobalException;
 using Microsoft.EntityFrameworkCore;
 
 namespace MediatR.Api.Configs.Handlers;

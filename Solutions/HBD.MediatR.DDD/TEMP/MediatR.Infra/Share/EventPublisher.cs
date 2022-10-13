@@ -1,5 +1,5 @@
-﻿using HBD.EfCore.Abstractions.Events;
-using HBD.EfCore.Events.Handlers;
+﻿using HBDStack.EfCore.Abstractions.Events;
+using HBDStack.EfCore.Events.Handlers;
 
 namespace MediatR.Infra.Share;
 

@@ -1,4 +1,4 @@
-﻿using HBD.MediatR.DDD.AutoMappers;
+﻿using HBDStack.MediatR.DDD.AutoMappers;
 using MediatR.Api.Controllers.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using MediatR.AppServices.Features.Profiles.Actions;

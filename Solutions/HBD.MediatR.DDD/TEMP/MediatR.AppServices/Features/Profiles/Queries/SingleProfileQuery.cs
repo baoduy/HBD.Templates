@@ -1,4 +1,4 @@
-using HBD.EfCore.Repos;
+using HBDStack.EfCore.Repos.Abstractions;
 using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.Domains.Features.Profiles.Entities;
 

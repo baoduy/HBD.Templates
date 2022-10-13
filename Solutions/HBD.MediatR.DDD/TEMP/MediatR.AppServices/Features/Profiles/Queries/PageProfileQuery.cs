@@ -1,6 +1,6 @@
-using HBD.EfCore.Abstractions.Pageable;
-using HBD.EfCore.Abstractions.QueryBuilders;
-using HBD.EfCore.Repos;
+using HBDStack.EfCore.Abstractions.Pageable;
+using HBDStack.EfCore.Abstractions.QueryBuilders;
+using HBDStack.EfCore.Repos.Abstractions;
 using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.AppServices.Share;
 using MediatR.Domains.Features.Profiles.Entities;

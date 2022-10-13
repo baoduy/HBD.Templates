@@ -8,12 +8,12 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="HBD.AutoMapper.Lazy" Version="1.0.2" />
-    <PackageReference Include="HBD.AzProxy.ServiceBus" Version="6.1.11" />
-    <PackageReference Include="HBD.MediatR.DDD" Version="1.0.16" />
-    <PackageReference Include="HBD.Services.StateManagement" Version="6.1.10" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="HBDStack.AutoMapper.Lazy" Version="6.5.2" />
+    <PackageReference Include="HBDStack.MediatR.DDD" Version="6.5.2" />
+    <PackageReference Include="HBDStack.Services.StateManagement" Version="6.5.14" />
+    <PackageReference Include="HBDStack.SlimMessageBus.AzureBus" Version="6.5.3" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
     <PackageReference Include="Scrutor" Version="4.2.0" />
   </ItemGroup>
@@ -24,11 +24,5 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="MediatR.Api.Tests" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="HBD.AzProxy.ServiceBus">
-      <HintPath>..\..\..\..\..\..\..\.nuget\packages\hbd.azproxy.servicebus\6.1.9\lib\net6.0\HBD.AzProxy.ServiceBus.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>

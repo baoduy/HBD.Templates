@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using HBD.Web.Auths.Providers;
+using HBDStack.Web.Auths.Providers;
 
 namespace MediatR.Api.Configs.Handlers;
 

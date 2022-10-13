@@ -1,4 +1,4 @@
-using HBD.AzProxy.ServiceBus;
+using SlimMessageBus;
 
 namespace MediatR.AppServices.Features.Profiles.Events;
 
@@ -17,13 +17,17 @@ internal sealed class ProfileCreatedEventAuditTrailHandler : INotificationHandle
 
 internal sealed class ProfileCreatedEventServiceBusHandler : INotificationHandler<ProfileCreatedEvent>
 {
-    private readonly IBusMessageSender _busSender;
+    private readonly IMessageBus _bus;
+
 
     //TODO remove this as just for testing purposed only
     public static bool Called { get; set; }
 
-    public ProfileCreatedEventServiceBusHandler(IBusMessageSenderFactory factory)
-        => _busSender = factory.CreateSender("tp1");
+    public ProfileCreatedEventServiceBusHandler(IMessageBus bus)
+    {
+        _bus = bus;
+    }
+
 
     public async Task Handle(ProfileCreatedEvent notification, CancellationToken cancellationToken)
     {

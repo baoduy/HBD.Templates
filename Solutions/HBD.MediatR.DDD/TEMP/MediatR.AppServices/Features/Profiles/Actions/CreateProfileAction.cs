@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
-using HBD.MediatR.DDD;
-using HBD.Results;
+using HBDStack.MediatR.DDD;
+using HBDStack.Results;
 using MediatR.AppServices.Features.Profiles.Events;
 using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.AppServices.Share;
 using MediatR.Domains.Features.Profiles.Repos;
 using MediatR.Domains.Services;
-using Microsoft.Azure.Amqp.Framing;
 using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
 
 namespace MediatR.AppServices.Features.Profiles.Actions;

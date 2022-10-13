@@ -31,9 +31,10 @@ public static class InfraSetup
 
 #if DEBUG
                     op.EnableDetailedErrors().EnableSensitiveDataLogging();
-#else
-                        //TODO: Workaround solution to ignored the Too many IServiceProvider created exception;
-                        op.ConfigureWarnings(x => x.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning));
+#else 
+                    //TODO: Workaround solution to ignored the Too many IServiceProvider created exception;
+                    op.ConfigureWarnings(x => x.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning));
+                    op.EnableServiceProviderCaching(false);
 #endif
                 },
                 enableAutoMapper: false,

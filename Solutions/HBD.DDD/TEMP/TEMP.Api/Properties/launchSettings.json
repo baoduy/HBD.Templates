@@ -19,6 +19,7 @@
     "TEMP.Api": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "docs",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

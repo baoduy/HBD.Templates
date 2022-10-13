@@ -1,4 +1,4 @@
-﻿using HBD.EfCore.DataAuthorization;
+﻿using HBDStack.EfCore.DataAuthorization;
 
 namespace MediatR.AppServices.Share;
 

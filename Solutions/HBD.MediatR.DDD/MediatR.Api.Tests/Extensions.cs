@@ -1,5 +1,5 @@
 using System.Text.Json;
-using HBD.Web.GlobalException;
+using HBDStack.Web.GlobalException;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace MediatR.Api.Tests;

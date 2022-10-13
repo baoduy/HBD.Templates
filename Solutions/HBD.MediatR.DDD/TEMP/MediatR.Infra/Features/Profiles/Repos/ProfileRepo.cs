@@ -1,5 +1,5 @@
-﻿using HBD.EfCore.Repos;
-using HBD.EfCore.Repos.Basic;
+﻿using HBDStack.EfCore.Repos;
+using HBDStack.EfCore.Repos.Abstractions.Basic;
 using MediatR.Domains.Features.Profiles.Repos;
 using Microsoft.EntityFrameworkCore;
 using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;

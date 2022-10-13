@@ -1,10 +1,10 @@
 using System.Diagnostics;
 using System.Net;
-using HBD.Results;
-using HBD.Web.GlobalException;
+using HBDStack.Results;
+using HBDStack.Web.GlobalException;
 using Microsoft.AspNetCore.Mvc;
 using IResult = Microsoft.AspNetCore.Http.IResult;
-using ProblemDetails = HBD.Web.GlobalException.ProblemDetails;
+using ProblemDetails = HBDStack.Web.GlobalException.ProblemDetails;
 
 namespace MediatR.Api;
 
@@ -19,7 +19,7 @@ public static class ResultExtensions
         return collection;
     }
 
-    public static ProblemDetails? ToProblemDetails(this HBD.Results.IResult result)
+    public static ProblemDetails? ToProblemDetails(this HBDStack.Results.IResult result)
     {
         if (result.IsSuccess) return null;
 
@@ -41,7 +41,7 @@ public static class ResultExtensions
         return problem;
     }
 
-    public static IActionResult Send(this HBD.Results.IResult result)
+    public static IActionResult Send(this HBDStack.Results.IResult result)
         => result.IsSuccess ? new OkResult(): new BadRequestObjectResult(result.ToProblemDetails());
 
     public static ActionResult<TResponse?> Send<TResponse>(this IResult<TResponse> result)

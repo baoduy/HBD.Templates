@@ -1,4 +1,4 @@
-using HBD.EfCore.Extensions.Configurations;
+using HBDStack.EfCore.Extensions.Configurations;
 using MediatR.Core;
 using MediatR.Domains.Features.Profiles.Entities;
 

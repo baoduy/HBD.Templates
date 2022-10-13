@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
-using HBD.MediatR.DDD;
-using HBD.Results;
+using HBDStack.MediatR.DDD;
+using HBDStack.Results;
 using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.AppServices.Share;
 using MediatR.Domains.Features.Profiles.Repos;

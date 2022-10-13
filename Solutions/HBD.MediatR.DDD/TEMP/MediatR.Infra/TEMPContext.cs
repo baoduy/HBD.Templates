@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using HBD.EfCore.DataAuthorization;
+using HBDStack.EfCore.DataAuthorization;
 using MediatR.Domains.Features.Profiles.Entities;
 using Microsoft.EntityFrameworkCore;
 

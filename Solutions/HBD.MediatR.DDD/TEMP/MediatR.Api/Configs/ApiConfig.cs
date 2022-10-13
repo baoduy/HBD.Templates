@@ -1,4 +1,4 @@
-﻿using HBD.Web.Swagger;
+﻿using HBDStack.Web.Swagger;
 using MediatR.Api.Configs.Handlers;
 using MediatR.Core.Options;
 

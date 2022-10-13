@@ -17,10 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="11.0.1" />
-    <PackageReference Include="HBD.EfCore.Abstractions" Version="6.1.9" />
-    <PackageReference Include="HBD.EfCore.DataAuthorization" Version="6.1.9" />
-    <PackageReference Include="HBD.EfCore.Repos.Abstractions" Version="6.1.9" />
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="HBDStack.EfCore.Abstractions" Version="6.5.8" />
+    <PackageReference Include="HBDStack.EfCore.DataAuthorization" Version="6.5.8" />
+    <PackageReference Include="HBDStack.EfCore.Repos.Abstractions" Version="6.5.8" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
   </ItemGroup>
 

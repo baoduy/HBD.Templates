@@ -1,4 +1,4 @@
-﻿using HBD.EfCore.Abstractions.Pageable;
+﻿using HBDStack.EfCore.Abstractions.Pageable;
 using MediatR.Api.Controllers.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using MediatR.AppServices.Features.Profiles.Actions;

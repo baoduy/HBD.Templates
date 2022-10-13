@@ -1,4 +1,4 @@
-﻿using HBD.EfCore.Abstractions.Events;
+﻿using HBDStack.EfCore.Abstractions.Events;
 
 namespace MediatR.Domains.Share;
 

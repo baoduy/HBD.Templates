@@ -1,8 +1,8 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using HBD.EfCore.DataAuthorization;
-using HBD.Web.GlobalException;
-using HBD.Web.Swagger;
+using HBDStack.EfCore.DataAuthorization;
+using HBDStack.Web.GlobalException;
+using HBDStack.Web.Swagger;
 using MediatR.Api.Configs.Handlers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;

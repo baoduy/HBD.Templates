@@ -1,4 +1,4 @@
-﻿using HBD.Services.StateManagement;
+﻿using HBDStack.Services.StateManagement;
 using MediatR.AppServices.ProcessManagers.States;
 
 namespace MediatR.AppServices.ProcessManagers;
