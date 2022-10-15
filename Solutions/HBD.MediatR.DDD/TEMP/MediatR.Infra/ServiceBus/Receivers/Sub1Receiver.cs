@@ -1,4 +1,4 @@
-namespace TEMP.Infra.ServiceBus.Receivers;
+namespace MediatR.Infra.ServiceBus.Receivers;
 
 public class Sub1Message
 {

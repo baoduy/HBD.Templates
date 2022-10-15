@@ -60,6 +60,6 @@ internal sealed class CreateProfileCommandHandler : IRequestFluentHandler<Create
         //Return result
         
         //NOTE this will return a lazy mapping result and only map profile to ProfileBasicView after SaveChanges is called.
-        return _mapper.ResultOf<ProfileBasicView>(profile);
+        return null;// _mapper.ResultOf<ProfileBasicView>(profile);
     }
 }

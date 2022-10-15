@@ -1,6 +1,6 @@
 using SlimMessageBus;
 
-namespace TEMP.Infra.ServiceBus;
+namespace MediatR.Infra.ServiceBus;
 
 public abstract class BusMessageHandler<TMessage>: IConsumer<TMessage>
 {

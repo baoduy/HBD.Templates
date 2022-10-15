@@ -2,11 +2,11 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR.Domains.Share;
+using MediatR.Infra.ServiceBus.Receivers;
 using MediatR.Infra.Share;
 using SlimMessageBus.Host.AzureServiceBus;
 using SlimMessageBus.Host.MsDependencyInjection;
 using SlimMessageBus.Host.Serialization.SystemTextJson;
-using TEMP.Infra.ServiceBus.Receivers;
 
 namespace MediatR.Infra;
 

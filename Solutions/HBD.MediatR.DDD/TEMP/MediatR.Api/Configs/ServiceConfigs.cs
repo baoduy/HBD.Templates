@@ -11,7 +11,6 @@ using MediatR.AppServices;
 using MediatR.AppServices.Share;
 using MediatR.Core;
 using MediatR.Core.Options;
-using MediatR.Domains.Share;
 using MediatR.Infra;
 
 namespace MediatR.Api.Configs;
@@ -113,13 +112,13 @@ internal static class ServiceConfigs
 
         var conn = configuration.GetConnectionString(SettingKeys.DbConnectionString);
 
-        services.AddAutoMapper(cfg =>
-            {
-                cfg.ShouldUseConstructor = c => c.IsPublic;
-                cfg.ShouldMapProperty = p => p.GetMethod?.IsPublic == true || p.CanRead;
-            }, typeof(AppSetup).Assembly, typeof(DomainSchemas).Assembly
+        //services.AddAutoMapper(cfg =>
+        //    {
+         //       cfg.ShouldUseConstructor = c => c.IsPublic;
+        //        cfg.ShouldMapProperty = p => p.GetMethod?.IsPublic == true || p.CanRead;
+        //    }, typeof(AppSetup).Assembly, typeof(DomainSchemas).Assembly
             /*typeof(AuthSetup).Assembly*/
-        );
+        //);
         
         return services
             .AddAppServices()

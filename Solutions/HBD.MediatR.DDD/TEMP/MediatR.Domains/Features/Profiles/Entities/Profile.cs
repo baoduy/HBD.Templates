@@ -8,21 +8,21 @@ namespace MediatR.Domains.Features.Profiles.Entities;
 [Table("Profiles", Schema = DomainSchemas.Profile)]
 public class Profile : AggregateRoot
 {
-    public Profile([NotNull] string name, string memberShipNo, string email, string phone,
-        string userId)
-        : this(default, name, memberShipNo, email, phone, userId)
+    public Profile(string name, string memberShipNo, string email, string phone,
+        string createdBy)
+        : this(default, name, memberShipNo, email, phone, createdBy)
     {
     }
 
-    public Profile(Guid id, [NotNull] string name, string memberShipNo, string email,
+    internal Profile(Guid id, string name, string memberShipNo, string email,
         string phone,
-        string userId)
-        : base(id, userId)
+        string createdBy)
+        : base(id, createdBy)
     {
         Email = email;
         MembershipNo = memberShipNo;
         
-        Update(null, name, phone,null,userId);
+        Update(null, name, phone,null,createdBy);
     }
 
     private Profile()

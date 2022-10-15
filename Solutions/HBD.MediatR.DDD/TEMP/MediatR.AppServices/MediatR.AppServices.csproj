@@ -8,11 +8,11 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
-    <PackageReference Include="HBDStack.AutoMapper.Lazy" Version="6.5.2" />
     <PackageReference Include="HBDStack.MediatR.DDD" Version="6.5.2" />
     <PackageReference Include="HBDStack.Services.StateManagement" Version="6.5.14" />
     <PackageReference Include="HBDStack.SlimMessageBus.AzureBus" Version="6.5.3" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
     <PackageReference Include="Scrutor" Version="4.2.0" />
@@ -22,7 +22,19 @@
     <ProjectReference Include="..\MediatR.Domains\MediatR.Domains.csproj" />
   </ItemGroup>
 
+  <Target Name="Mapster">
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet build" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet tool restore" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster model -a &quot;$(TargetDir)$(ProjectName).dll&quot;" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster extension -a &quot;$(TargetDir)$(ProjectName).dll&quot;" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a &quot;$(TargetDir)$(ProjectName).dll&quot;" />
+  </Target>
+  
   <ItemGroup>
     <InternalsVisibleTo Include="MediatR.Api.Tests" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Models" />
   </ItemGroup>
 </Project>

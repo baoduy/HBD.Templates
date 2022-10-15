@@ -3,7 +3,6 @@ using System.Net;
 using HBDStack.Results;
 using HBDStack.Web.GlobalException;
 using Microsoft.AspNetCore.Mvc;
-using IResult = Microsoft.AspNetCore.Http.IResult;
 using ProblemDetails = HBDStack.Web.GlobalException.ProblemDetails;
 
 namespace MediatR.Api;

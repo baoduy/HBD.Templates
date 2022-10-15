@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
+using Mapster;
 using Microsoft.Extensions.DependencyInjection;
-using MediatR.Domains.Share;
 
 [assembly: InternalsVisibleTo("MediatR.AppServices.Tests")]
 
@@ -12,12 +12,9 @@ public static class AppSetup
         
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
-        services
-            .AddAutoMapper(cfg =>
-        {
-            cfg.ShouldUseConstructor = c => c.IsPublic;
-            cfg.ShouldMapProperty = p => p.GetMethod?.IsPublic == true || p.CanRead;
-        }, typeof(AppSetup).Assembly,typeof(DomainSchemas).Assembly);
+        //Mapper
+        //TypeAdapterConfig.GlobalSettings
+        
         
         //Add MediatR
         services.AddMediatR(typeof(AppSetup).Assembly);

@@ -1,7 +1,7 @@
 using MediatR.Api.Tests.TestClasses;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MediatR.Api.Tests;
+namespace MediatR.Api.Tests.Fixtures;
 
 public class ApiFixture : IDisposable, IAsyncDisposable
 {

@@ -99,7 +99,7 @@ public static class InternalSetup
         {
             //Auto Mapper
             autoMapperConfig ??= cf => cf.ShouldUseConstructor = f => f.IsPublic;
-            service.AddAutoMapper(autoMapperConfig, assembliesToScans);
+            //service.AddAutoMapper(autoMapperConfig, assembliesToScans);
         }
 
         return service.AddBoundedContext<TContext>(contextBuilder,

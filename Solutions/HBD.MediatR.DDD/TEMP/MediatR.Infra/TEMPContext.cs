@@ -18,7 +18,7 @@ internal class TEMPContext : DbContext, IDataKeyDbContext
     /// <param name="dataKeyProviders">
     ///     optional <see cref="IDataKeyProvider" /> injected from DI. Only first runner will be picked.
     /// </param>
-    public TEMPContext(DbContextOptions options, [AllowNull] IEnumerable<IDataKeyProvider>? dataKeyProviders)
+    public TEMPContext(DbContextOptions options, IEnumerable<IDataKeyProvider>? dataKeyProviders)
         : base(options)
     {
         //Ensure only 1 Data Key Provider is registered.

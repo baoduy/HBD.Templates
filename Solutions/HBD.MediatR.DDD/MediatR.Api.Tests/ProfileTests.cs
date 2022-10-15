@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using FluentAssertions;
+using MediatR.Api.Tests.Fixtures;
 using MediatR.AppServices.Features.Profiles.Actions;
 using MediatR.AppServices.Features.Profiles.Events;
 using MediatR.AppServices.Features.Profiles.Models;
