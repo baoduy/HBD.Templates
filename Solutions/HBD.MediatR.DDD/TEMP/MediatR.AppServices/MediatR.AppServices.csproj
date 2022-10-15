@@ -22,12 +22,12 @@
     <ProjectReference Include="..\MediatR.Domains\MediatR.Domains.csproj" />
   </ItemGroup>
 
-  <Target Name="Mapster">
-    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet build" />
+  <Target Name="Mapster" AfterTargets="AfterBuild">
+<!--    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet build" />-->
     <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet tool restore" />
-    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster model -a &quot;$(TargetDir)$(ProjectName).dll&quot;" />
-    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster extension -a &quot;$(TargetDir)$(ProjectName).dll&quot;" />
-    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a &quot;$(TargetDir)$(ProjectName).dll&quot;" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster model -a &quot;$(TargetDir)$(ProjectName).dll&quot; -n MediatR.AppServices.Models" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster extension -a &quot;$(TargetDir)$(ProjectName).dll&quot; -n MediatR.AppServices.Models" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a &quot;$(TargetDir)$(ProjectName).dll&quot; -n MediatR.AppServices.Models" />
   </Target>
   
   <ItemGroup>

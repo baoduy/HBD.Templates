@@ -1,4 +1,4 @@
-namespace MediatR.Domains.Features.Profiles.Entities
+namespace MediatR.AppServices.Models
 {
     public partial class AddressDto
     {

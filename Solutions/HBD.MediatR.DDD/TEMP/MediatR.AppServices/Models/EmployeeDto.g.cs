@@ -1,7 +1,8 @@
 using System;
+using MediatR.AppServices.Models;
 using MediatR.Domains.Features.Profiles.Entities;
 
-namespace MediatR.Domains.Features.Profiles.Entities
+namespace MediatR.AppServices.Models
 {
     public partial class EmployeeDto
     {

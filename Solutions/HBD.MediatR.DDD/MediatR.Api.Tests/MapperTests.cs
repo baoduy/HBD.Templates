@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Mapster;
+using MediatR.AppServices.Models;
 using MediatR.Domains.Features.Profiles.Entities;
 
 namespace MediatR.Api.Tests;
