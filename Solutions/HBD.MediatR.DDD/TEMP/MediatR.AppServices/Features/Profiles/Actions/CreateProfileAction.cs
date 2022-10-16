@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using AutoMapper;
 using HBDStack.MediatR.DDD;
+using HBDStack.ObjectMapper.Abstraction;
 using HBDStack.Results;
 using MediatR.AppServices.Features.Profiles.Events;
 using MediatR.AppServices.Features.Profiles.Models;
@@ -11,7 +11,6 @@ using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
 
 namespace MediatR.AppServices.Features.Profiles.Actions;
 
-[AutoMap(typeof(Profile), ReverseMap = true)]
 public class CreateProfileCommand : BaseCommand, IRequestFluent<ProfileBasicView>
 {
     [Required] public string Email { get; set; } = default!;
@@ -26,13 +25,13 @@ public class CreateProfileCommand : BaseCommand, IRequestFluent<ProfileBasicView
 internal sealed class CreateProfileCommandHandler : IRequestFluentHandler<CreateProfileCommand, ProfileBasicView>
 {
     private readonly IMembershipService _membershipProvider;
-    private readonly IMapper _mapper;
+    private readonly IObjectMapper _mapper;
     private readonly IProfileRepo _repository;
 
     public CreateProfileCommandHandler(
         IProfileRepo repository,
         IMembershipService membershipProvider,
-        IMapper mapper)
+        IObjectMapper mapper)
     {
         _membershipProvider = membershipProvider;
         _mapper = mapper;

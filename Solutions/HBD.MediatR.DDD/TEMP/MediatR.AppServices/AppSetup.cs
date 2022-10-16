@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo("MediatR.AppServices.Tests")]

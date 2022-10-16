@@ -1,6 +1,8 @@
 using HBDStack.EfCore.Repos.Abstractions;
+using Mapster;
 using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.Domains.Features.Profiles.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace MediatR.AppServices.Features.Profiles.Queries;
 
@@ -17,5 +19,5 @@ internal sealed class SingleProfileQueryHandler : IRequestHandler<SingleProfileQ
 
 
     public async Task<ProfileBasicView?> Handle(SingleProfileQuery request, CancellationToken cancellationToken)
-        => await _repo. FindAsync(p => p.Id == request.Id, cancellationToken);
+        => await _repo.Get().ProjectToType<ProfileBasicView>().FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
 }

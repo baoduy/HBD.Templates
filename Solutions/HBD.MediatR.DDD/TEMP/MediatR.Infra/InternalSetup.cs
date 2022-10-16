@@ -1,7 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
-using AutoMapper;
 using HBDStack.EfCore.Hooks;
+using HBDStack.ObjectMapper.Mapster;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using MediatR.Domains.Share;
 using MediatR.Infra;
@@ -87,19 +88,17 @@ public static class InternalSetup
         ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
         ServiceLifetime optionsLifetime = ServiceLifetime.Scoped,
         bool enableAutoScanEventHandler = true,
-        bool enableAutoMapper = false,
-        Action<IMapperConfigurationExpression>? autoMapperConfig = null) where TContext : DbContext
+        bool enableAutoMapper = false) where TContext : DbContext
     {
         assembliesToScans ??= new[] {typeof(TContext).Assembly};
 
         if (enableAutoScanEventHandler)
-            service.ScanEventHandlers(assembliesToScans);
+            service.AddEvents(assembliesToScans);
 
         if (enableAutoMapper)
         {
-            //Auto Mapper
-            autoMapperConfig ??= cf => cf.ShouldUseConstructor = f => f.IsPublic;
-            //service.AddAutoMapper(autoMapperConfig, assembliesToScans);
+            
+            service.AddMapsterObjectMapper(registerAssemblies: assembliesToScans);
         }
 
         return service.AddBoundedContext<TContext>(contextBuilder,

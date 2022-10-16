@@ -8,10 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HBDStack.EfCore.Events" Version="6.5.9" />
-    <PackageReference Include="HBDStack.EfCore.Extensions" Version="6.5.9" />
-    <PackageReference Include="HBDStack.EfCore.Hooks" Version="6.5.9" />
-    <PackageReference Include="HBDStack.EfCore.Repos" Version="6.5.9" />
+    <PackageReference Include="HBDStack.EfCore.Events" Version="6.5.10" />
+    <PackageReference Include="HBDStack.EfCore.Extensions" Version="6.5.10" />
+    <PackageReference Include="HBDStack.EfCore.Hooks" Version="6.5.10" />
+    <PackageReference Include="HBDStack.EfCore.Repos" Version="6.5.10" />
+    <PackageReference Include="HBDStack.ObjectMapper.Mapster" Version="1.0.3" />
     <PackageReference Include="HBDStack.SlimMessageBus.AzureBus" Version="6.5.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
   </ItemGroup>

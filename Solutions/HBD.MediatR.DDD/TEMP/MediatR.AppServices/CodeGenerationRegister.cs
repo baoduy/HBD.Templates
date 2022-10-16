@@ -9,6 +9,7 @@ public class CodeGenerationRegister : ICodeGenerationRegister
         config.AdaptTo("[name]Dto", MapType.Map | MapType.Projection | MapType.MapToTarget)
             .ForAllTypesInNamespace(typeof(Domains.Share.DomainEntity).Assembly, "MediatR.Domains.Features")
             .ExcludeTypes(t => t.IsInterface || t.IsAbstract || t.IsEnum)
+            .PreserveReference(true)
             .ShallowCopyForSameType(true);
 
         //config.GenerateMapper("[name]Mapper")

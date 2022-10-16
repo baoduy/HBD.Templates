@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using AutoMapper;
 using HBDStack.MediatR.DDD;
+using HBDStack.ObjectMapper.Abstraction;
 using HBDStack.Results;
 using MediatR.AppServices.Features.Profiles.Models;
 using MediatR.AppServices.Share;
@@ -9,7 +9,6 @@ using Profile = MediatR.Domains.Features.Profiles.Entities.Profile;
 
 namespace MediatR.AppServices.Features.Profiles.Actions;
 
-[AutoMap(typeof(Profile), ReverseMap = true)]
 public class UpdateProfileCommand : BaseCommand,IRequestFluent<ProfileBasicView>
 {
     [Required] public Guid Id { get; set; } = default!;
@@ -21,11 +20,11 @@ public class UpdateProfileCommand : BaseCommand,IRequestFluent<ProfileBasicView>
 
 internal sealed class UpdateProfileCommandHandler : IRequestFluentHandler<UpdateProfileCommand, ProfileBasicView>
 {
-    private readonly IMapper _mapper;
+    private readonly IObjectMapper _mapper;
     private readonly IProfileRepo _repo;
 
     public UpdateProfileCommandHandler(
-        IMapper mapper,
+        IObjectMapper mapper,
         IProfileRepo repo)
     {
         _mapper = mapper;

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
 using MediatR.Domains.Share;
 
 namespace MediatR.Domains.Features.Profiles.Entities;

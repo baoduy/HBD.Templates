@@ -32,7 +32,7 @@ public static class InfraSetup
                         op.ConfigureWarnings(x => x.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning));
 #endif
                 },
-                enableAutoMapper: false,
+                enableAutoMapper: true,
                 enableAutoScanEventHandler: true,
                 assembliesToScans: new[] {typeof(InfraSetup).Assembly, typeof(DomainSchemas).Assembly});
         

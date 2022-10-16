@@ -10,7 +10,8 @@ public class MapperTests
     [Fact]
     public void Create_Profile()
     {
-        TypeAdapterConfig.GlobalSettings.ForType<ProfileDto,Profile>()
+        TypeAdapterConfig.GlobalSettings
+            .ForType<ProfileDto,Profile>()
             .MapToConstructor(true)
             .ConstructUsing(s=> new Profile(s.Name,s.MembershipNo,s.Email,s.Phone,s.CreatedBy))
             .PreserveReference(true);
@@ -20,7 +21,7 @@ public class MapperTests
             Id = Guid.NewGuid(),
             Name = "Steven",
             CreatedBy = "Steven"
-        }.Adapt<Profile>();
+        }.Adapt<Profile>(TypeAdapterConfig.GlobalSettings);
 
         rs.Name.Should().Be("Steven");
         
