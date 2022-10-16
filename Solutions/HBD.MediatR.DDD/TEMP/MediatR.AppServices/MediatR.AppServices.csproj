@@ -32,8 +32,4 @@
   <ItemGroup>
     <InternalsVisibleTo Include="MediatR.Api.Tests" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Models" />
-  </ItemGroup>
 </Project>

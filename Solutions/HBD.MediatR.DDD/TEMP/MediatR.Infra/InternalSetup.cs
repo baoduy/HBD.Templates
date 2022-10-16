@@ -97,7 +97,7 @@ public static class InternalSetup
 
         if (enableAutoMapper)
         {
-            
+            TypeAdapterConfig.GlobalSettings.Scan(assembliesToScans);
             service.AddMapsterObjectMapper(registerAssemblies: assembliesToScans);
         }
 

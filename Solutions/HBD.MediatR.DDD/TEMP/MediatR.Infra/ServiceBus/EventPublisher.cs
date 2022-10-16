@@ -1,7 +1,7 @@
 ﻿using HBDStack.EfCore.Abstractions.Events;
 using HBDStack.EfCore.Events.Handlers;
 
-namespace MediatR.Infra.Share;
+namespace MediatR.Infra.ServiceBus;
 
 /// <summary>
 /// This will capture all event items after saved.

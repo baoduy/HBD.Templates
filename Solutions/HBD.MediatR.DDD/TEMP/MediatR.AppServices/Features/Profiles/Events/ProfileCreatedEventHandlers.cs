@@ -17,18 +17,17 @@ internal sealed class ProfileCreatedEventAuditTrailHandler : INotificationHandle
 
 internal sealed class ProfileCreatedEventServiceBusHandler : INotificationHandler<ProfileCreatedEvent>
 {
-    private readonly IMessageBus _bus;
+    //private readonly IMessageBus _bus;
 
 
     //TODO remove this as just for testing purposed only
     public static bool Called { get; set; }
 
-    public ProfileCreatedEventServiceBusHandler(IMessageBus bus)
+    public ProfileCreatedEventServiceBusHandler( /*IMessageBus bus*/)
     {
-        _bus = bus;
-    }
-
-
+        // _bus = bus;
+    } 
+    
     public async Task Handle(ProfileCreatedEvent notification, CancellationToken cancellationToken)
     {
         //await _busSender.SendAsync(notification, cancellationToken);

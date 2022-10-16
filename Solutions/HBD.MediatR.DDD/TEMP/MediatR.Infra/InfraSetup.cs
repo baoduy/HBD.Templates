@@ -1,7 +1,9 @@
-﻿using HBDStack.SlimMessageBus.AzureBus;
+﻿using System.Reflection;
+using HBDStack.SlimMessageBus.AzureBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR.Domains.Share;
+using MediatR.Infra.ServiceBus;
 using MediatR.Infra.ServiceBus.Receivers;
 using MediatR.Infra.Share;
 using SlimMessageBus.Host.AzureServiceBus;
@@ -14,8 +16,14 @@ public static class InfraSetup
 {
     private const string Name = "MediatR.Infra";
 
-    public static IServiceCollection AddInfraServices(this IServiceCollection service, string connectionString)
+    public static IServiceCollection AddInfraServices(this IServiceCollection service, string connectionString,params Assembly[] assembliesToScans)
     {
+        var list = new List<Assembly>(assembliesToScans)
+        {
+            typeof(InfraSetup).Assembly,
+            typeof(DomainSchemas).Assembly
+        };
+
         //Add MediatR - EfCore Auto Save
         service.AddMediatEfCoreExtensions<TEMPContext>();
         
@@ -34,7 +42,7 @@ public static class InfraSetup
                 },
                 enableAutoMapper: true,
                 enableAutoScanEventHandler: true,
-                assembliesToScans: new[] {typeof(InfraSetup).Assembly, typeof(DomainSchemas).Assembly});
+                assembliesToScans: list.Distinct().ToArray());
         
         return service;
     }

@@ -102,28 +102,24 @@ internal static class ServiceConfigs
         return services;
     }
 
-    public static IServiceCollection AddAllAppServices(this IServiceCollection services,
-        IConfiguration configuration)
+    public static IServiceCollection AddAllAppServices(this IServiceCollection services, IConfiguration configuration)
     {
+        var feature = configuration.Bind<FeatureOptions>(FeatureOptions.Name);
+        
         services
             .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
             .AddScoped<IPrincipalProvider, PrincipalProvider>()
             .AddScoped<IDataKeyProvider>(p => p.GetRequiredService<IPrincipalProvider>());
 
         var conn = configuration.GetConnectionString(SettingKeys.DbConnectionString);
-
-        //services.AddAutoMapper(cfg =>
-        //    {
-         //       cfg.ShouldUseConstructor = c => c.IsPublic;
-        //        cfg.ShouldMapProperty = p => p.GetMethod?.IsPublic == true || p.CanRead;
-        //    }, typeof(AppSetup).Assembly, typeof(DomainSchemas).Assembly
-            /*typeof(AuthSetup).Assembly*/
-        //);
         
+        if (feature.EnableServiceBusProcess)
+        {
+            services.AddInfraServiceBus(configuration);
+        }
+
         return services
             .AddAppServices()
-            .AddInfraServices(conn)
-            //Service Bus
-            .AddInfraServiceBus(configuration);
+            .AddInfraServices(conn,typeof(AppSetup).Assembly);
     }
 }
