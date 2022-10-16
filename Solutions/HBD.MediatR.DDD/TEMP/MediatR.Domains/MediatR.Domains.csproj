@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HBDStack.EfCore.Abstractions" Version="6.5.8" />
-    <PackageReference Include="HBDStack.EfCore.DataAuthorization" Version="6.5.8" />
-    <PackageReference Include="HBDStack.EfCore.Repos.Abstractions" Version="6.5.8" />
+    <PackageReference Include="HBDStack.EfCore.Abstractions" Version="6.5.9" />
+    <PackageReference Include="HBDStack.EfCore.DataAuthorization" Version="6.5.9" />
+    <PackageReference Include="HBDStack.EfCore.Repos.Abstractions" Version="6.5.9" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
   </ItemGroup>
 

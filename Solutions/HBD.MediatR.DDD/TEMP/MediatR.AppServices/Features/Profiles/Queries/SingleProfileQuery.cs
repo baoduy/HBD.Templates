@@ -11,11 +11,11 @@ public record SingleProfileQuery : IRequest<ProfileBasicView?>
 
 internal sealed class SingleProfileQueryHandler : IRequestHandler<SingleProfileQuery, ProfileBasicView?>
 {
-    private readonly IDtoRepository<Profile> _repo;
+    private readonly IRepository<Profile> _repo;
 
-    public SingleProfileQueryHandler(IDtoRepository<Profile> repo) => _repo = repo;
+    public SingleProfileQueryHandler(IRepository<Profile> repo) => _repo = repo;
 
 
     public async Task<ProfileBasicView?> Handle(SingleProfileQuery request, CancellationToken cancellationToken)
-        => await _repo.FindAsync<ProfileBasicView>(p => p.Id == request.Id, cancellationToken);
+        => await _repo. FindAsync(p => p.Id == request.Id, cancellationToken);
 }
